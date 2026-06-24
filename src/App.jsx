@@ -1,20 +1,8 @@
 import { useState, useEffect, useRef } from 'react';
 import { 
-  Plane, 
-  Car, 
-  MapPin, 
-  Phone, 
-  CheckCircle, 
-  Menu, 
-  X, 
-  ChevronRight,
-  ChevronLeft,
-  ChevronDown,
-  Globe,
-  Image as ImageIcon,
-  Clock,
-  ShieldCheck,
-  PlayCircle
+  Plane, Car, MapPin, Phone, CheckCircle, Menu, X, ChevronRight,
+  ChevronLeft, ChevronDown, Globe, Image as ImageIcon, Clock,
+  ShieldCheck, PlayCircle, Waves, Coffee
 } from 'lucide-react';
 
 // --- Component สำหรับพื้นหลังเรขาคณิตเคลื่อนไหว ---
@@ -202,7 +190,7 @@ const InstagramIcon = ({ size = 24, className = "" }) => (
   <svg viewBox="0 0 24 24" width={size} height={size} className={className} fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
 );
 
-// ข้อมูลคำแปลภาษา
+// ข้อมูลคำแปลภาษา (อัปเดตคำให้เป็นมืออาชีพมากขึ้น)
 const translations = {
   th: {
     navHome: "หน้าแรก",
@@ -211,12 +199,20 @@ const translations = {
     navFacilities: "สิ่งอำนวยความสะดวก",
     navDining: "ร้านอาหาร/อาหาร",
     navContact: "ติดต่อ",
-    navBook: "จองห้องพัก",
+    navBook: "สำรองห้องพัก",
+    
+    // ข้อความใหม่บนหน้าแรก
     heroSubtitle: "Suvarnabhumi Ville Airport Hotel",
     heroTitle1: "โรงแรม",
     heroTitle2: "ใกล้สนามบินสุวรรณภูมิ",
     heroDesc: "ยินดีต้อนรับสู่หน้าข้อมูลเพิ่มเติมของ Suvarnabhumi Ville ที่จะช่วยแนะนำบริการรถรับ-ส่ง สิ่งอำนวยความสะดวก และร้านอาหาร เพื่อให้การพักผ่อนของคุณสมบูรณ์แบบที่สุด",
-    btnBookNow: "จองห้องพักเลย",
+    cardAirportToHotel: "บริการรับจากสนามบิน",
+    cardHotelToAirport: "บริการรถส่งสนามบิน",
+    cardFacilities: "สิ่งอำนวยความสะดวก",
+    cardDining: "ห้องอาหารและบาร์",
+    bookNowPro: "สำรองห้องพัก",
+    changeLang: "เปลี่ยนภาษา (Language)",
+
     shuttleAirToHotel: "บริการรับส่ง จากสนามบิน สู่ โรงแรม",
     noAdvanceBooking: "No Advance Booking",
     step1Title: "ไปที่จุดนัดพบ (Meeting Point)",
@@ -273,11 +269,18 @@ const translations = {
     navDining: "Dining",
     navContact: "Contact",
     navBook: "Book Now",
+    
     heroSubtitle: "Suvarnabhumi Ville Airport Hotel",
     heroTitle1: "Hotel Near",
     heroTitle2: "Suvarnabhumi Airport",
     heroDesc: "Welcome to Suvarnabhumi Ville's information page. Here you can find details about our shuttle service, facilities, and restaurants for your perfect stay.",
-    btnBookNow: "Book Room Now",
+    cardAirportToHotel: "Airport Pick-up",
+    cardHotelToAirport: "Airport Drop-off",
+    cardFacilities: "Hotel Facilities",
+    cardDining: "Dining & Bars",
+    bookNowPro: "Reserve Your Stay",
+    changeLang: "Language",
+
     shuttleAirToHotel: "Shuttle Service: Airport to Hotel",
     noAdvanceBooking: "No Advance Booking",
     step1Title: "Go to Meeting Point",
@@ -334,11 +337,18 @@ const translations = {
     navDining: "餐厅",
     navContact: "联系我们",
     navBook: "立即预订",
+    
     heroSubtitle: "Suvarnabhumi Ville Airport Hotel",
     heroTitle1: "素万那普机场",
     heroTitle2: "附近酒店",
     heroDesc: "欢迎来到 Suvarnabhumi Ville 信息页面。了解我们的接送服务、设施和餐厅，开启完美住宿。",
-    btnBookNow: "立即预订客房",
+    cardAirportToHotel: "接机服务",
+    cardHotelToAirport: "送机服务",
+    cardFacilities: "酒店设施",
+    cardDining: "餐饮与酒吧",
+    bookNowPro: "立即预订",
+    changeLang: "语言 (Language)",
+
     shuttleAirToHotel: "接送服务：从机场到酒店",
     noAdvanceBooking: "无需提前预订",
     step1Title: "前往会合点",
@@ -410,11 +420,10 @@ export default function App() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // ย้ายคำสั่งการเลื่อนจอและปิดเมนูมาไว้ตรงนี้แทน เพื่อไม่ให้ไปตีกับ useEffect
   const navigateTo = (page) => {
     setCurrentPage(page);
-    setMobileMenuOpen(false); // ปิดเมนูมือถือเวลาเปลี่ยนหน้า
-    window.scrollTo({ top: 0, behavior: 'smooth' }); // เลื่อนขึ้นบนสุดเสมอ
+    setMobileMenuOpen(false); 
+    window.scrollTo({ top: 0, behavior: 'smooth' }); 
   };
 
   return (
@@ -437,22 +446,20 @@ export default function App() {
         }
       `}} />
 
-      {/* พื้นหลังเรขาคณิต (ใส่ไว้ด้านหลังสุด มีผลทุกหน้า) */}
+      {/* พื้นหลังเรขาคณิต */}
       <FloatingShapes />
 
-      {/* Navigation (ระบบหลายหน้า) */}
+      {/* Navigation */}
       <nav className={`fixed w-full z-50 transition-all duration-500 ${isScrolled || currentPage !== 'home' ? 'glass-card py-3 shadow-2xl shadow-black/50' : 'bg-transparent py-6'}`}>
         <div className="max-w-7xl mx-auto px-4 lg:px-8">
           <div className="flex justify-between items-center relative w-full">
             
-            {/* โลโก้ (คลิกเพื่อกลับหน้าแรก) */}
             <div onClick={() => navigateTo('home')} className="flex-shrink-0 flex items-center cursor-pointer group relative z-20">
               <span className="font-serif text-xl md:text-2xl tracking-[0.15em] text-white uppercase group-hover:text-gray-200 transition-colors">
                 Suvarnabhumi <span className="text-[#d4af37] italic font-light lowercase">Ville</span>
               </span>
             </div>
             
-            {/* เมนูหลัก (จอคอม) */}
             <div className={`hidden lg:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 space-x-6 items-center z-10 w-max transition-all duration-500 ${isScrolled || currentPage !== 'home' ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none'}`}>
               {[
                 { id: 'home', label: t.navHome },
@@ -471,7 +478,6 @@ export default function App() {
                 </button>
               ))}
               
-              {/* เปลี่ยนภาษา */}
               <div className="relative group ml-4">
                 <button className="flex items-center text-sm tracking-wider text-gray-300 hover:text-[#d4af37] transition-colors uppercase py-2">
                   <Globe size={16} className="mr-1.5" />
@@ -486,7 +492,6 @@ export default function App() {
               </div>
             </div>
 
-            {/* ปุ่มจองห้องพัก (จอคอม) */}
             <div className="flex items-center gap-4 relative z-20">
               <div className={`hidden md:block transition-all duration-500 ${isScrolled || currentPage !== 'home' ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none'}`}>
                 <a href="https://www.suvarnabhumiville.com/accommodation/room/room-rate" target="_blank" rel="noreferrer" className="bg-[#d4af37] text-black px-6 py-2 text-sm tracking-wider font-medium hover:bg-white hover:text-black hover:shadow-[0_0_15px_rgba(212,175,55,0.4)] transition-all duration-300 rounded-full">
@@ -494,7 +499,6 @@ export default function App() {
                 </a>
               </div>
 
-              {/* ปุ่มเปิดเมนูมือถือ */}
               <div className="lg:hidden flex items-center">
                 <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="text-gray-300 hover:text-white transition-colors">
                   {mobileMenuOpen ? <X size={26} strokeWidth={1.5} /> : <Menu size={26} strokeWidth={1.5} />}
@@ -505,7 +509,7 @@ export default function App() {
           </div>
         </div>
 
-        {/* เมนูสำหรับมือถือ */}
+        {/* Mobile Menu */}
         <div className={`lg:hidden absolute top-full left-0 w-full glass-card border-t border-white/5 transition-all duration-300 overflow-y-auto ${mobileMenuOpen ? 'max-h-[70vh] opacity-100 visible' : 'max-h-0 opacity-0 invisible'}`}>
           <div className="px-6 py-4 space-y-1">
             <div className="flex items-center justify-between py-3 border-b border-white/5 mb-2">
@@ -538,10 +542,10 @@ export default function App() {
       </nav>
 
       {/* ==================================================== */}
-      {/* 1. หน้าแรก (Home) */}
+      {/* 1. หน้าแรก (Home) - อัปเดตดีไซน์ใหม่ล่าสุด */}
       {/* ==================================================== */}
       {currentPage === 'home' && (
-        <section className="relative h-screen flex items-center justify-center overflow-hidden animate-[pop-in_0.5s_ease-out_forwards]">
+        <section className="relative h-screen flex items-center justify-center overflow-hidden animate-[pop-in_0.5s_ease-out_forwards] pt-20">
           <div className="absolute inset-0 z-0">
             <img 
               src="./IMG_3314.JPG" 
@@ -552,54 +556,88 @@ export default function App() {
             <div className="absolute inset-0 bg-gradient-to-b from-[#2d3748]/80 via-[#2d3748]/40 to-[#2d3748]"></div>
           </div>
           
-          <div className="relative z-10 text-center px-6 max-w-4xl mx-auto mt-10">
+          <div className="relative z-10 text-center px-4 w-full max-w-5xl mx-auto mt-12 md:mt-20">
             <FadeInSection delay={100}>
-              <p className="text-[#d4af37] tracking-[0.4em] text-xs md:text-sm uppercase mb-6 font-medium">{t.heroSubtitle}</p>
+              <p className="text-[#d4af37] tracking-[0.4em] text-xs md:text-sm uppercase mb-4 md:mb-6 font-medium drop-shadow-md">
+                {t.heroSubtitle}
+              </p>
             </FadeInSection>
+            
             <FadeInSection delay={300}>
-              <h1 className="font-serif text-5xl md:text-7xl lg:text-8xl text-white mb-6 leading-[1.1] font-light">
-                {t.heroTitle1}<br/>
-                <span className="font-medium bg-clip-text text-transparent bg-gradient-to-r from-white via-gray-200 to-gray-400">{t.heroTitle2}</span>
-              </h1>
+              {/* โลโก้โรงแรม (ถ้าไม่มีรูป จะแสดงข้อความแทนอัตโนมัติ) */}
+              <div className="flex justify-center mb-6 md:mb-10">
+                 <img 
+                   src="./logo-large.png" 
+                   alt="Suvarnabhumi Ville Logo" 
+                   className="h-28 md:h-36 lg:h-48 object-contain drop-shadow-2xl hover:scale-105 transition-transform duration-700" 
+                   onError={(e) => { 
+                     e.target.style.display = 'none'; 
+                     e.target.nextSibling.style.display = 'block'; 
+                   }} 
+                 />
+                 <h1 style={{display: 'none'}} className="font-serif text-5xl md:text-7xl lg:text-8xl text-white leading-[1.1] font-light drop-shadow-2xl">
+                    {t.heroTitle1}<br/>
+                    <span className="font-medium bg-clip-text text-transparent bg-gradient-to-r from-white via-gray-200 to-gray-400">{t.heroTitle2}</span>
+                 </h1>
+              </div>
             </FadeInSection>
-            <FadeInSection delay={400}>
-              <h2 className="text-[#d4af37] tracking-[0.2em] md:tracking-[0.3em] text-sm md:text-base uppercase mb-8 font-medium drop-shadow-md">
-                " The Perfect Place With A Perfect View "
-              </h2>
-            </FadeInSection>
+            
             <FadeInSection delay={500}>
-              <p className="text-lg md:text-xl text-gray-400 mb-12 max-w-2xl mx-auto font-light leading-relaxed">
+              <p className="text-base md:text-lg text-gray-400 mb-10 max-w-2xl mx-auto font-light leading-relaxed px-4">
                 {t.heroDesc}
               </p>
             </FadeInSection>
+
             <FadeInSection delay={700}>
-              {/* แคปซูลเมนูที่หน้าแรก (สลับหน้าได้) */}
-              <div className="flex justify-center mt-4">
-                <div className="flex flex-col md:flex-row items-center gap-6 glass-card p-4 md:p-2 md:pl-8 rounded-3xl md:rounded-full border border-white/10 shadow-[0_0_40px_rgba(0,0,0,0.5)] w-full sm:w-auto">
-                  <div className="flex flex-wrap justify-center items-center gap-4 md:gap-6">
-                    <button onClick={() => navigateTo('airportToHotel')} className="text-sm tracking-wider text-gray-300 hover:text-[#d4af37] transition-all uppercase hover:-translate-y-0.5">{t.navAirToHotel}</button>
-                    <button onClick={() => navigateTo('hotelToAirport')} className="text-sm tracking-wider text-gray-300 hover:text-[#d4af37] transition-all uppercase hover:-translate-y-0.5">{t.navHotelToAir}</button>
-                    <button onClick={() => navigateTo('facilities')} className="text-sm tracking-wider text-gray-300 hover:text-[#d4af37] transition-all uppercase hover:-translate-y-0.5">{t.navFacilities}</button>
-                    <button onClick={() => navigateTo('dining')} className="text-sm tracking-wider text-gray-300 hover:text-[#d4af37] transition-all uppercase hover:-translate-y-0.5">{t.navDining}</button>
-                    
-                    {/* เปลี่ยนภาษา */}
-                    <div className="relative group z-50">
-                      <button className="flex items-center text-sm tracking-wider text-gray-300 hover:text-[#d4af37] transition-colors uppercase py-2">
-                        <Globe size={16} className="mr-1.5" /> {lang.toUpperCase()} <ChevronDown size={14} className="ml-1 opacity-70" />
-                      </button>
-                      <div className="absolute right-1/2 translate-x-1/2 md:translate-x-0 md:right-0 mt-2 w-32 glass-card rounded-xl overflow-hidden shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all">
-                        <button onClick={() => setLang('th')} className="w-full text-center md:text-left px-5 py-3 text-sm text-gray-300 hover:bg-white/5 hover:text-[#d4af37]">ไทย</button>
-                        <button onClick={() => setLang('en')} className="w-full text-center md:text-left px-5 py-3 text-sm text-gray-300 hover:bg-white/5 hover:text-[#d4af37]">English</button>
-                        <button onClick={() => setLang('zh')} className="w-full text-center md:text-left px-5 py-3 text-sm text-gray-300 hover:bg-white/5 hover:text-[#d4af37]">中文</button>
-                      </div>
-                    </div>
+               <div className="w-full mx-auto space-y-6">
+                  {/* Grid 4 ปุ่มทางลัด (แยกกันชัดเจน พรีเมียมขึ้น) */}
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                     <button onClick={() => navigateTo('airportToHotel')} className="glass-card p-6 md:p-8 rounded-3xl flex flex-col items-center justify-center gap-4 hover:-translate-y-2 hover:bg-white/10 hover:border-[#d4af37]/50 transition-all duration-300 group shadow-lg">
+                        <div className="bg-white/5 p-4 rounded-full group-hover:bg-[#d4af37] transition-colors shadow-inner">
+                           <Plane className="text-[#d4af37] group-hover:text-black transform rotate-45 transition-colors" size={32} strokeWidth={1.5} />
+                        </div>
+                        <span className="text-gray-300 text-sm md:text-base font-medium tracking-wide group-hover:text-white uppercase text-center leading-tight">{t.cardAirportToHotel}</span>
+                     </button>
+                     <button onClick={() => navigateTo('hotelToAirport')} className="glass-card p-6 md:p-8 rounded-3xl flex flex-col items-center justify-center gap-4 hover:-translate-y-2 hover:bg-white/10 hover:border-[#d4af37]/50 transition-all duration-300 group shadow-lg">
+                        <div className="bg-white/5 p-4 rounded-full group-hover:bg-[#d4af37] transition-colors shadow-inner">
+                           <Car className="text-[#d4af37] group-hover:text-black transition-colors" size={32} strokeWidth={1.5} />
+                        </div>
+                        <span className="text-gray-300 text-sm md:text-base font-medium tracking-wide group-hover:text-white uppercase text-center leading-tight">{t.cardHotelToAirport}</span>
+                     </button>
+                     <button onClick={() => navigateTo('facilities')} className="glass-card p-6 md:p-8 rounded-3xl flex flex-col items-center justify-center gap-4 hover:-translate-y-2 hover:bg-white/10 hover:border-[#d4af37]/50 transition-all duration-300 group shadow-lg">
+                        <div className="bg-white/5 p-4 rounded-full group-hover:bg-[#d4af37] transition-colors shadow-inner">
+                           <Waves className="text-[#d4af37] group-hover:text-black transition-colors" size={32} strokeWidth={1.5} />
+                        </div>
+                        <span className="text-gray-300 text-sm md:text-base font-medium tracking-wide group-hover:text-white uppercase text-center leading-tight">{t.cardFacilities}</span>
+                     </button>
+                     <button onClick={() => navigateTo('dining')} className="glass-card p-6 md:p-8 rounded-3xl flex flex-col items-center justify-center gap-4 hover:-translate-y-2 hover:bg-white/10 hover:border-[#d4af37]/50 transition-all duration-300 group shadow-lg">
+                        <div className="bg-white/5 p-4 rounded-full group-hover:bg-[#d4af37] transition-colors shadow-inner">
+                           <Coffee className="text-[#d4af37] group-hover:text-black transition-colors" size={32} strokeWidth={1.5} />
+                        </div>
+                        <span className="text-gray-300 text-sm md:text-base font-medium tracking-wide group-hover:text-white uppercase text-center leading-tight">{t.cardDining}</span>
+                     </button>
                   </div>
-                  <div className="w-full md:w-px h-px md:h-8 bg-white/10 my-2 md:my-0"></div>
-                  <a href="https://www.suvarnabhumiville.com/accommodation/room/room-rate" target="_blank" rel="noreferrer" className="bg-[#d4af37] text-black px-8 py-3.5 text-sm tracking-wider font-medium hover:bg-white rounded-full w-full md:w-auto flex justify-center items-center uppercase">
-                    {t.btnBookNow} <ChevronRight className="ml-2" size={16} />
-                  </a>
-                </div>
-              </div>
+
+                  {/* แถวสำหรับ เปลี่ยนภาษา และ จองห้องพัก */}
+                  <div className="flex flex-col sm:flex-row gap-4 justify-center items-stretch pt-2">
+                     {/* ปุ่มเปลี่ยนภาษาแบบ Dropdown สวยๆ */}
+                     <div className="relative group z-50 flex-1 sm:flex-none">
+                       <button className="w-full h-full min-h-[60px] glass-card px-8 rounded-full flex items-center justify-center text-sm tracking-wider text-gray-300 hover:text-[#d4af37] hover:bg-white/5 border border-white/5 hover:border-[#d4af37]/30 transition-all uppercase font-medium">
+                          <Globe size={18} className="mr-2" /> {lang === 'th' ? 'ภาษาไทย' : lang === 'en' ? 'ENGLISH' : '中文'} <ChevronDown size={16} className="ml-2 opacity-70" />
+                       </button>
+                       <div className="absolute bottom-[110%] left-0 w-full mb-2 glass-card rounded-2xl overflow-hidden shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 origin-bottom transform scale-95 group-hover:scale-100">
+                          <button onClick={() => setLang('th')} className="w-full text-center px-5 py-4 text-sm text-gray-300 hover:bg-white/10 hover:text-[#d4af37] transition-colors">ภาษาไทย (TH)</button>
+                          <button onClick={() => setLang('en')} className="w-full text-center px-5 py-4 text-sm text-gray-300 hover:bg-white/10 hover:text-[#d4af37] transition-colors border-t border-white/5">English (EN)</button>
+                          <button onClick={() => setLang('zh')} className="w-full text-center px-5 py-4 text-sm text-gray-300 hover:bg-white/10 hover:text-[#d4af37] transition-colors border-t border-white/5">中文 (ZH)</button>
+                       </div>
+                     </div>
+
+                     {/* ปุ่มสำรองห้องพัก */}
+                     <a href="https://www.suvarnabhumiville.com/accommodation/room/room-rate" target="_blank" rel="noreferrer" className="flex-[2] sm:flex-none bg-gradient-to-r from-[#d4af37] to-[#e5c560] text-black px-10 py-4 min-h-[60px] rounded-full text-sm md:text-base tracking-wider font-semibold hover:shadow-[0_0_30px_rgba(212,175,55,0.5)] transition-all duration-300 uppercase flex items-center justify-center hover:-translate-y-1">
+                       {t.bookNowPro} <ChevronRight className="ml-2" size={20} strokeWidth={2.5} />
+                     </a>
+                  </div>
+               </div>
             </FadeInSection>
           </div>
         </section>
