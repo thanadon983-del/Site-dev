@@ -384,25 +384,12 @@ const translations = {
 };
 
 export default function App() {
-  const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [lang, setLang] = useState('th'); 
   const [modalImage, setModalImage] = useState(null);
   const [currentPage, setCurrentPage] = useState('home'); 
 
   const t = translations[lang]; 
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 50) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   const navigateTo = (page) => {
     setCurrentPage(page);
@@ -416,6 +403,8 @@ export default function App() {
         @import url('https://fonts.googleapis.com/css2?family=Kanit:wght@200;300;400;500;600&display=swap');
         * { font-family: 'Kanit', sans-serif !important; }
         html { scroll-behavior: smooth; }
+        button, a { outline: none !important; -webkit-tap-highlight-color: transparent; }
+        button:focus, a:focus { outline: none !important; box-shadow: none !important; }
         .glass-card {
           background: rgba(20, 20, 20, 0.6);
           backdrop-filter: blur(16px);
@@ -433,8 +422,8 @@ export default function App() {
       {/* พื้นหลังเรขาคณิต */}
       <FloatingShapes />
 
-      {/* Navigation - ดีไซน์ใหม่ซ่อนเมนูยาวๆ ไว้ในปุ่ม 3 ขีดทั้งหมด */}
-      <nav className={`fixed w-full z-50 transition-all duration-500 ${isScrolled || currentPage !== 'home' ? 'glass-card py-3 shadow-2xl shadow-black/50' : 'bg-transparent py-5'}`}>
+      {/* Navigation - ดีไซน์ใหม่ซ่อนเมนูยาวๆ ไว้ในปุ่ม 3 ขีด และตั้งค่าเป็น absolute ไม่เลื่อนตามจอ */}
+      <nav className="absolute top-0 left-0 w-full z-50 bg-transparent py-5">
         <div className="max-w-7xl mx-auto px-6 lg:px-10">
           <div className="flex justify-between items-center relative w-full h-12">
             
@@ -474,7 +463,7 @@ export default function App() {
 
               {/* ปุ่มจองห้องพัก (แสดงเฉพาะบนคอม) */}
               <div className={`hidden md:block transition-all duration-500`}>
-                <a href="https://www.suvarnabhumiville.com/accommodation/room/room-rate" target="_blank" rel="noreferrer" className="bg-[#d4af37] text-black px-6 py-2 text-sm tracking-wider font-medium hover:bg-white hover:text-black hover:shadow-[0_0_15px_rgba(212,175,55,0.4)] transition-all duration-300 rounded-full flex items-center">
+                <a href="https://www.suvarnabhumiville.com/accommodation/room/room-rate" target="_blank" rel="noreferrer" className="bg-[#d4af37] text-black px-6 py-2 text-sm tracking-wider font-medium hover:bg-white hover:text-black hover:shadow-[0_0_15px_rgba(212,175,55,0.4)] transition-all duration-300 rounded-full flex items-center outline-none focus:outline-none">
                   {t.navBook}
                 </a>
               </div>
@@ -482,7 +471,7 @@ export default function App() {
               {/* ปุ่ม Hamburger 3 ขีด (แสดงทุกขนาดหน้าจอ) */}
               <button 
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)} 
-                className="text-[#d4af37] hover:text-white bg-white/5 hover:bg-[#d4af37] border border-[#d4af37]/30 p-2 md:p-2.5 rounded-full transition-all duration-300 shadow-lg"
+                className="text-[#d4af37] hover:text-white bg-white/5 hover:bg-[#d4af37] border border-[#d4af37]/30 p-2 md:p-2.5 rounded-full transition-all duration-300 shadow-lg outline-none focus:outline-none focus:ring-0"
               >
                 {mobileMenuOpen ? <X size={24} strokeWidth={1.5} /> : <Menu size={24} strokeWidth={1.5} />}
               </button>
@@ -518,7 +507,7 @@ export default function App() {
                 <button 
                   key={item.id} 
                   onClick={() => navigateTo(item.id)} 
-                  className={`w-full text-center md:text-left py-4 text-lg md:text-xl uppercase tracking-widest font-light transition-all duration-300 hover:tracking-[0.2em] rounded-xl hover:bg-white/5 ${currentPage === item.id ? 'text-[#d4af37] bg-white/5' : 'text-gray-300 hover:text-[#d4af37]'}`}
+                  className={`w-full text-center md:text-left py-4 text-lg md:text-xl uppercase tracking-widest font-light transition-all duration-300 hover:tracking-[0.2em] rounded-xl hover:bg-white/5 outline-none focus:outline-none ${currentPage === item.id ? 'text-[#d4af37] bg-white/5' : 'text-gray-300 hover:text-[#d4af37]'}`}
                 >
                   {item.label}
                 </button>
@@ -527,7 +516,7 @@ export default function App() {
 
             {/* ปุ่มจองห้องพักสำหรับมือถือ */}
             <div className="md:hidden mt-10">
-              <a href="https://www.suvarnabhumiville.com/accommodation/room/room-rate" target="_blank" rel="noreferrer" className="bg-[#d4af37] text-black w-full block text-center px-4 py-4 text-sm tracking-widest font-medium hover:bg-white rounded-full uppercase shadow-[0_0_20px_rgba(212,175,55,0.3)]">
+              <a href="https://www.suvarnabhumiville.com/accommodation/room/room-rate" target="_blank" rel="noreferrer" className="bg-[#d4af37] text-black w-full block text-center px-4 py-4 text-sm tracking-widest font-medium hover:bg-white rounded-full uppercase outline-none focus:outline-none shadow-[0_0_20px_rgba(212,175,55,0.3)]">
                 {t.navBook}
               </a>
             </div>
@@ -611,24 +600,6 @@ export default function App() {
                         </div>
                         <span className="text-gray-300 text-sm md:text-base font-medium tracking-wide group-hover:text-white uppercase text-center leading-tight">{t.navDining}</span>
                      </button>
-                  </div>
-
-                  {/* แถวสำหรับ เปลี่ยนภาษา และ จองห้องพัก */}
-                  <div className="flex flex-col sm:flex-row gap-4 justify-center items-stretch pt-2">
-                     <div className="relative group z-50 flex-1 sm:flex-none">
-                       <button className="w-full h-full min-h-[60px] glass-card px-8 rounded-full flex items-center justify-center text-sm tracking-wider text-gray-300 hover:text-[#d4af37] hover:bg-white/5 border border-white/5 hover:border-[#d4af37]/30 transition-all uppercase font-medium">
-                          <Globe size={18} className="mr-2" /> {lang === 'th' ? 'ภาษาไทย' : lang === 'en' ? 'ENGLISH' : '中文'} <ChevronDown size={16} className="ml-2 opacity-70" />
-                       </button>
-                       <div className="absolute bottom-[110%] left-0 w-full mb-2 glass-card rounded-2xl overflow-hidden shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 origin-bottom transform scale-95 group-hover:scale-100">
-                          <button onClick={() => setLang('th')} className="w-full text-center px-5 py-4 text-sm text-gray-300 hover:bg-white/10 hover:text-[#d4af37] transition-colors">ภาษาไทย (TH)</button>
-                          <button onClick={() => setLang('en')} className="w-full text-center px-5 py-4 text-sm text-gray-300 hover:bg-white/10 hover:text-[#d4af37] transition-colors border-t border-white/5">English (EN)</button>
-                          <button onClick={() => setLang('zh')} className="w-full text-center px-5 py-4 text-sm text-gray-300 hover:bg-white/10 hover:text-[#d4af37] transition-colors border-t border-white/5">中文 (ZH)</button>
-                       </div>
-                     </div>
-
-                     <a href="https://www.suvarnabhumiville.com/accommodation/room/room-rate" target="_blank" rel="noreferrer" className="flex-[2] sm:flex-none bg-gradient-to-r from-[#d4af37] to-[#e5c560] text-black px-10 py-4 min-h-[60px] rounded-full text-sm md:text-base tracking-wider font-semibold hover:shadow-[0_0_30px_rgba(212,175,55,0.5)] transition-all duration-300 uppercase flex items-center justify-center hover:-translate-y-1">
-                       {t.navBook} <ChevronRight className="ml-2" size={20} strokeWidth={2.5} />
-                     </a>
                   </div>
                </div>
             </FadeInSection>
