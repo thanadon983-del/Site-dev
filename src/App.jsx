@@ -104,7 +104,12 @@ const ImageCarousel = ({ images, heightClass = "h-[250px] md:h-[450px]" }) => {
           key={idx}
           className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${idx === currentIndex ? 'opacity-100 z-10' : 'opacity-0 z-0'}`}
         >
-          <img src={img} alt="Slide" className="w-full h-full object-cover" />
+          <img 
+            src={img} 
+            alt={`Slide ${idx}`} 
+            className="w-full h-full object-cover" 
+            onError={(e) => { e.target.src = 'https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=1200'; }}
+          />
           <div className="absolute inset-0 bg-gradient-to-t from-[#1a202c]/80 to-transparent opacity-60"></div>
         </div>
       ))}
@@ -162,7 +167,11 @@ const CoverflowGallery = ({ images }) => {
             className={`absolute w-[220px] md:w-[400px] h-full transition-all duration-700 ease-in-out cursor-pointer rounded-2xl overflow-hidden border border-white/10 ${styles}`} 
             onClick={() => setCurrentIndex(idx)}
           >
-            <img src={img} className="w-full h-full object-cover" />
+            <img 
+              src={img} 
+              className="w-full h-full object-cover" 
+              onError={(e) => { e.target.src = 'https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=800'; }}
+            />
           </div>
         );
       })}
@@ -190,7 +199,7 @@ const InstagramIcon = ({ size = 24, className = "" }) => (
   <svg viewBox="0 0 24 24" width={size} height={size} className={className} fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
 );
 
-// ข้อมูลคำแปลภาษา (อัปเดตคำให้เป็นมืออาชีพระดับท็อป)
+// ข้อมูลคำแปลภาษา
 const translations = {
   th: {
     navHome: "หน้าแรก",
@@ -201,9 +210,6 @@ const translations = {
     navContact: "ติดต่อเรา",
     navBook: "สำรองห้องพัก",
     
-    heroSubtitle: "Suvarnabhumi Ville Airport Hotel",
-    heroTitle1: "โรงแรม",
-    heroTitle2: "ใกล้สนามบินสุวรรณภูมิ",
     heroDesc: "ยินดีต้อนรับสู่หน้าข้อมูลเพิ่มเติมของ Suvarnabhumi Ville ที่จะช่วยแนะนำบริการรถรับ-ส่ง สิ่งอำนวยความสะดวก และร้านอาหาร เพื่อให้การพักผ่อนของคุณสมบูรณ์แบบที่สุด",
     changeLang: "เปลี่ยนภาษา (Language)",
 
@@ -264,9 +270,6 @@ const translations = {
     navContact: "Contact Us",
     navBook: "Reserve Your Stay",
     
-    heroSubtitle: "Suvarnabhumi Ville Airport Hotel",
-    heroTitle1: "Hotel Near",
-    heroTitle2: "Suvarnabhumi Airport",
     heroDesc: "Welcome to Suvarnabhumi Ville's information page. Here you can find details about our shuttle service, facilities, and restaurants for your perfect stay.",
     changeLang: "Language",
 
@@ -327,9 +330,6 @@ const translations = {
     navContact: "联系我们",
     navBook: "立即预订",
     
-    heroSubtitle: "Suvarnabhumi Ville Airport Hotel",
-    heroTitle1: "素万那普机场",
-    heroTitle2: "附近酒店",
     heroDesc: "欢迎来到 Suvarnabhumi Ville 信息页面。了解我们的接送服务、设施和餐厅，开启完美住宿。",
     changeLang: "语言 (Language)",
 
@@ -422,7 +422,7 @@ export default function App() {
       {/* พื้นหลังเรขาคณิต */}
       <FloatingShapes />
 
-      {/* Navigation - ดีไซน์ใหม่ซ่อนเมนูยาวๆ ไว้ในปุ่ม 3 ขีด และตั้งค่าเป็น absolute ไม่เลื่อนตามจอ */}
+      {/* Navigation */}
       <nav className="absolute top-0 left-0 w-full z-50 bg-transparent py-5">
         <div className="max-w-7xl mx-auto px-6 lg:px-10">
           <div className="flex justify-between items-center relative w-full h-12">
@@ -431,23 +431,22 @@ export default function App() {
             <div onClick={() => navigateTo('home')} className="flex-shrink-0 flex items-center cursor-pointer group relative z-20">
               <img 
                 src="./logo-large.png" 
-                alt="Suvarnabhumi Ville Logo" 
-                className="h-10 md:h-12 object-contain hover:scale-105 transition-transform duration-500" 
+                alt="Suvarnabhumi Ville Hotel Logo" 
+                className="h-12 md:h-16 object-contain hover:scale-105 transition-transform duration-500" 
                 onError={(e) => { 
                   e.target.style.display = 'none'; 
                   e.target.nextSibling.style.display = 'block'; 
                 }} 
               />
-              {/* ข้อความแสดงแทนในกรณีที่ยังไม่มีไฟล์รูป */}
               <span style={{display: 'none'}} className="font-serif text-xl md:text-2xl tracking-[0.15em] text-white uppercase group-hover:text-[#d4af37] transition-colors drop-shadow-md">
                 Suvarnabhumi <span className="text-[#d4af37] italic font-light lowercase">Ville</span>
               </span>
             </div>
             
-            {/* ชุดเมนูด้านขวา (เปลี่ยนภาษา, จองห้องพัก, และปุ่ม 3 ขีด Hamburger) */}
+            {/* ชุดเมนูด้านขวา */}
             <div className="flex items-center gap-3 md:gap-6 relative z-20">
               
-              {/* เปลี่ยนภาษา (แสดงเฉพาะบนคอม) */}
+              {/* เปลี่ยนภาษา */}
               <div className="relative group hidden md:block">
                 <button className="flex items-center text-sm tracking-wider text-gray-300 hover:text-[#d4af37] transition-colors uppercase py-2">
                   <Globe size={18} className="mr-1.5" />
@@ -461,14 +460,14 @@ export default function App() {
                 </div>
               </div>
 
-              {/* ปุ่มจองห้องพัก (แสดงเฉพาะบนคอม) */}
+              {/* ปุ่มจองห้องพัก */}
               <div className={`hidden md:block transition-all duration-500`}>
                 <a href="https://www.suvarnabhumiville.com/accommodation/room/room-rate" target="_blank" rel="noreferrer" className="bg-[#d4af37] text-black px-6 py-2 text-sm tracking-wider font-medium hover:bg-white hover:text-black hover:shadow-[0_0_15px_rgba(212,175,55,0.4)] transition-all duration-300 rounded-full flex items-center outline-none focus:outline-none">
                   {t.navBook}
                 </a>
               </div>
 
-              {/* ปุ่ม Hamburger 3 ขีด (แสดงทุกขนาดหน้าจอ) */}
+              {/* ปุ่ม Hamburger */}
               <button 
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)} 
                 className="text-[#d4af37] hover:text-white bg-white/5 hover:bg-[#d4af37] border border-[#d4af37]/30 p-2 md:p-2.5 rounded-full transition-all duration-300 shadow-lg outline-none focus:outline-none focus:ring-0"
@@ -480,21 +479,19 @@ export default function App() {
           </div>
         </div>
 
-        {/* เมนู Dropdown แบบสไลด์ลงมา (ทำงานเหมือนกันทั้งมือถือและคอมพิวเตอร์) */}
+        {/* เมนู Dropdown */}
         <div className={`absolute top-full left-0 w-full glass-card border-t border-white/5 transition-all duration-500 overflow-y-auto shadow-2xl ${mobileMenuOpen ? 'max-h-[85vh] opacity-100 visible py-6 md:py-10' : 'max-h-0 opacity-0 invisible py-0'}`}>
           <div className="max-w-3xl mx-auto px-6 flex flex-col">
             
-            {/* เปลี่ยนภาษาสำหรับมือถือ */}
             <div className="md:hidden flex items-center justify-between py-4 border-b border-white/10 mb-6">
               <span className="text-sm text-gray-400 uppercase tracking-wider flex items-center"><Globe size={16} className="mr-2" /> {t.changeLang}</span>
               <div className="flex space-x-4">
-                <button onClick={() => { setLang('th'); }} className={`${lang === 'th' ? 'text-[#d4af37] font-medium' : 'text-gray-400'} text-sm`}>TH</button>
-                <button onClick={() => { setLang('en'); }} className={`${lang === 'en' ? 'text-[#d4af37] font-medium' : 'text-gray-400'} text-sm`}>EN</button>
-                <button onClick={() => { setLang('zh'); }} className={`${lang === 'zh' ? 'text-[#d4af37] font-medium' : 'text-gray-400'} text-sm`}>ZH</button>
+                <button onClick={() => { setLang('th'); }} className={`${lang === 'th' ? 'text-[#d4af37] font-medium' : 'text-gray-400'} text-sm outline-none focus:outline-none`}>TH</button>
+                <button onClick={() => { setLang('en'); }} className={`${lang === 'en' ? 'text-[#d4af37] font-medium' : 'text-gray-400'} text-sm outline-none focus:outline-none`}>EN</button>
+                <button onClick={() => { setLang('zh'); }} className={`${lang === 'zh' ? 'text-[#d4af37] font-medium' : 'text-gray-400'} text-sm outline-none focus:outline-none`}>ZH</button>
               </div>
             </div>
 
-            {/* รายการเมนูทั้งหมดตรงกลางจอ */}
             <div className="flex flex-col space-y-2">
               {[
                 { id: 'home', label: t.navHome },
@@ -514,7 +511,6 @@ export default function App() {
               ))}
             </div>
 
-            {/* ปุ่มจองห้องพักสำหรับมือถือ */}
             <div className="md:hidden mt-10">
               <a href="https://www.suvarnabhumiville.com/accommodation/room/room-rate" target="_blank" rel="noreferrer" className="bg-[#d4af37] text-black w-full block text-center px-4 py-4 text-sm tracking-widest font-medium hover:bg-white rounded-full uppercase outline-none focus:outline-none shadow-[0_0_20px_rgba(212,175,55,0.3)]">
                 {t.navBook}
@@ -532,7 +528,7 @@ export default function App() {
         <section className="relative h-screen flex items-center justify-center overflow-hidden animate-[pop-in_0.5s_ease-out_forwards] pt-20">
           <div className="absolute inset-0 z-0">
             <img 
-              src="./IMG_3314.JPG" 
+              src="./bg-home.jpg" 
               alt="Background" 
               className="w-full h-full object-cover opacity-40 scale-105 transform motion-safe:animate-[pulse_15s_ease-in-out_infinite_alternate]"
               onError={(e) => { e.target.src = 'https://images.unsplash.com/photo-1542314831-c6a4d27ce605?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80'; }}
@@ -541,29 +537,21 @@ export default function App() {
           </div>
           
           <div className="relative z-10 text-center px-4 w-full max-w-5xl mx-auto mt-12 md:mt-20">
-            <FadeInSection delay={100}>
-              <p className="text-[#d4af37] tracking-[0.4em] text-xs md:text-sm uppercase mb-4 md:mb-6 font-medium drop-shadow-md">
-                {t.heroSubtitle}
-              </p>
-            </FadeInSection>
             
-            <FadeInSection delay={300}>
-              {/* โลโก้โรงแรมจุดที่ 2 (กลางจอหน้าแรก) */}
-              <div className="flex justify-center mb-6 md:mb-10">
+            <FadeInSection delay={100}>
+              <div className="flex justify-center mb-4 md:mb-6 mt-6 md:mt-10">
                  <img 
                    src="./logo-large.png" 
-                   alt="Suvarnabhumi Ville Logo" 
+                   alt="Suvarnabhumi Ville Hotel" 
                    className="h-28 md:h-36 lg:h-48 object-contain drop-shadow-2xl hover:scale-105 transition-transform duration-700" 
-                   onError={(e) => { 
-                     e.target.style.display = 'none'; 
-                     e.target.nextSibling.style.display = 'block'; 
-                   }} 
                  />
-                 <h1 style={{display: 'none'}} className="font-serif text-5xl md:text-7xl lg:text-8xl text-white leading-[1.1] font-light drop-shadow-2xl">
-                    {t.heroTitle1}<br/>
-                    <span className="font-medium bg-clip-text text-transparent bg-gradient-to-r from-white via-gray-200 to-gray-400">{t.heroTitle2}</span>
-                 </h1>
               </div>
+            </FadeInSection>
+
+            <FadeInSection delay={300}>
+              <h1 className="font-serif text-4xl md:text-5xl lg:text-7xl text-[#d4af37] mb-6 leading-[1.2] font-medium drop-shadow-2xl tracking-wider uppercase">
+                Suvarnabhumi Ville <span className="text-white font-light block md:inline mt-2 md:mt-0">Hotel</span>
+              </h1>
             </FadeInSection>
             
             <FadeInSection delay={500}>
@@ -574,27 +562,26 @@ export default function App() {
 
             <FadeInSection delay={700}>
                <div className="w-full mx-auto space-y-6">
-                  {/* Grid 4 ปุ่มทางลัดหลัก */}
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                     <button onClick={() => navigateTo('airportToHotel')} className="glass-card p-6 md:p-8 rounded-3xl flex flex-col items-center justify-center gap-4 hover:-translate-y-2 hover:bg-white/10 hover:border-[#d4af37]/50 transition-all duration-300 group shadow-lg">
+                     <button onClick={() => navigateTo('airportToHotel')} className="glass-card p-6 md:p-8 rounded-3xl flex flex-col items-center justify-center gap-4 hover:-translate-y-2 hover:bg-white/10 hover:border-[#d4af37]/50 transition-all duration-300 group shadow-lg outline-none focus:outline-none">
                         <div className="bg-white/5 p-4 rounded-full group-hover:bg-[#d4af37] transition-colors shadow-inner">
                            <Plane className="text-[#d4af37] group-hover:text-black transform rotate-45 transition-colors" size={32} strokeWidth={1.5} />
                         </div>
                         <span className="text-gray-300 text-sm md:text-base font-medium tracking-wide group-hover:text-white uppercase text-center leading-tight">{t.navAirToHotel}</span>
                      </button>
-                     <button onClick={() => navigateTo('hotelToAirport')} className="glass-card p-6 md:p-8 rounded-3xl flex flex-col items-center justify-center gap-4 hover:-translate-y-2 hover:bg-white/10 hover:border-[#d4af37]/50 transition-all duration-300 group shadow-lg">
+                     <button onClick={() => navigateTo('hotelToAirport')} className="glass-card p-6 md:p-8 rounded-3xl flex flex-col items-center justify-center gap-4 hover:-translate-y-2 hover:bg-white/10 hover:border-[#d4af37]/50 transition-all duration-300 group shadow-lg outline-none focus:outline-none">
                         <div className="bg-white/5 p-4 rounded-full group-hover:bg-[#d4af37] transition-colors shadow-inner">
                            <Car className="text-[#d4af37] group-hover:text-black transition-colors" size={32} strokeWidth={1.5} />
                         </div>
                         <span className="text-gray-300 text-sm md:text-base font-medium tracking-wide group-hover:text-white uppercase text-center leading-tight">{t.navHotelToAir}</span>
                      </button>
-                     <button onClick={() => navigateTo('facilities')} className="glass-card p-6 md:p-8 rounded-3xl flex flex-col items-center justify-center gap-4 hover:-translate-y-2 hover:bg-white/10 hover:border-[#d4af37]/50 transition-all duration-300 group shadow-lg">
+                     <button onClick={() => navigateTo('facilities')} className="glass-card p-6 md:p-8 rounded-3xl flex flex-col items-center justify-center gap-4 hover:-translate-y-2 hover:bg-white/10 hover:border-[#d4af37]/50 transition-all duration-300 group shadow-lg outline-none focus:outline-none">
                         <div className="bg-white/5 p-4 rounded-full group-hover:bg-[#d4af37] transition-colors shadow-inner">
                            <Waves className="text-[#d4af37] group-hover:text-black transition-colors" size={32} strokeWidth={1.5} />
                         </div>
                         <span className="text-gray-300 text-sm md:text-base font-medium tracking-wide group-hover:text-white uppercase text-center leading-tight">{t.navFacilities}</span>
                      </button>
-                     <button onClick={() => navigateTo('dining')} className="glass-card p-6 md:p-8 rounded-3xl flex flex-col items-center justify-center gap-4 hover:-translate-y-2 hover:bg-white/10 hover:border-[#d4af37]/50 transition-all duration-300 group shadow-lg">
+                     <button onClick={() => navigateTo('dining')} className="glass-card p-6 md:p-8 rounded-3xl flex flex-col items-center justify-center gap-4 hover:-translate-y-2 hover:bg-white/10 hover:border-[#d4af37]/50 transition-all duration-300 group shadow-lg outline-none focus:outline-none">
                         <div className="bg-white/5 p-4 rounded-full group-hover:bg-[#d4af37] transition-colors shadow-inner">
                            <Coffee className="text-[#d4af37] group-hover:text-black transition-colors" size={32} strokeWidth={1.5} />
                         </div>
@@ -650,14 +637,13 @@ export default function App() {
                   </div>
                 </FadeInSection>
                 
-                {/* Video Placeholder แนวตั้ง */}
+                {/* Video */}
                 <FadeInSection delay={400} className="flex flex-col items-center justify-center h-full">
                   <h3 className="text-white text-lg font-medium mb-4 text-center">วิดีโอแนะนำการเดินทาง (Guide Video)</h3>
                   <div className="relative w-full max-w-[320px] aspect-[9/16] bg-black rounded-3xl overflow-hidden border-4 border-[#1a202c] shadow-2xl group cursor-pointer">
                     <video 
                       src="./vid-guide1.mp4" 
                       className="w-full h-full object-cover"
-                      poster="./step1.jpg"
                       controls
                       controlsList="nodownload"
                     />
@@ -689,9 +675,9 @@ export default function App() {
                 </div>
               </FadeInSection>
 
-              <div className="grid lg:grid-cols-2 gap-12 items-start">
+              <div className="max-w-4xl mx-auto items-start">
                 <FadeInSection delay={200}>
-                  <div className="bg-[#1a202c] rounded-3xl border border-white/5 p-8 shadow-xl">
+                  <div className="bg-[#1a202c] rounded-3xl border border-white/5 p-8 md:p-12 shadow-xl">
                     <h3 className="text-2xl text-white mb-8 font-serif flex items-center"><Car className="text-[#d4af37] mr-3" /> รายละเอียดบริการ (Details)</h3>
                     <div className="space-y-6">
                       {[
@@ -709,20 +695,6 @@ export default function App() {
                         </div>
                       ))}
                     </div>
-                  </div>
-                </FadeInSection>
-                
-                {/* Video/Image Placeholder */}
-                <FadeInSection delay={400} className="flex flex-col items-center justify-center h-full">
-                  <h3 className="text-white text-lg font-medium mb-4 text-center">รถตู้รับส่งของโรงแรม (Our Van)</h3>
-                  <div className="relative w-full max-w-[400px] aspect-[3/4] bg-black rounded-3xl overflow-hidden border-4 border-[#1a202c] shadow-2xl group cursor-pointer">
-                    <video 
-                      src="./vid-guide2.mp4" 
-                      className="w-full h-full object-cover"
-                      poster="./van2.jpg"
-                      controls
-                    />
-                    <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-all pointer-events-none"></div>
                   </div>
                 </FadeInSection>
               </div>
@@ -749,37 +721,39 @@ export default function App() {
               {/* เพิ่ม ImageCarousel สำหรับสิ่งอำนวยความสะดวก */}
               <FadeInSection delay={100} className="mb-20">
                 <ImageCarousel images={[
-                  'https://images.unsplash.com/photo-1576013551627-11971f36c9d0?w=1200',
-                  'https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=1200',
-                  'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1200',
-                  'https://images.unsplash.com/photo-1582735689369-4fe89db7114c?w=1200'
+                  './fac-slide1.jpg',
+                  './fac-slide2.jpg',
+                  './fac-slide3.jpg',
+                  './fac-slide4.jpg'
                 ]} />
               </FadeInSection>
 
-              {/* Grid แบบวงกลม */}
-              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-12">
+              {/* Grid แบบการ์ดแนวตั้ง (Premium Portrait Cards) แทนแบบวงกลม */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8">
                 {[
-                  { img: './fac-wifi.jpg', fallback: 'https://images.unsplash.com/photo-1563622236306-03c6225c5dfc?w=400', title: t.facWifi },
-                  { img: './fac-pool.jpg', fallback: 'https://images.unsplash.com/photo-1576013551627-11971f36c9d0?w=400', title: t.facPool },
-                  { img: './fac-fitness.jpg', fallback: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=400', title: t.facFit },
-                  { img: './fac-sauna.jpg', fallback: 'https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=400', title: t.facSauna },
-                  { img: './fac-mart.jpg', fallback: 'https://images.unsplash.com/photo-1604719312566-8912e9227c6a?w=400', title: t.facMart },
-                  { img: './fac-chicken.jpg', fallback: 'https://images.unsplash.com/photo-1598514982205-f36b96d1e8d4?w=400', title: t.facChicken },
-                  { img: './fac-laundry.jpg', fallback: 'https://images.unsplash.com/photo-1582735689369-4fe89db7114c?w=400', title: t.facLaundry },
-                  { img: './fac-kids.jpg', fallback: 'https://images.unsplash.com/photo-1566004100631-35d015d6a491?w=400', title: t.facKids },
-                  { img: './fac-cctv.jpg', fallback: 'https://images.unsplash.com/photo-1557804506-669a67965ba0?w=400', title: t.facCCTV },
+                  { img: './fac-pool.jpg', title: t.facPool },
+                  { img: './fac-fitness.jpg', title: t.facFit },
+                  { img: './fac-sauna.jpg', title: t.facSauna },
+                  { img: './fac-mart.jpg', title: t.facMart },
+                  { img: './fac-chicken.jpg', title: t.facChicken },
+                  { img: './fac-laundry.jpg', title: t.facLaundry },
+                  { img: './fac-kids.jpg', title: t.facKids },
                 ].map((item, idx) => (
                   <FadeInSection key={idx} delay={idx * 100}>
-                    <div className="flex flex-col items-center text-center group cursor-default">
-                      <div className="w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden border-2 border-white/10 group-hover:border-[#d4af37] transition-all duration-500 mb-4 shadow-xl">
-                        <img 
-                          src={item.img} 
-                          alt="Facility" 
-                          className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"
-                          onError={(e) => { e.target.src = item.fallback; }}
-                        />
+                    <div className="relative aspect-[4/5] rounded-3xl overflow-hidden group shadow-2xl cursor-default border border-white/5 hover:border-[#d4af37]/50 transition-colors duration-500">
+                      <img 
+                        src={item.img} 
+                        alt={item.title} 
+                        className="absolute inset-0 w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700 bg-[#1a202c]"
+                        onError={(e) => { e.target.src = 'https://images.unsplash.com/photo-1563622236306-03c6225c5dfc?w=600'; }}
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-80 group-hover:opacity-90 transition-opacity duration-500"></div>
+                      <div className="absolute bottom-0 left-0 w-full p-6 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
+                        <div className="w-8 h-1 bg-[#d4af37] mb-3 transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500 delay-100"></div>
+                        <h3 className="text-white font-medium text-lg md:text-xl drop-shadow-md group-hover:text-[#d4af37] transition-colors duration-300">
+                          {item.title}
+                        </h3>
                       </div>
-                      <p className="text-gray-300 font-light text-sm md:text-base px-2 group-hover:text-white transition-colors">{item.title}</p>
                     </div>
                   </FadeInSection>
                 ))}
@@ -832,11 +806,11 @@ export default function App() {
                     </a>
                   </div>
                   <CoverflowGallery images={[
-                    'https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=800',
-                    'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=800',
-                    './bar.jpg',
-                    'https://images.unsplash.com/photo-1470337458703-41512024da26?w=800',
-                    'https://images.unsplash.com/photo-1574096079513-d8259312b785?w=800'
+                    './s64-1.jpg',
+                    './s64-2.jpg',
+                    './s64-3.jpg',
+                    './s64-4.jpg',
+                    './s64-5.jpg'
                   ]} />
                 </FadeInSection>
 
@@ -850,11 +824,11 @@ export default function App() {
                     </a>
                   </div>
                   <CoverflowGallery images={[
-                    'https://images.unsplash.com/photo-1544025162-8111f4228994?w=800',
-                    'https://images.unsplash.com/photo-1594041680534-e8c8cdebd659?w=800',
-                    './steak.webp',
-                    'https://images.unsplash.com/photo-1529692236671-f1f6cf9683ba?w=800',
-                    'https://images.unsplash.com/photo-1558030006-450675393462?w=800'
+                    './steak-1.jpg',
+                    './steak-2.jpg',
+                    './steak-3.jpg',
+                    './steak-4.jpg',
+                    './steak-5.jpg'
                   ]} />
                 </FadeInSection>
 
@@ -868,11 +842,11 @@ export default function App() {
                     </a>
                   </div>
                   <CoverflowGallery images={[
-                    'https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=800',
-                    'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=800',
-                    './cafe.jpg',
-                    'https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=800',
-                    'https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=800'
+                    './cafe-1.jpg',
+                    './cafe-2.jpg',
+                    './cafe-3.jpg',
+                    './cafe-4.jpg',
+                    './cafe-5.jpg'
                   ]} />
                 </FadeInSection>
               </div>
@@ -892,7 +866,7 @@ export default function App() {
               <div className="grid lg:grid-cols-2 gap-12 bg-[#1a202c] rounded-3xl border border-white/5 overflow-hidden shadow-2xl">
                 {/* ข้อมูลติดต่อ */}
                 <div className="p-10 md:p-16 flex flex-col justify-center">
-                  <h2 className="font-serif text-3xl text-white mb-8 font-light">Suvarnabhumi Ville Airport Hotel</h2>
+                  <h2 className="font-serif text-3xl text-white mb-8 font-light">Suvarnabhumi Ville Hotel</h2>
                   <div className="space-y-6">
                     <div className="flex items-start">
                       <MapPin className="text-[#d4af37] mr-4 mt-1 shrink-0" size={24} strokeWidth={1.5} />
@@ -942,7 +916,7 @@ export default function App() {
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="flex flex-col md:flex-row justify-between items-center gap-6">
             <div className="flex flex-col items-center md:items-start">
-              <span className="font-serif text-xl tracking-[0.15em] text-white uppercase mb-2">Suvarnabhumi <span className="text-[#d4af37] italic font-light lowercase">Ville</span></span>
+              <span className="font-serif text-xl tracking-[0.15em] text-[#d4af37] uppercase mb-2">Suvarnabhumi <span className="text-white italic font-light lowercase">Ville</span></span>
               <p className="text-xs text-gray-500 font-light">The Perfect Place With A Perfect View</p>
             </div>
             
@@ -953,7 +927,7 @@ export default function App() {
             </div>
           </div>
           <div className="text-center md:text-left mt-8 pt-8 border-t border-white/5 text-xs text-gray-600 font-light">
-            <p>© {new Date().getFullYear()} Suvarnabhumi Ville. All Rights Reserved.</p>
+            <p>© {new Date().getFullYear()} Suvarnabhumi Ville Hotel. All Rights Reserved.</p>
           </div>
         </div>
       </footer>
