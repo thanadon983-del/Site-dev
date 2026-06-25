@@ -5,28 +5,26 @@ import {
   ShieldCheck, Waves, Coffee, Home
 } from 'lucide-react';
 
-// --- Component สำหรับพื้นหลังเรขาคณิตเคลื่อนไหว (ปรับเป็นโทนสว่าง) ---
-const FloatingShapes = () => {
-  const shapes = [
-    { type: 'circle', size: 'w-64 h-64 md:w-96 md:h-96', pos: '-top-[10%] -left-[10%]', duration: '25s', delay: '0s', color: 'bg-[#d4af37]' },
-    { type: 'square', size: 'w-48 h-48 md:w-72 md:h-72', pos: 'top-[20%] right-[5%]', duration: '30s', delay: '-5s', color: 'bg-white' },
-    { type: 'circle', size: 'w-72 h-72 md:w-[500px] md:h-[500px]', pos: 'bottom-[10%] -left-[5%]', duration: '35s', delay: '-10s', color: 'bg-gray-200' },
-    { type: 'square', size: 'w-32 h-32 md:w-48 md:h-48', pos: 'bottom-[30%] right-[15%]', duration: '20s', delay: '-2s', color: 'bg-[#d4af37]' },
-    { type: 'circle', size: 'w-56 h-56 md:w-80 md:h-80', pos: 'top-[40%] left-[30%]', duration: '40s', delay: '-15s', color: 'bg-white' },
-  ];
-
+// --- Component สำหรับพื้นหลัง Mesh Gradient (ขาว/ทอง/#1800ad) ---
+const AnimatedMeshGradient = () => {
   return (
-    <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
-      {shapes.map((s, i) => (
-        <div
-          key={i}
-          className={`absolute opacity-10 ${s.size} ${s.pos} ${s.color} ${s.type === 'circle' ? 'rounded-full' : 'rounded-[3rem] rotate-12'}`}
-          style={{
-            animation: `float-shape ${s.duration} ease-in-out infinite alternate`,
-            animationDelay: s.delay,
-          }}
-        />
-      ))}
+    <div className="fixed inset-0 overflow-hidden pointer-events-none z-0 bg-white">
+      <div 
+        className="absolute top-[-20%] left-[-10%] w-[70vw] h-[70vw] rounded-full bg-[#d4af37] mix-blend-multiply filter blur-[90px] md:blur-[150px] opacity-50"
+        style={{ animation: 'blob 25s infinite alternate ease-in-out' }}
+      ></div>
+      <div 
+        className="absolute top-[10%] right-[-10%] w-[60vw] h-[60vw] rounded-full bg-[#1800ad] mix-blend-multiply filter blur-[90px] md:blur-[150px] opacity-30"
+        style={{ animation: 'blob 30s infinite alternate ease-in-out', animationDelay: '2s' }}
+      ></div>
+      <div 
+        className="absolute bottom-[-20%] left-[10%] w-[80vw] h-[80vw] rounded-full bg-[#d4af37] mix-blend-multiply filter blur-[90px] md:blur-[150px] opacity-40"
+        style={{ animation: 'blob 35s infinite alternate ease-in-out', animationDelay: '4s' }}
+      ></div>
+      <div 
+        className="absolute bottom-[-10%] right-[20%] w-[50vw] h-[50vw] rounded-full bg-[#1800ad] mix-blend-multiply filter blur-[90px] md:blur-[150px] opacity-20"
+        style={{ animation: 'blob 28s infinite alternate ease-in-out', animationDelay: '6s' }}
+      ></div>
     </div>
   );
 };
@@ -438,30 +436,30 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 text-gray-700 selection:bg-[#d4af37] selection:text-white font-light" style={{ fontFamily: "'Kanit', sans-serif" }}>
+    <div className="min-h-screen bg-white text-gray-700 selection:bg-[#d4af37] selection:text-white font-light" style={{ fontFamily: "'Kanit', sans-serif" }}>
       <style dangerouslySetInnerHTML={{__html: `
         @import url('https://fonts.googleapis.com/css2?family=Kanit:wght@200;300;400;500;600&display=swap');
         * { font-family: 'Kanit', sans-serif !important; }
         html { scroll-behavior: smooth; }
-        body { background-color: #f9fafb; }
+        body { background-color: #ffffff; }
         button, a { outline: none !important; -webkit-tap-highlight-color: transparent; }
         button:focus, a:focus { outline: none !important; box-shadow: none !important; }
         .glass-card {
-          background: rgba(255, 255, 255, 0.95);
-          backdrop-filter: blur(16px);
-          -webkit-backdrop-filter: blur(16px);
-          border: 1px solid rgba(0, 0, 0, 0.05);
+          background: rgba(255, 255, 255, 0.85);
+          backdrop-filter: blur(20px);
+          -webkit-backdrop-filter: blur(20px);
+          border: 1px solid rgba(255, 255, 255, 0.4);
         }
-        @keyframes float-shape {
-          0% { transform: translateY(0) translateX(0) rotate(0deg) scale(1); }
-          33% { transform: translateY(-30px) translateX(20px) rotate(45deg) scale(1.05); }
-          66% { transform: translateY(20px) translateX(-20px) rotate(90deg) scale(0.95); }
-          100% { transform: translateY(0) translateX(0) rotate(135deg) scale(1); }
+        @keyframes blob {
+          0% { transform: translate(0px, 0px) scale(1); }
+          33% { transform: translate(30px, -50px) scale(1.1); }
+          66% { transform: translate(-20px, 20px) scale(0.9); }
+          100% { transform: translate(0px, 0px) scale(1); }
         }
       `}} />
 
-      {/* พื้นหลังเรขาคณิตแบบสว่าง */}
-      <FloatingShapes />
+      {/* พื้นหลัง Mesh Gradient เคลื่อนไหว */}
+      <AnimatedMeshGradient />
 
       {/* Navigation */}
       <nav className="absolute top-0 left-0 w-full z-50 bg-transparent py-5">
@@ -563,16 +561,6 @@ export default function App() {
       {/* ==================================================== */}
       {currentPage === 'home' && (
         <section className="relative min-h-screen flex flex-col justify-center overflow-hidden animate-[pop-in_0.5s_ease-out_forwards] pt-20 pb-10">
-          <div className="absolute inset-0 z-0 h-[85vh] md:h-[90vh]">
-            <img 
-              src="./bg-home.jpg" 
-              alt="Background" 
-              className="w-full h-full object-cover scale-105 transform motion-safe:animate-[pulse_15s_ease-in-out_infinite_alternate]"
-              onError={(e) => { e.target.src = 'https://images.unsplash.com/photo-1542314831-c6a4d27ce605?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80'; }}
-            />
-            {/* ไล่สีจากขาวสว่างด้านบน ลงมาเป็นดำเข้มด้านล่าง */}
-            <div className="absolute inset-0 bg-gradient-to-b from-white/90 via-black/50 to-gray-900"></div>
-          </div>
           
           <div className="relative z-10 text-center px-4 w-full max-w-5xl mx-auto flex-grow flex flex-col justify-center">
             
@@ -581,19 +569,19 @@ export default function App() {
                  <img 
                    src="./logo-large.png" 
                    alt="Suvarnabhumi Ville Hotel" 
-                   className="h-32 md:h-40 lg:h-48 object-contain drop-shadow-2xl hover:scale-105 transition-transform duration-700" 
+                   className="h-32 md:h-40 lg:h-48 object-contain drop-shadow-xl hover:scale-105 transition-transform duration-700" 
                  />
               </div>
             </FadeInSection>
 
             <FadeInSection delay={300}>
-              <h1 className="font-serif text-4xl md:text-5xl lg:text-7xl text-[#d4af37] mb-6 leading-[1.2] font-medium drop-shadow-2xl tracking-wider uppercase">
+              <h1 className="font-serif text-4xl md:text-5xl lg:text-7xl text-white mb-6 leading-[1.2] font-medium tracking-wider uppercase" style={{ textShadow: '0 4px 20px rgba(0,0,0,0.3), 0 2px 5px rgba(0,0,0,0.5)' }}>
                 Suvarnabhumi Ville <span className="text-white font-light block md:inline mt-2 md:mt-0">Hotel</span>
               </h1>
             </FadeInSection>
             
             <FadeInSection delay={500}>
-              <p className="text-base md:text-lg text-white mb-6 max-w-2xl mx-auto font-light leading-relaxed px-4 drop-shadow-lg">
+              <p className="text-base md:text-lg text-white mb-6 max-w-2xl mx-auto font-light leading-relaxed px-4" style={{ textShadow: '0 2px 10px rgba(0,0,0,0.5)' }}>
                 {t.heroDesc}
               </p>
             </FadeInSection>
