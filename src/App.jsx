@@ -5,6 +5,30 @@ import {
   ShieldCheck, Waves, Coffee, Home
 } from 'lucide-react';
 
+// --- Component สำหรับพื้นหลัง Mesh Gradient (ขาว/ทอง/#1800ad) ---
+const AnimatedMeshGradient = () => {
+  return (
+    <div className="fixed inset-0 overflow-hidden pointer-events-none z-0 bg-white">
+      <div 
+        className="absolute top-[-20%] left-[-10%] w-[70vw] h-[70vw] rounded-full bg-[#d4af37] mix-blend-multiply filter blur-[90px] md:blur-[150px] opacity-50"
+        style={{ animation: 'blob 25s infinite alternate ease-in-out' }}
+      ></div>
+      <div 
+        className="absolute top-[10%] right-[-10%] w-[60vw] h-[60vw] rounded-full bg-[#1800ad] mix-blend-multiply filter blur-[90px] md:blur-[150px] opacity-40"
+        style={{ animation: 'blob 30s infinite alternate ease-in-out', animationDelay: '2s' }}
+      ></div>
+      <div 
+        className="absolute bottom-[-20%] left-[10%] w-[80vw] h-[80vw] rounded-full bg-[#d4af37] mix-blend-multiply filter blur-[90px] md:blur-[150px] opacity-40"
+        style={{ animation: 'blob 35s infinite alternate ease-in-out', animationDelay: '4s' }}
+      ></div>
+      <div 
+        className="absolute bottom-[-10%] right-[20%] w-[50vw] h-[50vw] rounded-full bg-[#1800ad] mix-blend-multiply filter blur-[90px] md:blur-[150px] opacity-30"
+        style={{ animation: 'blob 28s infinite alternate ease-in-out', animationDelay: '6s' }}
+      ></div>
+    </div>
+  );
+};
+
 // --- Component สำหรับทำ Animation เลื่อนจอแล้วค่อยๆ ปรากฏ ---
 const FadeInSection = ({ children, delay = 0, className = "" }) => {
   const [isVisible, setVisible] = useState(false);
@@ -63,7 +87,7 @@ const ShortcutMenu = ({ navigateTo, currentPage, t }) => {
             <button 
               key={item.id}
               onClick={() => navigateTo(item.id)} 
-              className="glass-card bg-white p-6 md:p-8 rounded-3xl flex flex-col items-center justify-center gap-4 hover:-translate-y-2 transition-all duration-300 group outline-none focus:outline-none border border-gray-100 shadow-md hover:shadow-xl hover:border-[#d4af37]/40"
+              className="glass-card bg-white/90 p-6 md:p-8 rounded-3xl flex flex-col items-center justify-center gap-4 hover:-translate-y-2 transition-all duration-300 group outline-none focus:outline-none border-gray-100 shadow-md hover:shadow-xl hover:border-[#d4af37]/40"
             >
               <div className="p-4 rounded-full transition-colors shadow-inner bg-gray-50 text-gray-400 group-hover:bg-[#d4af37] group-hover:text-white">
                 <Icon size={30} strokeWidth={1.5} className={item.iconClass || ""} />
@@ -79,7 +103,7 @@ const ShortcutMenu = ({ navigateTo, currentPage, t }) => {
   );
 };
 
-// --- Component แบนเนอร์หัวเว็บสำหรับหน้าย่อย (ลบแผ่นไล่สีดำออกเพื่อให้เห็นภาพชัดๆ) ---
+// --- Component แบนเนอร์หัวเว็บสำหรับหน้าย่อย (ไล่สี ขาวบน -> ดำล่าง) ---
 const PageBanner = ({ title, bgImage }) => (
   <div className="relative h-[35vh] min-h-[280px] md:h-[45vh] md:min-h-[380px] w-full flex items-center justify-center overflow-hidden">
     <img 
@@ -88,11 +112,12 @@ const PageBanner = ({ title, bgImage }) => (
       className="absolute inset-0 w-full h-full object-cover scale-105 transform motion-safe:animate-[pulse_15s_ease-in-out_infinite_alternate]"
       onError={(e) => { e.target.src = 'https://images.unsplash.com/photo-1542314831-c6a4d27ce605?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80'; }}
     />
+    <div className="absolute inset-0 bg-gradient-to-b from-white/90 via-black/50 to-gray-900"></div>
     
     <div className="relative z-10 text-center px-6 mt-10">
       <FadeInSection>
-        <h1 className="text-3xl md:text-5xl font-serif text-white tracking-wider font-light mb-4 drop-shadow-lg" style={{ textShadow: '0 4px 15px rgba(0,0,0,0.6), 0 2px 5px rgba(0,0,0,0.8)' }}>{title}</h1>
-        <div className="w-16 h-1 bg-[#d4af37] mx-auto rounded-full shadow-[0_2px_4px_rgba(0,0,0,0.5)]"></div>
+        <h1 className="text-3xl md:text-5xl font-serif text-white tracking-wider font-light mb-4 drop-shadow-lg">{title}</h1>
+        <div className="w-16 h-1 bg-[#d4af37] mx-auto rounded-full shadow-md"></div>
       </FadeInSection>
     </div>
   </div>
@@ -125,6 +150,7 @@ const ImageCarousel = ({ images, heightClass = "h-[250px] md:h-[450px]" }) => {
             className="w-full h-full object-cover" 
             onError={(e) => { e.target.src = 'https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=1200'; }}
           />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-60"></div>
         </div>
       ))}
       <button onClick={prevSlide} className="absolute left-4 top-1/2 -translate-y-1/2 z-20 bg-white/80 text-gray-800 hover:bg-[#d4af37] hover:text-white p-3 rounded-full opacity-0 group-hover:opacity-100 transition-all backdrop-blur-sm shadow-md">
@@ -203,7 +229,7 @@ const CoverflowGallery = ({ images }) => {
 // ไอคอน Social Media
 const LineIcon = ({ size = 24, className = "" }) => (
   <svg viewBox="0 0 24 24" width={size} height={size} className={className} fill="currentColor">
-    <path d="M24 10.304c0-5.369-5.383-9.738-12-9.738-6.616 0-12 4.369-12 9.738 0 4.814 4.269 8.846 10.036 9.608.391.084.922.258 1.057.592.122.303.079.778.039 1.085l-.171 1.027c-.053.303-.242 1.186 1.039.647 1.281-.54 6.911-4.069 9.428-6.967 1.739-1.907 2.572-3.843 2.572-5.992zm-18.988 2.595h-2.392v-4.578c0-.265.215-.48.48-.48s.48.215.48.48v4.098h1.432c.265 0 .48.215.48.48s-.215.48-.48.48zm3.322 0h-.96c-.265 0-.48-.215-.48-.48v-4.578c0-.265.215-.48.48-.48s.48.215.48.48v4.098h1.432c.265 0 .48.215.48.48s-.215.48-.48.48zm5.666 0h-1.472l-1.963-2.739v2.739c0 .265-.214.48-.479.48s-.48-.215-.48-.48v-4.578c0-.265.215-.48.48-.48s.48.215.48.48v2.724l1.948-2.724c.097-.137.253-.211.419-.211.265 0 .48.215.48.48v4.578c0 .265-.215.48-.48.48zm3.692-3.618h-2.392v.975h2.392c.265 0 .48.215.48.48s-.215.48-.48.48h-2.392v1.203h2.392c.265 0 .48.215.48.48s-.215.48-.48.48h-2.872c-.265 0-.48-.215-.48-.48v-4.578c0-.265.215-.48.48-.48h2.872c.265 0 .48.215.48.48s-.215.48-.48.48z"/>
+    <path d="M24 10.304c0-5.369-5.383-9.738-12-9.738-6.616 0-12 4.369-12 9.738 0 4.814 4.269 8.846 10.036 9.608.391.084.922.258 1.057.592.122.303.079.778.039 1.085l-.171 1.027c-.053.303-.242 1.186 1.039.647 1.281-.54 6.911-4.069 9.428-6.967 1.739-1.907 2.572-3.843 2.572-5.992zm-18.988 2.595h-2.392v-4.578c0-.265.215-.48.48-.48s.48.215.48.48v4.098h1.432c.265 0 .48.215.48.48s-.215.48-.48.48zm3.322 0h-.96c-.265 0-.48-.215-.48-.48v-4.578c0-.265.215-.48.48-.48s.48.215.48.48v4.578c0 .265-.215.48-.48.48zm5.666 0h-1.472l-1.963-2.739v2.739c0 .265-.214.48-.479.48s-.48-.215-.48-.48v-4.578c0-.265.215-.48.48-.48s.48.215.48.48v2.724l1.948-2.724c.097-.137.253-.211.419-.211.265 0 .48.215.48.48v4.578c0 .265-.215.48-.48.48zm3.692-3.618h-2.392v.975h2.392c.265 0 .48.215.48.48s-.215.48-.48.48h-2.392v1.203h2.392c.265 0 .48.215.48.48s-.215.48-.48.48h-2.872c-.265 0-.48-.215-.48-.48v-4.578c0-.265.215-.48.48-.48h2.872c.265 0 .48.215.48.48s-.215.48-.48.48z"/>
   </svg>
 );
 const FacebookIcon = ({ size = 24, className = "" }) => (
@@ -233,6 +259,7 @@ const translations = {
     changeLang: "เปลี่ยนภาษา (Language)",
 
     shuttleAirToHotel: "บริการรับจากสนามบิน สู่ โรงแรม",
+    service24h: "บริการ 24 ชั่วโมง", // เพิ่มการแปลบริการ 24 ชม
     noAdvanceBooking: "No Advance Booking",
     step1Title: "ไปที่จุดนัดพบ (Meeting Point)",
     step1Desc1: "หลังจากรับสัมภาระ กรุณาไปยังจุดนัดพบที่ ",
@@ -291,6 +318,7 @@ const translations = {
     changeLang: "Language",
 
     shuttleAirToHotel: "Shuttle Service: Airport to Hotel",
+    service24h: "24 Hours Service", // เพิ่มการแปลบริการ 24 ชม
     noAdvanceBooking: "No Advance Booking",
     step1Title: "Go to Meeting Point",
     step1Desc1: "After receiving luggage, please go to the meeting point at ",
@@ -349,6 +377,7 @@ const translations = {
     changeLang: "语言 (Language)",
 
     shuttleAirToHotel: "接送服务：从机场到酒店",
+    service24h: "24小时服务", // เพิ่มการแปลบริการ 24 ชม
     noAdvanceBooking: "无需提前预订",
     step1Title: "前往会合点",
     step1Desc1: "取完行李后，请前往位于 ",
@@ -425,7 +454,16 @@ export default function App() {
           -webkit-backdrop-filter: blur(20px);
           border: 1px solid rgba(255, 255, 255, 0.4);
         }
+        @keyframes blob {
+          0% { transform: translate(0px, 0px) scale(1); }
+          33% { transform: translate(30px, -50px) scale(1.1); }
+          66% { transform: translate(-20px, 20px) scale(0.9); }
+          100% { transform: translate(0px, 0px) scale(1); }
+        }
       `}} />
+
+      {/* พื้นหลัง Mesh Gradient เคลื่อนไหว */}
+      <AnimatedMeshGradient />
 
       {/* Navigation */}
       <nav className="absolute top-0 left-0 w-full z-50 bg-transparent py-5">
@@ -533,7 +571,8 @@ export default function App() {
               className="w-full h-full object-cover scale-105 transform motion-safe:animate-[pulse_15s_ease-in-out_infinite_alternate]"
               onError={(e) => { e.target.src = 'https://images.unsplash.com/photo-1542314831-c6a4d27ce605?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80'; }}
             />
-            {/* เอาการไล่สีและแผ่นฟิล์มดำ/ขาวออก เพื่อโชว์ภาพชัดๆ */}
+            {/* ไล่สีจากขาวสว่างด้านบน ลงมาเป็นดำเข้มด้านล่าง */}
+            <div className="absolute inset-0 bg-gradient-to-b from-white/90 via-black/50 to-gray-900"></div>
           </div>
           
           <div className="relative z-10 text-center px-4 w-full max-w-5xl mx-auto flex-grow flex flex-col justify-center">
@@ -549,13 +588,13 @@ export default function App() {
             </FadeInSection>
 
             <FadeInSection delay={300}>
-              <h1 className="font-serif text-4xl md:text-5xl lg:text-7xl text-white mb-6 leading-[1.2] font-medium tracking-wider uppercase" style={{ textShadow: '0 4px 15px rgba(0,0,0,0.6), 0 2px 5px rgba(0,0,0,0.8)' }}>
+              <h1 className="font-serif text-4xl md:text-5xl lg:text-7xl text-white mb-6 leading-[1.2] font-medium tracking-wider uppercase" style={{ textShadow: '0 4px 20px rgba(0,0,0,0.3), 0 2px 5px rgba(0,0,0,0.5)' }}>
                 Suvarnabhumi Ville <span className="text-white font-light block md:inline mt-2 md:mt-0">Hotel</span>
               </h1>
             </FadeInSection>
             
             <FadeInSection delay={500}>
-              <p className="text-base md:text-lg text-white mb-6 max-w-2xl mx-auto font-medium leading-relaxed px-4" style={{ textShadow: '0 2px 8px rgba(0,0,0,0.8)' }}>
+              <p className="text-base md:text-lg text-gray-600 mb-6 max-w-2xl mx-auto font-light leading-relaxed px-4">
                 {t.heroDesc}
               </p>
             </FadeInSection>
@@ -579,7 +618,11 @@ export default function App() {
             <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
               <FadeInSection>
                 <div className="text-center mb-16">
-                  <h2 className="font-serif text-3xl md:text-4xl text-gray-900 mb-4 font-medium">{t.shuttleAirToHotel}</h2>
+                  {/* เพิ่มป้าย 24 ชั่วโมง */}
+                  <h2 className="font-serif text-3xl md:text-4xl text-gray-900 mb-4 font-medium flex flex-col md:flex-row items-center justify-center gap-4">
+                    {t.shuttleAirToHotel}
+                    <span className="text-sm bg-[#d4af37] text-white px-4 py-1.5 rounded-full font-medium tracking-widest uppercase shadow-md font-sans border border-[#d4af37]">{t.service24h}</span>
+                  </h2>
                   <p className="text-gray-600 font-light max-w-2xl mx-auto">
                     {t.step1Desc1} <br/><span className="text-[#d4af37] font-medium">{t.step1Desc2}</span>
                   </p>
@@ -601,10 +644,13 @@ export default function App() {
                         <div key={idx} className="flex gap-4 group cursor-pointer hover:bg-gray-50 p-4 -mx-4 rounded-xl transition-all" onClick={() => setModalImage(item.image)}>
                           <div className="w-10 h-10 rounded-full bg-gray-100 group-hover:bg-[#d4af37] flex items-center justify-center text-gray-500 group-hover:text-white font-medium text-base transition-colors shrink-0 shadow-inner">{item.step}</div>
                           <div>
-                            <h4 className="text-gray-900 font-medium mb-1 group-hover:text-[#d4af37] transition-colors">{item.title}</h4>
+                            {/* นำไอคอนรูปภาพมาไว้หลังหัวข้อแทน และให้โชว์ตอนเอาเมาส์ชี้ */}
+                            <h4 className="text-gray-900 font-medium mb-1 group-hover:text-[#d4af37] transition-colors flex items-center">
+                              {item.title}
+                              <ImageIcon size={16} className="ml-2 text-gray-400 group-hover:text-[#d4af37] opacity-0 group-hover:opacity-100 transition-opacity" />
+                            </h4>
                             <p className="text-gray-600 text-sm font-light leading-relaxed">{item.desc1}<strong className="text-gray-800 font-medium">{item.desc2}</strong>{item.desc3}</p>
                             {item.warning && <p className="text-yellow-600 text-sm mt-3 font-light bg-yellow-50 p-3 rounded-lg border border-yellow-200/50">{item.warning}</p>}
-                            <div className="mt-2 flex items-center text-xs text-[#d4af37]/80 group-hover:text-[#d4af37] font-medium"><ImageIcon size={14} className="mr-1.5" /> {lang === 'th' ? 'คลิกเพื่อดูภาพ' : 'Click to view image'}</div>
                           </div>
                         </div>
                       ))}
@@ -642,7 +688,11 @@ export default function App() {
             <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
               <FadeInSection>
                 <div className="text-center mb-16">
-                  <h2 className="font-serif text-3xl md:text-4xl text-gray-900 mb-4 font-medium">{t.shuttleHotelToAir}</h2>
+                  {/* เพิ่มป้าย 24 ชั่วโมง */}
+                  <h2 className="font-serif text-3xl md:text-4xl text-gray-900 mb-4 font-medium flex flex-col md:flex-row items-center justify-center gap-4">
+                    {t.shuttleHotelToAir}
+                    <span className="text-sm bg-[#d4af37] text-white px-4 py-1.5 rounded-full font-medium tracking-widest uppercase shadow-md font-sans border border-[#d4af37]">{t.service24h}</span>
+                  </h2>
                   <p className="text-gray-600 font-light max-w-2xl mx-auto">
                     บริการรถตู้จากโรงแรมไปยังสนามบินสุวรรณภูมิ ออกทุกๆ ครึ่งชั่วโมง
                   </p>
@@ -696,7 +746,7 @@ export default function App() {
                 </div>
               </FadeInSection>
 
-              {/* Slider รูปใหญ่ */}
+              {/* เพิ่ม ImageCarousel สำหรับสิ่งอำนวยความสะดวก */}
               <FadeInSection delay={100} className="mb-20">
                 <ImageCarousel images={[
                   '/fac-slide1.jpg',
