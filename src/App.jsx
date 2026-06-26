@@ -259,7 +259,7 @@ const translations = {
     changeLang: "เปลี่ยนภาษา (Language)",
 
     shuttleAirToHotel: "บริการรับจากสนามบิน สู่ โรงแรม",
-    service24h: "บริการ 24 ชั่วโมง", // เพิ่มการแปลบริการ 24 ชม
+    service24h: "บริการ 24 ชั่วโมง", 
     noAdvanceBooking: "No Advance Booking",
     step1Title: "ไปที่จุดนัดพบ (Meeting Point)",
     step1Desc1: "หลังจากรับสัมภาระ กรุณาไปยังจุดนัดพบที่ ",
@@ -318,7 +318,7 @@ const translations = {
     changeLang: "Language",
 
     shuttleAirToHotel: "Shuttle Service: Airport to Hotel",
-    service24h: "24 Hours Service", // เพิ่มการแปลบริการ 24 ชม
+    service24h: "24 Hours Service", 
     noAdvanceBooking: "No Advance Booking",
     step1Title: "Go to Meeting Point",
     step1Desc1: "After receiving luggage, please go to the meeting point at ",
@@ -377,7 +377,7 @@ const translations = {
     changeLang: "语言 (Language)",
 
     shuttleAirToHotel: "接送服务：从机场到酒店",
-    service24h: "24小时服务", // เพิ่มการแปลบริการ 24 ชม
+    service24h: "24小时服务", 
     noAdvanceBooking: "无需提前预订",
     step1Title: "前往会合点",
     step1Desc1: "取完行李后，请前往位于 ",
@@ -454,16 +454,7 @@ export default function App() {
           -webkit-backdrop-filter: blur(20px);
           border: 1px solid rgba(255, 255, 255, 0.4);
         }
-        @keyframes blob {
-          0% { transform: translate(0px, 0px) scale(1); }
-          33% { transform: translate(30px, -50px) scale(1.1); }
-          66% { transform: translate(-20px, 20px) scale(0.9); }
-          100% { transform: translate(0px, 0px) scale(1); }
-        }
       `}} />
-
-      {/* พื้นหลัง Mesh Gradient เคลื่อนไหว */}
-      <AnimatedMeshGradient />
 
       {/* Navigation */}
       <nav className="absolute top-0 left-0 w-full z-50 bg-transparent py-5">
@@ -472,7 +463,7 @@ export default function App() {
             
             <div onClick={() => navigateTo('home')} className="flex-shrink-0 flex items-center cursor-pointer group relative z-20">
               <img 
-                src="/logo-large.png" 
+                src="./logo-large.png" 
                 alt="Suvarnabhumi Ville Hotel Logo" 
                 className="h-12 md:h-16 object-contain hover:scale-105 transition-transform duration-500" 
                 onError={(e) => { 
@@ -566,13 +557,11 @@ export default function App() {
         <section className="relative min-h-screen flex flex-col justify-center overflow-hidden animate-[pop-in_0.5s_ease-out_forwards] pt-20 pb-10 bg-white">
           <div className="absolute inset-0 z-0 h-[85vh] md:h-[90vh]">
             <img 
-              src="/bg-home.jpg" 
+              src="./bg-home.jpg" 
               alt="Background" 
               className="w-full h-full object-cover scale-105 transform motion-safe:animate-[pulse_15s_ease-in-out_infinite_alternate]"
               onError={(e) => { e.target.src = 'https://images.unsplash.com/photo-1542314831-c6a4d27ce605?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80'; }}
             />
-            {/* ไล่สีจากขาวสว่างด้านบน ลงมาเป็นดำเข้มด้านล่าง */}
-            <div className="absolute inset-0 bg-gradient-to-b from-white/90 via-black/50 to-gray-900"></div>
           </div>
           
           <div className="relative z-10 text-center px-4 w-full max-w-5xl mx-auto flex-grow flex flex-col justify-center">
@@ -580,7 +569,7 @@ export default function App() {
             <FadeInSection delay={100}>
               <div className="flex justify-center mb-4 md:mb-6 mt-6 md:mt-10">
                  <img 
-                   src="/logo-large.png" 
+                   src="./logo-large.png" 
                    alt="Suvarnabhumi Ville Hotel" 
                    className="h-32 md:h-40 lg:h-48 object-contain drop-shadow-xl hover:scale-105 transition-transform duration-700" 
                  />
@@ -588,13 +577,13 @@ export default function App() {
             </FadeInSection>
 
             <FadeInSection delay={300}>
-              <h1 className="font-serif text-4xl md:text-5xl lg:text-7xl text-white mb-6 leading-[1.2] font-medium tracking-wider uppercase" style={{ textShadow: '0 4px 20px rgba(0,0,0,0.3), 0 2px 5px rgba(0,0,0,0.5)' }}>
+              <h1 className="font-serif text-4xl md:text-5xl lg:text-7xl text-white mb-6 leading-[1.2] font-medium tracking-wider uppercase" style={{ textShadow: '0 4px 15px rgba(0,0,0,0.6), 0 2px 5px rgba(0,0,0,0.8)' }}>
                 Suvarnabhumi Ville <span className="text-white font-light block md:inline mt-2 md:mt-0">Hotel</span>
               </h1>
             </FadeInSection>
             
             <FadeInSection delay={500}>
-              <p className="text-base md:text-lg text-gray-600 mb-6 max-w-2xl mx-auto font-light leading-relaxed px-4">
+              <p className="text-base md:text-lg text-white mb-6 max-w-2xl mx-auto font-medium leading-relaxed px-4" style={{ textShadow: '0 2px 8px rgba(0,0,0,0.8)' }}>
                 {t.heroDesc}
               </p>
             </FadeInSection>
@@ -611,14 +600,13 @@ export default function App() {
       {/* ==================================================== */}
       {currentPage === 'airportToHotel' && (
         <div className="animate-[pop-in_0.5s_ease-out_forwards]">
-          <PageBanner title={t.navAirToHotel} bgImage="/bg-airport.jpg" />
+          <PageBanner title={t.navAirToHotel} bgImage="./bg-airport.jpg" />
           <ShortcutMenu navigateTo={navigateTo} currentPage={currentPage} t={t} />
 
           <section className="py-12 relative bg-white">
             <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
               <FadeInSection>
                 <div className="text-center mb-16">
-                  {/* เพิ่มป้าย 24 ชั่วโมง */}
                   <h2 className="font-serif text-3xl md:text-4xl text-gray-900 mb-4 font-medium flex flex-col md:flex-row items-center justify-center gap-4">
                     {t.shuttleAirToHotel}
                     <span className="text-sm bg-[#d4af37] text-white px-4 py-1.5 rounded-full font-medium tracking-widest uppercase shadow-md font-sans border border-[#d4af37]">{t.service24h}</span>
@@ -636,15 +624,14 @@ export default function App() {
                     <h3 className="text-2xl text-gray-900 mb-8 font-serif flex items-center"><Plane className="text-[#d4af37] mr-3 transform rotate-45" /> 4 ขั้นตอนง่ายๆ (Steps)</h3>
                     <div className="space-y-6">
                       {[
-                        { step: 1, title: t.step1Title, desc1: t.step1Desc1, desc2: t.step1Desc2, image: '/step1.jpg' },
-                        { step: 2, title: t.step2Title, desc1: t.step2Desc1, desc2: t.step2Desc2, image: '/step2.jpg' },
-                        { step: 3, title: t.step3Title, desc1: t.step3Desc1, desc2: t.step3Desc2, desc3: t.step3Desc3, image: '/step3.jpg' },
-                        { step: 4, title: t.step4Title, desc1: t.step4Desc1, desc2: t.step4Desc2, desc3: t.step4Desc3, warning: t.step4Warning, image: '/step4.jpg' }
+                        { step: 1, title: t.step1Title, desc1: t.step1Desc1, desc2: t.step1Desc2, image: './step1.jpg' },
+                        { step: 2, title: t.step2Title, desc1: t.step2Desc1, desc2: t.step2Desc2, image: './step2.jpg' },
+                        { step: 3, title: t.step3Title, desc1: t.step3Desc1, desc2: t.step3Desc2, desc3: t.step3Desc3, image: './step3.jpg' },
+                        { step: 4, title: t.step4Title, desc1: t.step4Desc1, desc2: t.step4Desc2, desc3: t.step4Desc3, warning: t.step4Warning, image: './step4.jpg' }
                       ].map((item, idx) => (
                         <div key={idx} className="flex gap-4 group cursor-pointer hover:bg-gray-50 p-4 -mx-4 rounded-xl transition-all" onClick={() => setModalImage(item.image)}>
                           <div className="w-10 h-10 rounded-full bg-gray-100 group-hover:bg-[#d4af37] flex items-center justify-center text-gray-500 group-hover:text-white font-medium text-base transition-colors shrink-0 shadow-inner">{item.step}</div>
                           <div>
-                            {/* นำไอคอนรูปภาพมาไว้หลังหัวข้อแทน และให้โชว์ตอนเอาเมาส์ชี้ */}
                             <h4 className="text-gray-900 font-medium mb-1 group-hover:text-[#d4af37] transition-colors flex items-center">
                               {item.title}
                               <ImageIcon size={16} className="ml-2 text-gray-400 group-hover:text-[#d4af37] opacity-0 group-hover:opacity-100 transition-opacity" />
@@ -663,7 +650,7 @@ export default function App() {
                   <h3 className="text-gray-900 text-lg font-medium mb-4 text-center">วิดีโอแนะนำการเดินทาง (Guide Video)</h3>
                   <div className="relative w-full max-w-[320px] aspect-[9/16] bg-gray-100 rounded-3xl overflow-hidden border-4 border-white shadow-2xl">
                     <video 
-                      src="/vid-guide1.mp4" 
+                      src="./vid-guide1.mp4" 
                       className="w-full h-full object-cover"
                       controls
                       controlsList="nodownload"
@@ -681,14 +668,13 @@ export default function App() {
       {/* ==================================================== */}
       {currentPage === 'hotelToAirport' && (
         <div className="animate-[pop-in_0.5s_ease-out_forwards]">
-          <PageBanner title={t.navHotelToAir} bgImage="/bg-hotel.jpg" />
+          <PageBanner title={t.navHotelToAir} bgImage="./bg-hotel.jpg" />
           <ShortcutMenu navigateTo={navigateTo} currentPage={currentPage} t={t} />
 
           <section className="py-12 relative bg-white">
             <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
               <FadeInSection>
                 <div className="text-center mb-16">
-                  {/* เพิ่มป้าย 24 ชั่วโมง */}
                   <h2 className="font-serif text-3xl md:text-4xl text-gray-900 mb-4 font-medium flex flex-col md:flex-row items-center justify-center gap-4">
                     {t.shuttleHotelToAir}
                     <span className="text-sm bg-[#d4af37] text-white px-4 py-1.5 rounded-full font-medium tracking-widest uppercase shadow-md font-sans border border-[#d4af37]">{t.service24h}</span>
@@ -734,7 +720,7 @@ export default function App() {
       {/* ==================================================== */}
       {currentPage === 'facilities' && (
         <div className="animate-[pop-in_0.5s_ease-out_forwards]">
-          <PageBanner title={t.navFacilities} bgImage="/bg-facility.jpg" />
+          <PageBanner title={t.navFacilities} bgImage="./bg-facility.jpg" />
           <ShortcutMenu navigateTo={navigateTo} currentPage={currentPage} t={t} />
 
           <section className="py-12 relative bg-white">
@@ -749,22 +735,22 @@ export default function App() {
               {/* เพิ่ม ImageCarousel สำหรับสิ่งอำนวยความสะดวก */}
               <FadeInSection delay={100} className="mb-20">
                 <ImageCarousel images={[
-                  '/fac-slide1.jpg',
-                  '/fac-slide2.jpg',
-                  '/fac-slide3.jpg',
-                  '/fac-slide4.jpg'
+                  './fac-slide1.jpg',
+                  './fac-slide2.jpg',
+                  './fac-slide3.jpg',
+                  './fac-slide4.jpg'
                 ]} />
               </FadeInSection>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8">
                 {[
-                  { img: '/fac-pool.jpg', title: t.facPool },
-                  { img: '/fac-fitness.jpg', title: t.facFit },
-                  { img: '/fac-sauna.jpg', title: t.facSauna },
-                  { img: '/fac-mart.jpg', title: t.facMart },
-                  { img: '/fac-chicken.jpg', title: t.facChicken },
-                  { img: '/fac-laundry.jpg', title: t.facLaundry },
-                  { img: '/fac-kids.jpg', title: t.facKids },
+                  { img: './fac-pool.jpg', title: t.facPool },
+                  { img: './fac-fitness.jpg', title: t.facFit },
+                  { img: './fac-sauna.jpg', title: t.facSauna },
+                  { img: './fac-mart.jpg', title: t.facMart },
+                  { img: './fac-chicken.jpg', title: t.facChicken },
+                  { img: './fac-laundry.jpg', title: t.facLaundry },
+                  { img: './fac-kids.jpg', title: t.facKids },
                 ].map((item, idx) => (
                   <FadeInSection key={idx} delay={idx * 100}>
                     <div className="relative aspect-[4/5] rounded-3xl overflow-hidden group shadow-lg cursor-default border border-gray-100 hover:border-[#d4af37]/50 transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 bg-gray-100">
@@ -795,7 +781,7 @@ export default function App() {
       {/* ==================================================== */}
       {currentPage === 'dining' && (
         <div className="animate-[pop-in_0.5s_ease-out_forwards]">
-          <PageBanner title={t.navDining} bgImage="/bg-dining.jpg" />
+          <PageBanner title={t.navDining} bgImage="./bg-dining.jpg" />
           <ShortcutMenu navigateTo={navigateTo} currentPage={currentPage} t={t} />
 
           <section className="py-12 relative bg-white">
@@ -811,7 +797,7 @@ export default function App() {
               <FadeInSection delay={200}>
                 <div className="relative rounded-3xl overflow-hidden mb-24 group shadow-2xl border border-gray-100">
                   <img 
-                    src="/food-breakfast.jpg" 
+                    src="./food-breakfast.jpg" 
                     alt="Breakfast" 
                     className="w-full h-64 md:h-[400px] object-cover opacity-90 transform group-hover:scale-105 transition-transform duration-1000 bg-gray-100"
                     onError={(e) => { e.target.src = 'https://images.unsplash.com/photo-1533089860892-a7c6f0a88666?w=1200'; }}
@@ -834,11 +820,11 @@ export default function App() {
                     </a>
                   </div>
                   <CoverflowGallery images={[
-                    '/s64-1.jpg',
-                    '/s64-2.jpg',
-                    '/s64-3.jpg',
-                    '/s64-4.jpg',
-                    '/s64-5.jpg'
+                    './s64-1.jpg',
+                    './s64-2.jpg',
+                    './s64-3.jpg',
+                    './s64-4.jpg',
+                    './s64-5.jpg'
                   ]} />
                 </FadeInSection>
 
@@ -852,11 +838,11 @@ export default function App() {
                     </a>
                   </div>
                   <CoverflowGallery images={[
-                    '/steak-1.jpg',
-                    '/steak-2.jpg',
-                    '/steak-3.jpg',
-                    '/steak-4.jpg',
-                    '/steak-5.jpg'
+                    './steak-1.jpg',
+                    './steak-2.jpg',
+                    './steak-3.jpg',
+                    './steak-4.jpg',
+                    './steak-5.jpg'
                   ]} />
                 </FadeInSection>
 
@@ -870,11 +856,11 @@ export default function App() {
                     </a>
                   </div>
                   <CoverflowGallery images={[
-                    '/cafe-1.jpg',
-                    '/cafe-2.jpg',
-                    '/cafe-3.jpg',
-                    '/cafe-4.jpg',
-                    '/cafe-5.jpg'
+                    './cafe-1.jpg',
+                    './cafe-2.jpg',
+                    './cafe-3.jpg',
+                    './cafe-4.jpg',
+                    './cafe-5.jpg'
                   ]} />
                 </FadeInSection>
               </div>
@@ -888,7 +874,7 @@ export default function App() {
       {/* ==================================================== */}
       {currentPage === 'contact' && (
         <div className="animate-[pop-in_0.5s_ease-out_forwards]">
-          <PageBanner title={t.contactTitle} bgImage="/bg-contact.jpg" />
+          <PageBanner title={t.contactTitle} bgImage="./bg-contact.jpg" />
           <ShortcutMenu navigateTo={navigateTo} currentPage={currentPage} t={t} />
 
           <section className="py-12 relative bg-white">
