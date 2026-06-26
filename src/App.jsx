@@ -5,30 +5,6 @@ import {
   ShieldCheck, Waves, Coffee, Home
 } from 'lucide-react';
 
-// --- Component สำหรับพื้นหลัง Mesh Gradient (ขาว/ทอง/#1800ad) ---
-const AnimatedMeshGradient = () => {
-  return (
-    <div className="fixed inset-0 overflow-hidden pointer-events-none z-0 bg-white">
-      <div 
-        className="absolute top-[-20%] left-[-10%] w-[70vw] h-[70vw] rounded-full bg-[#d4af37] mix-blend-multiply filter blur-[90px] md:blur-[150px] opacity-50"
-        style={{ animation: 'blob 25s infinite alternate ease-in-out' }}
-      ></div>
-      <div 
-        className="absolute top-[10%] right-[-10%] w-[60vw] h-[60vw] rounded-full bg-[#1800ad] mix-blend-multiply filter blur-[90px] md:blur-[150px] opacity-30"
-        style={{ animation: 'blob 30s infinite alternate ease-in-out', animationDelay: '2s' }}
-      ></div>
-      <div 
-        className="absolute bottom-[-20%] left-[10%] w-[80vw] h-[80vw] rounded-full bg-[#d4af37] mix-blend-multiply filter blur-[90px] md:blur-[150px] opacity-40"
-        style={{ animation: 'blob 35s infinite alternate ease-in-out', animationDelay: '4s' }}
-      ></div>
-      <div 
-        className="absolute bottom-[-10%] right-[20%] w-[50vw] h-[50vw] rounded-full bg-[#1800ad] mix-blend-multiply filter blur-[90px] md:blur-[150px] opacity-20"
-        style={{ animation: 'blob 28s infinite alternate ease-in-out', animationDelay: '6s' }}
-      ></div>
-    </div>
-  );
-};
-
 // --- Component สำหรับทำ Animation เลื่อนจอแล้วค่อยๆ ปรากฏ ---
 const FadeInSection = ({ children, delay = 0, className = "" }) => {
   const [isVisible, setVisible] = useState(false);
@@ -87,7 +63,7 @@ const ShortcutMenu = ({ navigateTo, currentPage, t }) => {
             <button 
               key={item.id}
               onClick={() => navigateTo(item.id)} 
-              className="glass-card bg-white/90 p-6 md:p-8 rounded-3xl flex flex-col items-center justify-center gap-4 hover:-translate-y-2 transition-all duration-300 group outline-none focus:outline-none border-gray-100 shadow-md hover:shadow-xl hover:border-[#d4af37]/40"
+              className="glass-card bg-white p-6 md:p-8 rounded-3xl flex flex-col items-center justify-center gap-4 hover:-translate-y-2 transition-all duration-300 group outline-none focus:outline-none border border-gray-100 shadow-md hover:shadow-xl hover:border-[#d4af37]/40"
             >
               <div className="p-4 rounded-full transition-colors shadow-inner bg-gray-50 text-gray-400 group-hover:bg-[#d4af37] group-hover:text-white">
                 <Icon size={30} strokeWidth={1.5} className={item.iconClass || ""} />
@@ -103,7 +79,7 @@ const ShortcutMenu = ({ navigateTo, currentPage, t }) => {
   );
 };
 
-// --- Component แบนเนอร์หัวเว็บสำหรับหน้าย่อย (ไล่สี ขาวบน -> ดำล่าง) ---
+// --- Component แบนเนอร์หัวเว็บสำหรับหน้าย่อย (ลบแผ่นไล่สีดำออกเพื่อให้เห็นภาพชัดๆ) ---
 const PageBanner = ({ title, bgImage }) => (
   <div className="relative h-[35vh] min-h-[280px] md:h-[45vh] md:min-h-[380px] w-full flex items-center justify-center overflow-hidden">
     <img 
@@ -112,12 +88,11 @@ const PageBanner = ({ title, bgImage }) => (
       className="absolute inset-0 w-full h-full object-cover scale-105 transform motion-safe:animate-[pulse_15s_ease-in-out_infinite_alternate]"
       onError={(e) => { e.target.src = 'https://images.unsplash.com/photo-1542314831-c6a4d27ce605?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80'; }}
     />
-    <div className="absolute inset-0 bg-gradient-to-b from-white/90 via-black/50 to-gray-900"></div>
     
     <div className="relative z-10 text-center px-6 mt-10">
       <FadeInSection>
-        <h1 className="text-3xl md:text-5xl font-serif text-white tracking-wider font-light mb-4 drop-shadow-lg">{title}</h1>
-        <div className="w-16 h-1 bg-[#d4af37] mx-auto rounded-full shadow-md"></div>
+        <h1 className="text-3xl md:text-5xl font-serif text-white tracking-wider font-light mb-4 drop-shadow-lg" style={{ textShadow: '0 4px 15px rgba(0,0,0,0.6), 0 2px 5px rgba(0,0,0,0.8)' }}>{title}</h1>
+        <div className="w-16 h-1 bg-[#d4af37] mx-auto rounded-full shadow-[0_2px_4px_rgba(0,0,0,0.5)]"></div>
       </FadeInSection>
     </div>
   </div>
@@ -150,7 +125,6 @@ const ImageCarousel = ({ images, heightClass = "h-[250px] md:h-[450px]" }) => {
             className="w-full h-full object-cover" 
             onError={(e) => { e.target.src = 'https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=1200'; }}
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-60"></div>
         </div>
       ))}
       <button onClick={prevSlide} className="absolute left-4 top-1/2 -translate-y-1/2 z-20 bg-white/80 text-gray-800 hover:bg-[#d4af37] hover:text-white p-3 rounded-full opacity-0 group-hover:opacity-100 transition-all backdrop-blur-sm shadow-md">
@@ -229,7 +203,7 @@ const CoverflowGallery = ({ images }) => {
 // ไอคอน Social Media
 const LineIcon = ({ size = 24, className = "" }) => (
   <svg viewBox="0 0 24 24" width={size} height={size} className={className} fill="currentColor">
-    <path d="M24 10.304c0-5.369-5.383-9.738-12-9.738-6.616 0-12 4.369-12 9.738 0 4.814 4.269 8.846 10.036 9.608.391.084.922.258 1.057.592.122.303.079.778.039 1.085l-.171 1.027c-.053.303-.242 1.186 1.039.647 1.281-.54 6.911-4.069 9.428-6.967 1.739-1.907 2.572-3.843 2.572-5.992zm-18.988 2.595h-2.392v-4.578c0-.265.215-.48.48-.48s.48.215.48.48v4.098h1.432c.265 0 .48.215.48.48s-.215.48-.48.48zm3.322 0h-.96c-.265 0-.48-.215-.48-.48v-4.578c0-.265.215-.48.48-.48s.48.215.48.48v4.578c0 .265-.215.48-.48.48zm5.666 0h-1.472l-1.963-2.739v2.739c0 .265-.214.48-.479.48s-.48-.215-.48-.48v-4.578c0-.265.215-.48.48-.48s.48.215.48.48v2.724l1.948-2.724c.097-.137.253-.211.419-.211.265 0 .48.215.48.48v4.578c0 .265-.215.48-.48.48zm3.692-3.618h-2.392v.975h2.392c.265 0 .48.215.48.48s-.215.48-.48.48h-2.392v1.203h2.392c.265 0 .48.215.48.48s-.215.48-.48.48h-2.872c-.265 0-.48-.215-.48-.48v-4.578c0-.265.215-.48.48-.48h2.872c.265 0 .48.215.48.48s-.215.48-.48.48z"/>
+    <path d="M24 10.304c0-5.369-5.383-9.738-12-9.738-6.616 0-12 4.369-12 9.738 0 4.814 4.269 8.846 10.036 9.608.391.084.922.258 1.057.592.122.303.079.778.039 1.085l-.171 1.027c-.053.303-.242 1.186 1.039.647 1.281-.54 6.911-4.069 9.428-6.967 1.739-1.907 2.572-3.843 2.572-5.992zm-18.988 2.595h-2.392v-4.578c0-.265.215-.48.48-.48s.48.215.48.48v4.098h1.432c.265 0 .48.215.48.48s-.215.48-.48.48zm3.322 0h-.96c-.265 0-.48-.215-.48-.48v-4.578c0-.265.215-.48.48-.48s.48.215.48.48v4.098h1.432c.265 0 .48.215.48.48s-.215.48-.48.48zm5.666 0h-1.472l-1.963-2.739v2.739c0 .265-.214.48-.479.48s-.48-.215-.48-.48v-4.578c0-.265.215-.48.48-.48s.48.215.48.48v2.724l1.948-2.724c.097-.137.253-.211.419-.211.265 0 .48.215.48.48v4.578c0 .265-.215.48-.48.48zm3.692-3.618h-2.392v.975h2.392c.265 0 .48.215.48.48s-.215.48-.48.48h-2.392v1.203h2.392c.265 0 .48.215.48.48s-.215.48-.48.48h-2.872c-.265 0-.48-.215-.48-.48v-4.578c0-.265.215-.48.48-.48h2.872c.265 0 .48.215.48.48s-.215.48-.48.48z"/>
   </svg>
 );
 const FacebookIcon = ({ size = 24, className = "" }) => (
@@ -451,16 +425,7 @@ export default function App() {
           -webkit-backdrop-filter: blur(20px);
           border: 1px solid rgba(255, 255, 255, 0.4);
         }
-        @keyframes blob {
-          0% { transform: translate(0px, 0px) scale(1); }
-          33% { transform: translate(30px, -50px) scale(1.1); }
-          66% { transform: translate(-20px, 20px) scale(0.9); }
-          100% { transform: translate(0px, 0px) scale(1); }
-        }
       `}} />
-
-      {/* พื้นหลัง Mesh Gradient เคลื่อนไหว */}
-      <AnimatedMeshGradient />
 
       {/* Navigation */}
       <nav className="absolute top-0 left-0 w-full z-50 bg-transparent py-5">
@@ -477,7 +442,7 @@ export default function App() {
                   e.target.nextSibling.style.display = 'block'; 
                 }} 
               />
-              <span style={{display: 'none'}} className="font-serif text-xl md:text-2xl tracking-[0.15em] text-gray-800 uppercase group-hover:text-[#d4af37] transition-colors drop-shadow-md">
+              <span style={{display: 'none', textShadow: '0 2px 5px rgba(0,0,0,0.3)'}} className="font-serif text-xl md:text-2xl tracking-[0.15em] text-white uppercase group-hover:text-[#d4af37] transition-colors drop-shadow-md">
                 Suvarnabhumi <span className="text-[#d4af37] italic font-light lowercase">Ville</span>
               </span>
             </div>
@@ -485,7 +450,7 @@ export default function App() {
             <div className="flex items-center gap-3 md:gap-6 relative z-20">
               
               <div className="relative group hidden md:block">
-                <button className="flex items-center text-sm tracking-wider text-gray-800 hover:text-[#d4af37] transition-colors uppercase py-2 drop-shadow-sm font-medium">
+                <button className="flex items-center text-sm tracking-wider text-white hover:text-[#d4af37] transition-colors uppercase py-2 font-medium" style={{ textShadow: '0 2px 5px rgba(0,0,0,0.3)' }}>
                   <Globe size={18} className="mr-1.5" />
                   {lang === 'th' ? 'TH' : lang === 'en' ? 'EN' : '中文'}
                   <ChevronDown size={14} className="ml-1 opacity-70 group-hover:opacity-100 transition-opacity" />
@@ -505,7 +470,7 @@ export default function App() {
 
               <button 
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)} 
-                className="text-gray-800 bg-white/40 border border-gray-300 hover:bg-[#d4af37] hover:border-transparent hover:text-white p-2 md:p-2.5 rounded-full transition-all duration-300 shadow-sm outline-none focus:outline-none focus:ring-0"
+                className="text-white bg-black/10 border border-white/30 hover:bg-[#d4af37] hover:border-transparent hover:text-white p-2 md:p-2.5 rounded-full transition-all duration-300 shadow-sm outline-none focus:outline-none focus:ring-0 backdrop-blur-md"
               >
                 {mobileMenuOpen ? <X size={24} strokeWidth={2} /> : <Menu size={24} strokeWidth={2} />}
               </button>
@@ -560,7 +525,7 @@ export default function App() {
       {/* 1. หน้าแรก (Home) */}
       {/* ==================================================== */}
       {currentPage === 'home' && (
-        <section className="relative min-h-screen flex flex-col justify-center overflow-hidden animate-[pop-in_0.5s_ease-out_forwards] pt-20 pb-10">
+        <section className="relative min-h-screen flex flex-col justify-center overflow-hidden animate-[pop-in_0.5s_ease-out_forwards] pt-20 pb-10 bg-white">
           <div className="absolute inset-0 z-0 h-[85vh] md:h-[90vh]">
             <img 
               src="/bg-home.jpg" 
@@ -568,8 +533,7 @@ export default function App() {
               className="w-full h-full object-cover scale-105 transform motion-safe:animate-[pulse_15s_ease-in-out_infinite_alternate]"
               onError={(e) => { e.target.src = 'https://images.unsplash.com/photo-1542314831-c6a4d27ce605?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80'; }}
             />
-            {/* ไล่สีจากขาวสว่างด้านบน ลงมาเป็นดำเข้มด้านล่าง */}
-            <div className="absolute inset-0 bg-gradient-to-b from-white/90 via-black/50 to-gray-900"></div>
+            {/* เอาการไล่สีและแผ่นฟิล์มดำ/ขาวออก เพื่อโชว์ภาพชัดๆ */}
           </div>
           
           <div className="relative z-10 text-center px-4 w-full max-w-5xl mx-auto flex-grow flex flex-col justify-center">
@@ -579,19 +543,19 @@ export default function App() {
                  <img 
                    src="/logo-large.png" 
                    alt="Suvarnabhumi Ville Hotel" 
-                   className="h-32 md:h-40 lg:h-48 object-contain drop-shadow-2xl hover:scale-105 transition-transform duration-700" 
+                   className="h-32 md:h-40 lg:h-48 object-contain drop-shadow-xl hover:scale-105 transition-transform duration-700" 
                  />
               </div>
             </FadeInSection>
 
             <FadeInSection delay={300}>
-              <h1 className="font-serif text-4xl md:text-5xl lg:text-7xl text-white mb-6 leading-[1.2] font-medium tracking-wider uppercase" style={{ textShadow: '0 4px 20px rgba(0,0,0,0.3), 0 2px 5px rgba(0,0,0,0.5)' }}>
+              <h1 className="font-serif text-4xl md:text-5xl lg:text-7xl text-white mb-6 leading-[1.2] font-medium tracking-wider uppercase" style={{ textShadow: '0 4px 15px rgba(0,0,0,0.6), 0 2px 5px rgba(0,0,0,0.8)' }}>
                 Suvarnabhumi Ville <span className="text-white font-light block md:inline mt-2 md:mt-0">Hotel</span>
               </h1>
             </FadeInSection>
             
             <FadeInSection delay={500}>
-              <p className="text-base md:text-lg text-gray-600 mb-6 max-w-2xl mx-auto font-light leading-relaxed px-4">
+              <p className="text-base md:text-lg text-white mb-6 max-w-2xl mx-auto font-medium leading-relaxed px-4" style={{ textShadow: '0 2px 8px rgba(0,0,0,0.8)' }}>
                 {t.heroDesc}
               </p>
             </FadeInSection>
@@ -611,7 +575,7 @@ export default function App() {
           <PageBanner title={t.navAirToHotel} bgImage="/bg-airport.jpg" />
           <ShortcutMenu navigateTo={navigateTo} currentPage={currentPage} t={t} />
 
-          <section className="py-12 relative">
+          <section className="py-12 relative bg-white">
             <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
               <FadeInSection>
                 <div className="text-center mb-16">
@@ -648,7 +612,7 @@ export default function App() {
                   </div>
                 </FadeInSection>
                 
-                {/* ช่องวิดีโอแบบคลีนๆ ลบปุ่มเพลย์หลอกออกแล้ว */}
+                {/* ช่องวิดีโอ */}
                 <FadeInSection delay={400} className="flex flex-col items-center justify-center h-full">
                   <h3 className="text-gray-900 text-lg font-medium mb-4 text-center">วิดีโอแนะนำการเดินทาง (Guide Video)</h3>
                   <div className="relative w-full max-w-[320px] aspect-[9/16] bg-gray-100 rounded-3xl overflow-hidden border-4 border-white shadow-2xl">
@@ -674,7 +638,7 @@ export default function App() {
           <PageBanner title={t.navHotelToAir} bgImage="/bg-hotel.jpg" />
           <ShortcutMenu navigateTo={navigateTo} currentPage={currentPage} t={t} />
 
-          <section className="py-12 relative">
+          <section className="py-12 relative bg-white">
             <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
               <FadeInSection>
                 <div className="text-center mb-16">
@@ -723,7 +687,7 @@ export default function App() {
           <PageBanner title={t.navFacilities} bgImage="/bg-facility.jpg" />
           <ShortcutMenu navigateTo={navigateTo} currentPage={currentPage} t={t} />
 
-          <section className="py-12 relative">
+          <section className="py-12 relative bg-white">
             <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
               <FadeInSection>
                 <div className="text-center mb-16">
@@ -732,7 +696,7 @@ export default function App() {
                 </div>
               </FadeInSection>
 
-              {/* เพิ่ม ImageCarousel สำหรับสิ่งอำนวยความสะดวก */}
+              {/* Slider รูปใหญ่ */}
               <FadeInSection delay={100} className="mb-20">
                 <ImageCarousel images={[
                   '/fac-slide1.jpg',
@@ -742,7 +706,6 @@ export default function App() {
                 ]} />
               </FadeInSection>
 
-              {/* Grid แบบการ์ดแนวตั้ง ตัด Wifi และ CCTV ออกแล้ว */}
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8">
                 {[
                   { img: '/fac-pool.jpg', title: t.facPool },
@@ -785,7 +748,7 @@ export default function App() {
           <PageBanner title={t.navDining} bgImage="/bg-dining.jpg" />
           <ShortcutMenu navigateTo={navigateTo} currentPage={currentPage} t={t} />
 
-          <section className="py-12 relative">
+          <section className="py-12 relative bg-white">
             <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
               <FadeInSection>
                 <div className="text-center mb-16">
@@ -810,7 +773,6 @@ export default function App() {
                 </div>
               </FadeInSection>
 
-              {/* แกลเลอรี่อาหารแบบ Coverflow */}
               <div className="space-y-32">
                 {/* S64 */}
                 <FadeInSection delay={300}>
@@ -879,7 +841,7 @@ export default function App() {
           <PageBanner title={t.contactTitle} bgImage="/bg-contact.jpg" />
           <ShortcutMenu navigateTo={navigateTo} currentPage={currentPage} t={t} />
 
-          <section className="py-12 relative">
+          <section className="py-12 relative bg-white">
             <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
               <div className="grid lg:grid-cols-2 gap-0 bg-white rounded-3xl border border-gray-100 overflow-hidden shadow-2xl">
                 {/* ข้อมูลติดต่อ */}
@@ -935,7 +897,7 @@ export default function App() {
       )}
 
       {/* ==================================================== */}
-      {/* Footer (แสดงทุกหน้า เปลี่ยนเป็นสีสว่าง) */}
+      {/* Footer */}
       {/* ==================================================== */}
       <footer className="bg-white pt-16 pb-8 border-t border-gray-200 relative z-10">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
@@ -958,7 +920,7 @@ export default function App() {
         </div>
       </footer>
 
-      {/* Popup รูปภาพ (Modal Overlay) */}
+      {/* Popup รูปภาพ */}
       {modalImage && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 p-4 md:p-10 backdrop-blur-sm transition-all" onClick={() => setModalImage(null)}>
           <button className="absolute top-6 right-6 md:top-10 md:right-10 text-gray-400 hover:text-white transition-colors bg-white/10 hover:bg-white/20 rounded-full p-2 z-10" onClick={() => setModalImage(null)}>
