@@ -5,30 +5,6 @@ import {
   ShieldCheck, Waves, Coffee, Home
 } from 'lucide-react';
 
-// --- Component สำหรับพื้นหลัง Mesh Gradient (ขาว/ทอง/#1800ad) ---
-const AnimatedMeshGradient = () => {
-  return (
-    <div className="fixed inset-0 overflow-hidden pointer-events-none z-0 bg-white">
-      <div 
-        className="absolute top-[-20%] left-[-10%] w-[70vw] h-[70vw] rounded-full bg-[#d4af37] mix-blend-multiply filter blur-[90px] md:blur-[150px] opacity-50"
-        style={{ animation: 'blob 25s infinite alternate ease-in-out' }}
-      ></div>
-      <div 
-        className="absolute top-[10%] right-[-10%] w-[60vw] h-[60vw] rounded-full bg-[#1800ad] mix-blend-multiply filter blur-[90px] md:blur-[150px] opacity-40"
-        style={{ animation: 'blob 30s infinite alternate ease-in-out', animationDelay: '2s' }}
-      ></div>
-      <div 
-        className="absolute bottom-[-20%] left-[10%] w-[80vw] h-[80vw] rounded-full bg-[#d4af37] mix-blend-multiply filter blur-[90px] md:blur-[150px] opacity-40"
-        style={{ animation: 'blob 35s infinite alternate ease-in-out', animationDelay: '4s' }}
-      ></div>
-      <div 
-        className="absolute bottom-[-10%] right-[20%] w-[50vw] h-[50vw] rounded-full bg-[#1800ad] mix-blend-multiply filter blur-[90px] md:blur-[150px] opacity-30"
-        style={{ animation: 'blob 28s infinite alternate ease-in-out', animationDelay: '6s' }}
-      ></div>
-    </div>
-  );
-};
-
 // --- Component สำหรับทำ Animation เลื่อนจอแล้วค่อยๆ ปรากฏ ---
 const FadeInSection = ({ children, delay = 0, className = "" }) => {
   const [isVisible, setVisible] = useState(false);
@@ -87,7 +63,7 @@ const ShortcutMenu = ({ navigateTo, currentPage, t }) => {
             <button 
               key={item.id}
               onClick={() => navigateTo(item.id)} 
-              className="glass-card bg-white/90 p-6 md:p-8 rounded-3xl flex flex-col items-center justify-center gap-4 hover:-translate-y-2 transition-all duration-300 group outline-none focus:outline-none border-gray-100 shadow-md hover:shadow-xl hover:border-[#d4af37]/40"
+              className="glass-card bg-white p-6 md:p-8 rounded-3xl flex flex-col items-center justify-center gap-4 hover:-translate-y-2 transition-all duration-300 group outline-none focus:outline-none border border-gray-100 shadow-md hover:shadow-xl hover:border-[#d4af37]/40"
             >
               <div className="p-4 rounded-full transition-colors shadow-inner bg-gray-50 text-gray-400 group-hover:bg-[#d4af37] group-hover:text-white">
                 <Icon size={30} strokeWidth={1.5} className={item.iconClass || ""} />
@@ -103,7 +79,7 @@ const ShortcutMenu = ({ navigateTo, currentPage, t }) => {
   );
 };
 
-// --- Component แบนเนอร์หัวเว็บสำหรับหน้าย่อย (ไล่สี ขาวบน -> ดำล่าง) ---
+// --- Component แบนเนอร์หัวเว็บสำหรับหน้าย่อย (โชว์ภาพชัดๆ ไม่มีตัวกรองสีดำ) ---
 const PageBanner = ({ title, bgImage }) => (
   <div className="relative h-[35vh] min-h-[280px] md:h-[45vh] md:min-h-[380px] w-full flex items-center justify-center overflow-hidden">
     <img 
@@ -112,12 +88,11 @@ const PageBanner = ({ title, bgImage }) => (
       className="absolute inset-0 w-full h-full object-cover scale-105 transform motion-safe:animate-[pulse_15s_ease-in-out_infinite_alternate]"
       onError={(e) => { e.target.src = 'https://images.unsplash.com/photo-1542314831-c6a4d27ce605?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80'; }}
     />
-    <div className="absolute inset-0 bg-gradient-to-b from-white/90 via-black/50 to-gray-900"></div>
     
     <div className="relative z-10 text-center px-6 mt-10">
       <FadeInSection>
-        <h1 className="text-3xl md:text-5xl font-serif text-white tracking-wider font-light mb-4 drop-shadow-lg">{title}</h1>
-        <div className="w-16 h-1 bg-[#d4af37] mx-auto rounded-full shadow-md"></div>
+        <h1 className="text-3xl md:text-5xl font-serif text-white tracking-wider font-light mb-4 drop-shadow-lg" style={{ textShadow: '0 4px 15px rgba(0,0,0,0.6), 0 2px 5px rgba(0,0,0,0.8)' }}>{title}</h1>
+        <div className="w-16 h-1 bg-[#d4af37] mx-auto rounded-full shadow-[0_2px_4px_rgba(0,0,0,0.5)]"></div>
       </FadeInSection>
     </div>
   </div>
@@ -150,7 +125,6 @@ const ImageCarousel = ({ images, heightClass = "h-[250px] md:h-[450px]" }) => {
             className="w-full h-full object-cover" 
             onError={(e) => { e.target.src = 'https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=1200'; }}
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-60"></div>
         </div>
       ))}
       <button onClick={prevSlide} className="absolute left-4 top-1/2 -translate-y-1/2 z-20 bg-white/80 text-gray-800 hover:bg-[#d4af37] hover:text-white p-3 rounded-full opacity-0 group-hover:opacity-100 transition-all backdrop-blur-sm shadow-md">
@@ -562,6 +536,8 @@ export default function App() {
               className="w-full h-full object-cover scale-105 transform motion-safe:animate-[pulse_15s_ease-in-out_infinite_alternate]"
               onError={(e) => { e.target.src = 'https://images.unsplash.com/photo-1542314831-c6a4d27ce605?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80'; }}
             />
+            {/* เพิ่มแผ่นฟิล์มไล่สีดำโปร่งแสง (บนเข้ม - กลางใส - ล่างเข้ม) เพื่อให้ตัวหนังสืออ่านง่าย */}
+            <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/20 to-black/80"></div>
           </div>
           
           <div className="relative z-10 text-center px-4 w-full max-w-5xl mx-auto flex-grow flex flex-col justify-center">
@@ -874,7 +850,7 @@ export default function App() {
       {/* ==================================================== */}
       {currentPage === 'contact' && (
         <div className="animate-[pop-in_0.5s_ease-out_forwards]">
-          <PageBanner title={t.contactTitle} bgImage="/bg-contact.jpg" />
+          <PageBanner title={t.contactTitle} bgImage="./bg-contact.jpg" />
           <ShortcutMenu navigateTo={navigateTo} currentPage={currentPage} t={t} />
 
           <section className="py-12 relative bg-white">
@@ -915,16 +891,27 @@ export default function App() {
                   </div>
                 </div>
 
-                {/* Google Maps Embed */}
+                {/* Google Maps Embed (พร้อมปุ่มเปิดแผนที่) */}
                 <div className="h-[400px] lg:h-auto min-h-[400px] bg-gray-100 relative group">
                   <iframe 
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3876.5367657155627!2d100.73010151483015!3d13.685958290389332!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x311d67004f141829%3A0x6b4f706e2e54a938!2sSuvarnabhumi%20Ville%20Airport%20Hotel!5e0!3m2!1sen!2sth!4v1650000000000!5m2!1sen!2sth" 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3875.5367657155627!2d100.739523!3d13.7129251!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x311d6710935f0495%3A0xbd2686a7ab672a9c!2sSuvarnabhumi%20Ville%20Airport%20Hotel!5e0!3m2!1sen!2sth!4v1650000000000!5m2!1sen!2sth" 
                     className="w-full h-full border-0" 
                     allowFullScreen="" 
                     loading="lazy" 
                     referrerPolicy="no-referrer-when-downgrade"
                     title="Google Maps"
                   ></iframe>
+                  
+                  {/* ปุ่มเปิด Google Maps ในแท็บใหม่ไปที่ลิงก์ที่กำหนด */}
+                  <a 
+                    href="https://www.google.com/maps/place/%E0%B9%82%E0%B8%A3%E0%B8%87%E0%B9%81%E0%B8%A3%E0%B8%A1%E0%B8%AA%E0%B8%B8%E0%B8%A7%E0%B8%A3%E0%B8%A3%E0%B8%93%E0%B8%A0%E0%B8%B9%E0%B8%A1%E0%B8%B4+%E0%B8%A7%E0%B8%B4%E0%B8%A5%E0%B8%A5%E0%B9%8C+%E0%B9%81%E0%B8%AD%E0%B8%A3%E0%B9%8C%E0%B8%9E%E0%B8%AD%E0%B8%A3%E0%B9%8C%E0%B8%95+%E0%B9%82%E0%B8%AE%E0%B9%80%E0%B8%97%E0%B8%A5/@13.7129303,100.7369481,17z/data=!4m9!3m8!1s0x311d6710935f0495:0xbd2686a7ab672a9c!5m2!4m1!1i2!8m2!3d13.7129251!4d100.739523!16s%2Fg%2F11by_lwq7s?entry=ttu&g_ep=EgoyMDI2MDYyMy4wIKXMDSoASAFQAw%3D%3D"
+                    target="_blank" 
+                    rel="noreferrer"
+                    className="absolute bottom-6 right-6 bg-[#d4af37] text-white px-5 py-2.5 rounded-full shadow-lg hover:bg-gray-900 transition-colors duration-300 font-medium tracking-wide flex items-center text-sm z-10"
+                  >
+                    <MapPin size={18} className="mr-2" />
+                    {lang === 'th' ? 'เปิดแผนที่' : lang === 'en' ? 'Open Map' : '打开地图'}
+                  </a>
                 </div>
               </div>
             </div>
