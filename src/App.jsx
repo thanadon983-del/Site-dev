@@ -874,7 +874,7 @@ export default function App() {
       {/* ==================================================== */}
       {currentPage === 'contact' && (
         <div className="animate-[pop-in_0.5s_ease-out_forwards]">
-          <PageBanner title={t.contactTitle} bgImage="./bg-contact.jpg" />
+          <PageBanner title={t.contactTitle} bgImage="/bg-contact.jpg" />
           <ShortcutMenu navigateTo={navigateTo} currentPage={currentPage} t={t} />
 
           <section className="py-12 relative bg-white">
@@ -918,24 +918,13 @@ export default function App() {
                 {/* Google Maps Embed */}
                 <div className="h-[400px] lg:h-auto min-h-[400px] bg-gray-100 relative group">
                   <iframe 
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3875.5367657155627!2d100.739523!3d13.7129251!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x311d6710935f0495%3A0xbd2686a7ab672a9c!2sSuvarnabhumi%20Ville%20Airport%20Hotel!5e0!3m2!1sen!2sth!4v1650000000000!5m2!1sen!2sth" 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3876.5367657155627!2d100.73010151483015!3d13.685958290389332!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x311d67004f141829%3A0x6b4f706e2e54a938!2sSuvarnabhumi%20Ville%20Airport%20Hotel!5e0!3m2!1sen!2sth!4v1650000000000!5m2!1sen!2sth" 
                     className="w-full h-full border-0" 
                     allowFullScreen="" 
                     loading="lazy" 
                     referrerPolicy="no-referrer-when-downgrade"
                     title="Google Maps"
                   ></iframe>
-                  
-                  {/* ปุ่มเปิด Google Maps ในแท็บใหม่ไปที่ลิงก์ที่กำหนด */}
-                  <a 
-                    href="https://www.google.com/maps/place/%E0%B9%82%E0%B8%A3%E0%B8%87%E0%B9%81%E0%B8%A3%E0%B8%A1%E0%B8%AA%E0%B8%B8%E0%B8%A7%E0%B8%A3%E0%B8%A3%E0%B8%93%E0%B8%A0%E0%B8%B9%E0%B8%A1%E0%B8%B4+%E0%B8%A7%E0%B8%B4%E0%B8%A5%E0%B8%A5%E0%B9%8C+%E0%B9%81%E0%B8%AD%E0%B8%A3%E0%B9%8C%E0%B8%9E%E0%B8%AD%E0%B8%A3%E0%B9%8C%E0%B8%95+%E0%B9%82%E0%B8%AE%E0%B9%80%E0%B8%97%E0%B8%A5/@13.7129303,100.7369481,17z/data=!4m9!3m8!1s0x311d6710935f0495:0xbd2686a7ab672a9c!5m2!4m1!1i2!8m2!3d13.7129251!4d100.739523!16s%2Fg%2F11by_lwq7s?entry=ttu&g_ep=EgoyMDI2MDYyMy4wIKXMDSoASAFQAw%3D%3D"
-                    target="_blank" 
-                    rel="noreferrer"
-                    className="absolute bottom-6 right-6 bg-[#d4af37] text-white px-5 py-2.5 rounded-full shadow-lg hover:bg-gray-900 transition-colors duration-300 font-medium tracking-wide flex items-center text-sm z-10"
-                  >
-                    <MapPin size={18} className="mr-2" />
-                    {lang === 'th' ? 'เปิดแผนที่' : lang === 'en' ? 'Open Map' : '打开地图'}
-                  </a>
                 </div>
               </div>
             </div>
@@ -946,22 +935,22 @@ export default function App() {
       {/* ==================================================== */}
       {/* Footer */}
       {/* ==================================================== */}
-      <footer className="bg-white pt-16 pb-8 border-t border-gray-200 relative z-10">
+      <footer className="bg-[#14183d] pt-16 pb-8 border-t border-[#14183d] relative z-10">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="flex flex-col md:flex-row justify-between items-center gap-6">
             <div className="flex flex-col items-center md:items-start">
-              <span className="font-serif text-xl tracking-[0.15em] text-[#d4af37] uppercase mb-2">Suvarnabhumi <span className="text-gray-800 italic font-light lowercase">Ville</span></span>
-              <p className="text-xs text-gray-500 font-light tracking-wide">The Perfect Place With A Perfect View</p>
+              <span className="font-serif text-xl tracking-[0.15em] text-[#d4af37] uppercase mb-2">Suvarnabhumi <span className="text-white italic font-light lowercase">Ville</span></span>
+              <p className="text-xs text-gray-300 font-light tracking-wide">The Perfect Place With A Perfect View</p>
             </div>
             
             <div className="flex gap-4">
-               <a href="https://www.facebook.com/suvarnabhumi.ville.2025" target="_blank" rel="noreferrer" className="text-gray-400 hover:text-[#d4af37] transition-colors"><FacebookIcon size={20} /></a>
-               <a href="https://www.instagram.com/suvarnabhumiville/" target="_blank" rel="noreferrer" className="text-gray-400 hover:text-[#d4af37] transition-colors"><InstagramIcon size={20} /></a>
-               <a href="https://www.tiktok.com/@suvarnabhumivilles64" target="_blank" rel="noreferrer" className="text-gray-400 hover:text-[#d4af37] transition-colors"><TiktokIcon size={20} /></a>
-               <a href="https://lin.ee/YGQw4ZR" target="_blank" rel="noreferrer" className="text-gray-400 hover:text-[#d4af37] transition-colors"><LineIcon size={20} /></a>
+               <a href="https://www.facebook.com/suvarnabhumi.ville.2025" target="_blank" rel="noreferrer" className="text-gray-300 hover:text-[#d4af37] transition-colors"><FacebookIcon size={20} /></a>
+               <a href="https://www.instagram.com/suvarnabhumiville/" target="_blank" rel="noreferrer" className="text-gray-300 hover:text-[#d4af37] transition-colors"><InstagramIcon size={20} /></a>
+               <a href="https://www.tiktok.com/@suvarnabhumivilles64" target="_blank" rel="noreferrer" className="text-gray-300 hover:text-[#d4af37] transition-colors"><TiktokIcon size={20} /></a>
+               <a href="https://lin.ee/YGQw4ZR" target="_blank" rel="noreferrer" className="text-gray-300 hover:text-[#d4af37] transition-colors"><LineIcon size={20} /></a>
             </div>
           </div>
-          <div className="text-center md:text-left mt-8 pt-8 border-t border-gray-100 text-xs text-gray-500 font-light">
+          <div className="text-center md:text-left mt-8 pt-8 border-t border-white/10 text-xs text-gray-400 font-light">
             <p>© {new Date().getFullYear()} Suvarnabhumi Ville Hotel. All Rights Reserved.</p>
           </div>
         </div>
