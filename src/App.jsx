@@ -79,7 +79,7 @@ const ShortcutMenu = ({ navigateTo, currentPage, t }) => {
   );
 };
 
-// --- Component แบนเนอร์หัวเว็บสำหรับหน้าย่อย (โชว์ภาพชัดๆ ไม่มีตัวกรองสีดำ) ---
+// --- Component แบนเนอร์หัวเว็บสำหรับหน้าย่อย (เพิ่มฟิล์มดำให้เข้มขึ้นและอ่านง่าย) ---
 const PageBanner = ({ title, bgImage }) => (
   <div className="relative h-[35vh] min-h-[280px] md:h-[45vh] md:min-h-[380px] w-full flex items-center justify-center overflow-hidden">
     <img 
@@ -88,6 +88,8 @@ const PageBanner = ({ title, bgImage }) => (
       className="absolute inset-0 w-full h-full object-cover scale-105 transform motion-safe:animate-[pulse_15s_ease-in-out_infinite_alternate]"
       onError={(e) => { e.target.src = 'https://images.unsplash.com/photo-1542314831-c6a4d27ce605?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80'; }}
     />
+    {/* เพิ่มแผ่นฟิล์มไล่สีดำโปร่งแสงที่เข้มขึ้น สำหรับแบนเนอร์หน้าย่อย */}
+    <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/40 to-black/80"></div>
     
     <div className="relative z-10 text-center px-6 mt-10">
       <FadeInSection>
@@ -536,8 +538,8 @@ export default function App() {
               className="w-full h-full object-cover scale-105 transform motion-safe:animate-[pulse_15s_ease-in-out_infinite_alternate]"
               onError={(e) => { e.target.src = 'https://images.unsplash.com/photo-1542314831-c6a4d27ce605?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80'; }}
             />
-            {/* เพิ่มแผ่นฟิล์มไล่สีดำโปร่งแสง (บนเข้ม - กลางใส - ล่างเข้ม) เพื่อให้ตัวหนังสืออ่านง่าย */}
-            <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/20 to-black/80"></div>
+            {/* เพิ่มแผ่นฟิล์มไล่สีดำโปร่งแสงที่เข้มขึ้น เพื่อให้ตัวหนังสืออ่านง่าย */}
+            <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/40 to-black/90"></div>
           </div>
           
           <div className="relative z-10 text-center px-4 w-full max-w-5xl mx-auto flex-grow flex flex-col justify-center">
