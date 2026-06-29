@@ -438,22 +438,8 @@ export default function App() {
       {/* Navigation */}
       <nav className="absolute top-0 left-0 w-full z-50 bg-transparent py-5">
         <div className="max-w-7xl mx-auto px-6 lg:px-10">
-          <div className="flex justify-between items-center relative w-full h-12">
-            
-            <div onClick={() => navigateTo('home')} className="flex-shrink-0 flex items-center cursor-pointer group relative z-20">
-              <img 
-                src="./logo-large.png" 
-                alt="Suvarnabhumi Ville Hotel Logo" 
-                className="h-12 md:h-16 object-contain hover:scale-105 transition-transform duration-500" 
-                onError={(e) => { 
-                  e.target.style.display = 'none'; 
-                  e.target.nextSibling.style.display = 'block'; 
-                }} 
-              />
-              <span style={{display: 'none', textShadow: '0 2px 5px rgba(0,0,0,0.3)'}} className="font-serif text-xl md:text-2xl tracking-[0.15em] text-white uppercase group-hover:text-[#d4af37] transition-colors drop-shadow-md">
-                Suvarnabhumi <span className="text-[#d4af37] italic font-light lowercase">Ville</span>
-              </span>
-            </div>
+          {/* เปลี่ยนจาก justify-between เป็น justify-end เพื่อดันเมนูไปทางขวา และลบ div โลโก้ออก */}
+          <div className="flex justify-end items-center relative w-full h-12">
             
             <div className="flex items-center gap-3 md:gap-6 relative z-20">
               
@@ -833,7 +819,7 @@ export default function App() {
                   <div className="text-center mb-8">
                     <h3 className="font-serif text-3xl text-gray-900 mb-3">Café Suvarnabhumi Ville</h3>
                     <p className="text-gray-600 font-light max-w-3xl mx-auto mb-6 text-lg">{t.cafeDesc}</p>
-                    <a href="https://www.facebook.com/CafeSuvarnabhumiVille64" target="_blank" rel="noreferrer" className="inline-flex items-center text-sm uppercase tracking-wider text-[#d4af37] hover:text-white bg-white hover:bg-[#d4af37] transition-all border border-[#d4af37] px-8 py-3 rounded-full shadow-md hover:shadow-lg">
+                    <a href="https://www.facebook.com/cafesuvarnabhumiville/" target="_blank" rel="noreferrer" className="inline-flex items-center text-sm uppercase tracking-wider text-[#d4af37] hover:text-white bg-white hover:bg-[#d4af37] transition-all border border-[#d4af37] px-8 py-3 rounded-full shadow-md hover:shadow-lg">
                       Visit Facebook <ChevronRight size={18} className="ml-2" />
                     </a>
                   </div>
