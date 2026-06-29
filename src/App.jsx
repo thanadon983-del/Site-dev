@@ -271,6 +271,7 @@ const translations = {
     facChicken: "ไก่ย่าง Five Star (07:30 - 21:30 น.)",
     facLaundry: "ร้านซักผ้า (เปิดบริการ 24 ชั่วโมง)",
     facKids: "ห้องเด็กเล่น (เปิดบริการ 24 ชั่วโมง)",
+    facMassage: "ร้านนวดแผนไทย (11:00 - 22:30 น.)",
     diningTitle: "อาหารและเครื่องดื่ม",
     diningDesc: "สัมผัสความอร่อยที่แตกต่างกับร้านอาหารทั้ง 3 แห่งภายในโรงแรมของเรา",
     bfTitle: "อาหารเช้า",
@@ -330,6 +331,7 @@ const translations = {
     facChicken: "Five Star Chicken (07:30 - 21:30)",
     facLaundry: "Laundry Service (24 Hours)",
     facKids: "Kids Room (24 Hours)",
+    facMassage: "Thai Massage (11:00 - 22:30)",
     diningTitle: "Dining & Beverage",
     diningDesc: "Experience different delicious tastes from our 3 restaurants.",
     bfTitle: "Breakfast",
@@ -389,6 +391,7 @@ const translations = {
     facChicken: "五星烤鸡 (07:30 - 21:30)",
     facLaundry: "洗衣服务 (24小时)",
     facKids: "儿童游戏室 (24小时)",
+    facMassage: "泰式按摩 (11:00 - 22:30)",
     diningTitle: "餐饮",
     diningDesc: "在我们的3家餐厅体验不同的美味。",
     bfTitle: "早餐",
@@ -530,8 +533,8 @@ export default function App() {
       {/* 1. หน้าแรก (Home) */}
       {/* ==================================================== */}
       {currentPage === 'home' && (
-        <section className="relative min-h-screen flex flex-col justify-center overflow-hidden animate-[pop-in_0.5s_ease-out_forwards] pt-20 pb-10 bg-white">
-          <div className="absolute inset-0 z-0 h-[85vh] md:h-[90vh]">
+        <section className="relative min-h-screen flex flex-col justify-center overflow-hidden animate-[pop-in_0.5s_ease-out_forwards] pt-20 pb-10 bg-[#14183d]">
+          <div className="absolute inset-0 z-0">
             <img 
               src="./bg-home.jpg" 
               alt="Background" 
@@ -729,6 +732,7 @@ export default function App() {
                   { img: './fac-chicken.jpg', title: t.facChicken },
                   { img: './fac-laundry.jpg', title: t.facLaundry },
                   { img: './fac-kids.jpg', title: t.facKids },
+                  { img: './fac-massage.jpg', title: t.facMassage },
                 ].map((item, idx) => (
                   <FadeInSection key={idx} delay={idx * 100}>
                     <div className="relative aspect-[4/5] rounded-3xl overflow-hidden group shadow-lg cursor-default border border-gray-100 hover:border-[#d4af37]/50 transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 bg-gray-100">
