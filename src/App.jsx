@@ -220,7 +220,7 @@ const TiktokIcon = ({ size = 24, className = "" }) => (
   </svg>
 );
 
-// ข้อมูลคำแปลภาษา
+// ข้อมูลคำแปลภาษา (อัปเดตคำแปลที่ตกหล่นให้ครบทุกจุด)
 const translations = {
   th: {
     navHome: "หน้าแรก",
@@ -233,10 +233,14 @@ const translations = {
     
     heroDesc: "ยินดีต้อนรับสู่หน้าข้อมูลเพิ่มเติมของ Suvarnabhumi Ville ที่จะช่วยแนะนำบริการรถรับ-ส่ง สิ่งอำนวยความสะดวก และร้านอาหาร เพื่อให้การพักผ่อนของคุณสมบูรณ์แบบที่สุด",
     changeLang: "เปลี่ยนภาษา (Language)",
+    slogan: "The Perfect Place With A Perfect View",
 
     shuttleAirToHotel: "บริการรับจากสนามบิน สู่ โรงแรม",
     service24h: "บริการ 24 ชั่วโมง", 
     noAdvanceBooking: "No Advance Booking",
+    stepsTitle: "4 ขั้นตอนง่ายๆ",
+    guideVideo: "วิดีโอแนะนำการเดินทาง",
+    viewImage: "ดูภาพประกอบ",
     step1Title: "ไปที่จุดนัดพบ (Meeting Point)",
     step1Desc1: "หลังจากรับสัมภาระ กรุณาไปยังจุดนัดพบที่ ",
     step1Desc2: "ชั้น 2 ด้านในอาคารผู้โดยสารขาเข้า",
@@ -252,8 +256,11 @@ const translations = {
     step4Desc2: "10-20 นาที",
     step4Desc3: " เนื่องจากรถไม่ได้จอดรอที่สนามบิน",
     step4Warning: "หากหาพนักงานไม่เจอ กรุณาโทร 098-267-3888 (ตลอด 24 ชม.)",
+    
     shuttleHotelToAir: "บริการรถ จากโรงแรม สู่ สนามบิน",
     hotelToAirportBadge: "Hotel to Airport",
+    h2aSubtitle: "บริการรถตู้จากโรงแรมไปยังสนามบินสุวรรณภูมิ ออกทุกๆ ครึ่งชั่วโมง",
+    detailsTitle: "รายละเอียดบริการ",
     h2a1Title: "การจองรถไปสนามบิน",
     h2a1Desc: "กรุณาแจ้งเวลาที่ต้องการเดินทางไปสนามบินกับพนักงานต้อนรับขณะเช็คอิน เพื่อสำรองที่นั่งล่วงหน้า",
     h2a2Title: "เวลาให้บริการ",
@@ -262,6 +269,7 @@ const translations = {
     h2a3Desc: "ค่าบริการ 100 บาท/รอบ สำหรับผู้โดยสาร 1-2 ท่านที่เดินทางพร้อมกัน",
     h2a4Title: "ก่อนเดินทาง",
     h2a4Desc: "กรุณามาถึงบริเวณล็อบบี้ของโรงแรมก่อนเวลาออกอย่างน้อย 10-15 นาที",
+    
     facTitle: "สิ่งอำนวยความสะดวกในโรงแรม",
     facDesc: "เราได้จัดเตรียมบริการและสิ่งอำนวยความสะดวกต่างๆ ไว้เพื่อให้ท่านได้รับความสะดวกสบายตลอดการเข้าพัก",
     facPool: "สระว่ายน้ำกลางแจ้ง (07:00 - 01:00 น.)",
@@ -272,6 +280,7 @@ const translations = {
     facLaundry: "ร้านซักผ้า (เปิดบริการ 24 ชั่วโมง)",
     facKids: "ห้องเด็กเล่น (เปิดบริการ 24 ชั่วโมง)",
     facMassage: "ร้านนวดแผนไทย (11:00 - 22:30 น.)",
+    
     diningTitle: "อาหารและเครื่องดื่ม",
     diningDesc: "สัมผัสความอร่อยที่แตกต่างกับร้านอาหารทั้ง 3 แห่งภายในโรงแรมของเรา",
     bfTitle: "อาหารเช้า",
@@ -279,8 +288,15 @@ const translations = {
     s64Desc: "รูฟท็อปบาร์วิวสนามบิน 360 องศา ดนตรีสดและโชว์ควงไฟสุดอลังการ (เปิด 18:00 - 01:00 น.)",
     steakDesc: "สเต็กคุณภาพและอาหารหลากหลายเมนู ในบรรยากาศสบายๆ (เปิด 11:00 - 22:00 น.)",
     cafeDesc: "คาเฟ่บรรยากาศดี ให้บริการเครื่องดื่ม กาแฟสด และเบเกอรี่ (เปิด 24 ชั่วโมง)",
+    visitWebsite: "เยี่ยมชมเว็บไซต์",
+    visitFacebook: "เข้าชม Facebook",
+    
     contactTitle: "ติดต่อเรา",
     addressDesc: "9/9 หมู่ 7 ซอยกิ่งแก้ว 64 ถนนกิ่งแก้ว ตำบลราชาเทวะ อำเภอบางพลี สมุทรปราการ 10540",
+    frontDesk: "(แผนกต้อนรับ 24 ชม.)",
+    socialMedia: "โซเชียลมีเดีย",
+    openMap: "เปิดแผนที่",
+    allRightsReserved: "สงวนลิขสิทธิ์",
   },
   en: {
     navHome: "Home",
@@ -293,10 +309,14 @@ const translations = {
     
     heroDesc: "Welcome to Suvarnabhumi Ville's information page. Here you can find details about our shuttle service, facilities, and restaurants for your perfect stay.",
     changeLang: "Language",
+    slogan: "The Perfect Place With A Perfect View",
 
     shuttleAirToHotel: "Shuttle Service: Airport to Hotel",
     service24h: "24 Hours Service", 
     noAdvanceBooking: "No Advance Booking",
+    stepsTitle: "4 Easy Steps",
+    guideVideo: "Guide Video",
+    viewImage: "View Image",
     step1Title: "Go to Meeting Point",
     step1Desc1: "After receiving luggage, please go to the meeting point at ",
     step1Desc2: "2nd floor inside Arrival Hall",
@@ -312,8 +332,11 @@ const translations = {
     step4Desc2: "10-20 minutes",
     step4Desc3: " for the van to arrive.",
     step4Warning: "If you cannot find the staff, please call 098-267-3888 (24 Hrs)",
+    
     shuttleHotelToAir: "Shuttle Service: Hotel to Airport",
     hotelToAirportBadge: "Hotel to Airport",
+    h2aSubtitle: "Van service from the hotel to Suvarnabhumi Airport, departing every 30 minutes.",
+    detailsTitle: "Service Details",
     h2a1Title: "Advance Booking",
     h2a1Desc: "Please inform reception of your preferred departure time during check-in to reserve your seat.",
     h2a2Title: "Service Hours",
@@ -322,6 +345,7 @@ const translations = {
     h2a3Desc: "100 THB per trip for 1-2 passengers traveling together.",
     h2a4Title: "Before Departure",
     h2a4Desc: "Please arrive at the lobby at least 10-15 minutes before departure.",
+    
     facTitle: "Hotel Facilities",
     facDesc: "We provide various services and facilities to ensure a comfortable stay.",
     facPool: "Outdoor Swimming Pool (07:00 - 01:00)",
@@ -332,6 +356,7 @@ const translations = {
     facLaundry: "Laundry Service (24 Hours)",
     facKids: "Kids Room (24 Hours)",
     facMassage: "Thai Massage (11:00 - 22:30)",
+    
     diningTitle: "Dining & Beverage",
     diningDesc: "Experience different delicious tastes from our 3 restaurants.",
     bfTitle: "Breakfast",
@@ -339,8 +364,15 @@ const translations = {
     s64Desc: "360° airport view rooftop bar, live music & fire show (18:00 - 01:00)",
     steakDesc: "Quality steaks and various menus in a cozy atmosphere (11:00 - 22:00)",
     cafeDesc: "Fresh coffee, beverages, and bakery in a relaxing cafe (24 Hours)",
+    visitWebsite: "Visit Website",
+    visitFacebook: "Visit Facebook",
+    
     contactTitle: "Contact Us",
     addressDesc: "9/9 Moo 7 Soi Kingkaew 64, Kingkaew Road, Rachathewa, Bangphli, Samut Prakan 10540",
+    frontDesk: "(Front Desk 24 Hrs)",
+    socialMedia: "Social Media",
+    openMap: "Open Map",
+    allRightsReserved: "All Rights Reserved.",
   },
   zh: {
     navHome: "首页",
@@ -353,10 +385,14 @@ const translations = {
     
     heroDesc: "欢迎来到 Suvarnabhumi Ville 信息页面。了解我们的接送服务、设施和餐厅，开启完美住宿。",
     changeLang: "语言 (Language)",
+    slogan: "完美的地点，完美的风景",
 
     shuttleAirToHotel: "接送服务：从机场到酒店",
     service24h: "24小时服务", 
     noAdvanceBooking: "无需提前预订",
+    stepsTitle: "4个简单的步骤",
+    guideVideo: "乘车指南视频",
+    viewImage: "查看图片",
     step1Title: "前往会合点",
     step1Desc1: "取完行李后，请前往位于 ",
     step1Desc2: "到达大厅内2楼的会合点",
@@ -372,8 +408,11 @@ const translations = {
     step4Desc2: "10-20分钟",
     step4Desc3: " 等候车辆到达。",
     step4Warning: "如果找不到工作人员，请致电 098-267-3888 (24小时)",
+    
     shuttleHotelToAir: "接送服务：从酒店到机场",
     hotelToAirportBadge: "酒店至机场",
+    h2aSubtitle: "从酒店到素万那普机场的班车服务，每30分钟一班。",
+    detailsTitle: "服务详情",
     h2a1Title: "提前预订",
     h2a1Desc: "请在入住时告知前台您所需的出发时间以预留座位。",
     h2a2Title: "服务时间",
@@ -382,6 +421,7 @@ const translations = {
     h2a3Desc: "同行1-2名乘客每趟100泰铢。",
     h2a4Title: "出发前",
     h2a4Desc: "请在出发前至少10-15分钟到达大堂。",
+    
     facTitle: "酒店设施",
     facDesc: "我们提供各种服务和设施，以确保您住宿舒适。",
     facPool: "室外游泳池 (07:00 - 01:00)",
@@ -392,6 +432,7 @@ const translations = {
     facLaundry: "洗衣服务 (24小时)",
     facKids: "儿童游戏室 (24小时)",
     facMassage: "泰式按摩 (11:00 - 22:30)",
+    
     diningTitle: "餐饮",
     diningDesc: "在我们的3家餐厅体验不同的美味。",
     bfTitle: "早餐",
@@ -399,8 +440,15 @@ const translations = {
     s64Desc: "360° 机场景观屋顶酒吧、现场音乐和火舞表演 (18:00 - 01:00)",
     steakDesc: "温馨氛围中提供优质牛排和各种菜单 (11:00 - 22:00)",
     cafeDesc: "轻松的咖啡厅提供现煮咖啡、饮料和烘焙食品 (24小时)",
+    visitWebsite: "访问网站",
+    visitFacebook: "访问 Facebook",
+    
     contactTitle: "联系我们",
     addressDesc: "9/9 Moo 7 Soi Kingkaew 64, Kingkaew Road, Rachathewa, Bangphli, Samut Prakan 10540",
+    frontDesk: "(24小时前台)",
+    socialMedia: "社交媒体",
+    openMap: "打开地图",
+    allRightsReserved: "保留所有权利。",
   }
 };
 
@@ -588,7 +636,7 @@ export default function App() {
                 <FadeInSection delay={200}>
                   <div className="bg-white rounded-3xl border border-gray-100 p-8 shadow-xl relative">
                     <span className="absolute top-8 right-8 text-xs tracking-widest text-[#d4af37] border border-[#d4af37]/30 px-3 py-1 rounded-full uppercase bg-[#d4af37]/5 hidden sm:inline-block">{t.noAdvanceBooking}</span>
-                    <h3 className="text-2xl text-gray-900 mb-8 font-serif flex items-center"><Plane className="text-[#d4af37] mr-3 transform rotate-45" /> 4 ขั้นตอนง่ายๆ (Steps)</h3>
+                    <h3 className="text-2xl text-gray-900 mb-8 font-serif flex items-center"><Plane className="text-[#d4af37] mr-3 transform rotate-45" /> {t.stepsTitle}</h3>
                     <div className="space-y-6">
                       {[
                         { step: 1, title: t.step1Title, desc1: t.step1Desc1, desc2: t.step1Desc2, image: './step1.jpg' },
@@ -605,6 +653,7 @@ export default function App() {
                             </h4>
                             <p className="text-gray-600 text-sm font-light leading-relaxed">{item.desc1}<strong className="text-gray-800 font-medium">{item.desc2}</strong>{item.desc3}</p>
                             {item.warning && <p className="text-yellow-600 text-sm mt-3 font-light bg-yellow-50 p-3 rounded-lg border border-yellow-200/50">{item.warning}</p>}
+                            <div className="mt-2 flex items-center text-xs text-gray-400 group-hover:text-[#d4af37] transition-colors"><ImageIcon size={12} className="mr-1" /> {t.viewImage}</div>
                           </div>
                         </div>
                       ))}
@@ -614,7 +663,7 @@ export default function App() {
                 
                 {/* ช่องวิดีโอ */}
                 <FadeInSection delay={400} className="flex flex-col items-center justify-center h-full">
-                  <h3 className="text-gray-900 text-lg font-medium mb-4 text-center">วิดีโอแนะนำการเดินทาง (Guide Video)</h3>
+                  <h3 className="text-gray-900 text-lg font-medium mb-4 text-center">{t.guideVideo}</h3>
                   <div className="relative w-full max-w-[320px] aspect-[9/16] bg-gray-100 rounded-3xl overflow-hidden border-4 border-white shadow-2xl">
                     <video 
                       src="./vid-guide1.mp4" 
@@ -647,7 +696,7 @@ export default function App() {
                     <span className="text-sm bg-[#d4af37] text-white px-4 py-1.5 rounded-full font-medium tracking-widest uppercase shadow-md font-sans border border-[#d4af37]">{t.service24h}</span>
                   </h2>
                   <p className="text-gray-600 font-light max-w-2xl mx-auto">
-                    บริการรถตู้จากโรงแรมไปยังสนามบินสุวรรณภูมิ ออกทุกๆ ครึ่งชั่วโมง
+                    {t.h2aSubtitle}
                   </p>
                 </div>
               </FadeInSection>
@@ -655,7 +704,7 @@ export default function App() {
               <div className="max-w-4xl mx-auto items-start">
                 <FadeInSection delay={200}>
                   <div className="bg-white rounded-3xl border border-gray-100 p-8 md:p-12 shadow-xl">
-                    <h3 className="text-2xl text-gray-900 mb-8 font-serif flex items-center"><Car className="text-[#d4af37] mr-3" /> รายละเอียดบริการ (Details)</h3>
+                    <h3 className="text-2xl text-gray-900 mb-8 font-serif flex items-center"><Car className="text-[#d4af37] mr-3" /> {t.detailsTitle}</h3>
                     <div className="space-y-8">
                       {[
                         { icon: Clock, title: t.h2a1Title, desc: t.h2a1Desc },
@@ -784,7 +833,7 @@ export default function App() {
                     <h3 className="font-serif text-3xl text-gray-900 mb-3">{t.s64Desc.split('(')[0]}</h3>
                     <p className="text-gray-600 font-light max-w-3xl mx-auto mb-6 text-lg">{t.s64Desc}</p>
                     <a href="https://skybar64.com/" target="_blank" rel="noreferrer" className="inline-flex items-center text-sm uppercase tracking-wider text-[#d4af37] hover:text-white bg-white hover:bg-[#d4af37] transition-all border border-[#d4af37] px-8 py-3 rounded-full shadow-md hover:shadow-lg">
-                      Visit Website <ChevronRight size={18} className="ml-2" />
+                      {t.visitWebsite} <ChevronRight size={18} className="ml-2" />
                     </a>
                   </div>
                   <CoverflowGallery images={[
@@ -802,7 +851,7 @@ export default function App() {
                     <h3 className="font-serif text-3xl text-gray-900 mb-3">Steak Gun Aeng 64</h3>
                     <p className="text-gray-600 font-light max-w-3xl mx-auto mb-6 text-lg">{t.steakDesc}</p>
                     <a href="https://www.facebook.com/steakgunang64" target="_blank" rel="noreferrer" className="inline-flex items-center text-sm uppercase tracking-wider text-[#d4af37] hover:text-white bg-white hover:bg-[#d4af37] transition-all border border-[#d4af37] px-8 py-3 rounded-full shadow-md hover:shadow-lg">
-                      Visit Facebook <ChevronRight size={18} className="ml-2" />
+                      {t.visitFacebook} <ChevronRight size={18} className="ml-2" />
                     </a>
                   </div>
                   <CoverflowGallery images={[
@@ -820,7 +869,7 @@ export default function App() {
                     <h3 className="font-serif text-3xl text-gray-900 mb-3">Café Suvarnabhumi Ville</h3>
                     <p className="text-gray-600 font-light max-w-3xl mx-auto mb-6 text-lg">{t.cafeDesc}</p>
                     <a href="https://www.facebook.com/cafesuvarnabhumiville/" target="_blank" rel="noreferrer" className="inline-flex items-center text-sm uppercase tracking-wider text-[#d4af37] hover:text-white bg-white hover:bg-[#d4af37] transition-all border border-[#d4af37] px-8 py-3 rounded-full shadow-md hover:shadow-lg">
-                      Visit Facebook <ChevronRight size={18} className="ml-2" />
+                      {t.visitFacebook} <ChevronRight size={18} className="ml-2" />
                     </a>
                   </div>
                   <CoverflowGallery images={[
@@ -862,7 +911,7 @@ export default function App() {
                       <div className="bg-gray-50 p-2.5 rounded-full shrink-0 shadow-inner">
                         <Phone className="text-[#d4af37]" size={20} strokeWidth={1.5} />
                       </div>
-                      <p className="text-gray-600 font-light ml-4">+66 (0) 98 267 3888 (Front Desk 24 Hrs)</p>
+                      <p className="text-gray-600 font-light ml-4">+66 (0) 98 267 3888 {t.frontDesk}</p>
                     </div>
                     <div className="flex items-center">
                       <div className="bg-gray-50 p-2.5 rounded-full shrink-0 shadow-inner">
@@ -873,7 +922,7 @@ export default function App() {
                   </div>
                   
                   <div className="mt-12 pt-8 border-t border-gray-100">
-                    <p className="text-sm text-gray-400 uppercase tracking-widest mb-5 font-medium">Social Media</p>
+                    <p className="text-sm text-gray-400 uppercase tracking-widest mb-5 font-medium">{t.socialMedia}</p>
                     <div className="flex space-x-4">
                       <a href="https://www.facebook.com/suvarnabhumi.ville.2025" target="_blank" rel="noreferrer" className="w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center text-gray-500 hover:bg-[#d4af37] hover:border-transparent hover:text-white hover:-translate-y-1 transition-all shadow-sm"><FacebookIcon size={20} /></a>
                       <a href="https://www.instagram.com/suvarnabhumiville/" target="_blank" rel="noreferrer" className="w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center text-gray-500 hover:bg-[#d4af37] hover:border-transparent hover:text-white hover:-translate-y-1 transition-all shadow-sm"><InstagramIcon size={20} /></a>
@@ -902,7 +951,7 @@ export default function App() {
                     className="absolute bottom-6 right-6 bg-[#d4af37] text-white px-5 py-2.5 rounded-full shadow-lg hover:bg-gray-900 transition-colors duration-300 font-medium tracking-wide flex items-center text-sm z-10"
                   >
                     <MapPin size={18} className="mr-2" />
-                    {lang === 'th' ? 'เปิดแผนที่' : lang === 'en' ? 'Open Map' : '打开地图'}
+                    {t.openMap}
                   </a>
                 </div>
               </div>
@@ -919,7 +968,7 @@ export default function App() {
           <div className="flex flex-col md:flex-row justify-between items-center gap-6">
             <div className="flex flex-col items-center md:items-start">
               <span className="font-serif text-xl tracking-[0.15em] text-[#d4af37] uppercase mb-2">Suvarnabhumi <span className="text-white italic font-light lowercase">Ville</span></span>
-              <p className="text-xs text-gray-300 font-light tracking-wide">The Perfect Place With A Perfect View</p>
+              <p className="text-xs text-gray-300 font-light tracking-wide">{t.slogan}</p>
             </div>
             
             <div className="flex gap-4">
@@ -930,7 +979,7 @@ export default function App() {
             </div>
           </div>
           <div className="text-center md:text-left mt-8 pt-8 border-t border-white/10 text-xs text-gray-400 font-light">
-            <p>© {new Date().getFullYear()} Suvarnabhumi Ville Hotel. All Rights Reserved.</p>
+            <p>© {new Date().getFullYear()} Suvarnabhumi Ville Hotel. {t.allRightsReserved}</p>
           </div>
         </div>
       </footer>
