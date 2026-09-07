@@ -5,26 +5,6 @@ import {
   ShieldCheck, Waves, Coffee, Home
 } from 'lucide-react';
 
-// --- Component สำหรับพื้นหลังสีพาสเทลเคลื่อนไหว (เพื่อให้กระจกฝ้าทำงานได้สวยงาม) ---
-const SoftMeshBackground = () => {
-  return (
-    <div className="fixed inset-0 overflow-hidden pointer-events-none z-[-1] bg-[#f8f9fa]">
-      <div 
-        className="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] rounded-full bg-[#d4af37]/15 mix-blend-multiply filter blur-[80px] md:blur-[120px] opacity-80"
-        style={{ animation: 'blob 20s infinite alternate ease-in-out' }}
-      ></div>
-      <div 
-        className="absolute top-[20%] right-[-10%] w-[60vw] h-[60vw] rounded-full bg-blue-300/20 mix-blend-multiply filter blur-[80px] md:blur-[120px] opacity-80"
-        style={{ animation: 'blob 25s infinite alternate-reverse ease-in-out', animationDelay: '2s' }}
-      ></div>
-      <div 
-        className="absolute bottom-[-20%] left-[20%] w-[70vw] h-[70vw] rounded-full bg-indigo-200/20 mix-blend-multiply filter blur-[100px] md:blur-[150px] opacity-70"
-        style={{ animation: 'blob 30s infinite alternate ease-in-out', animationDelay: '4s' }}
-      ></div>
-    </div>
-  );
-};
-
 // --- Component สำหรับทำ Animation เลื่อนจอแล้วค่อยๆ ปรากฏ ---
 const FadeInSection = ({ children, delay = 0, className = "" }) => {
   const [isVisible, setVisible] = useState(false);
@@ -75,7 +55,7 @@ const ShortcutMenu = ({ navigateTo, currentPage, t }) => {
   }
 
   return (
-    <div className="w-full max-w-5xl mx-auto px-4 mt-8 mb-12 relative z-20">
+    <div className="hotel-shortcuts w-full max-w-5xl mx-auto px-4 mt-8 mb-12 relative z-20">
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         {shortcutsToShow.map((item) => {
           const Icon = item.icon;
@@ -83,12 +63,12 @@ const ShortcutMenu = ({ navigateTo, currentPage, t }) => {
             <button 
               key={item.id}
               onClick={() => navigateTo(item.id)} 
-              className="glass-card p-6 md:p-8 rounded-3xl flex flex-col items-center justify-center gap-4 hover:-translate-y-2 transition-all duration-300 group outline-none focus:outline-none hover:shadow-2xl hover:border-[#d4af37]/40"
+              className="glass-card p-6 md:p-8 rounded-sm flex flex-col items-center justify-center gap-4 hover:-translate-y-2 transition-all duration-300 group outline-none focus:outline-none hover:shadow-sm hover:border-[#927447]/40"
             >
-              <div className="p-4 rounded-full transition-colors shadow-sm bg-white/50 text-gray-500 group-hover:bg-[#d4af37] group-hover:text-white backdrop-blur-sm">
+              <div className="p-4 rounded-full transition-colors shadow-sm bg-white/50 text-gray-500 group-hover:bg-[#927447] group-hover:text-white backdrop-blur-sm">
                 <Icon size={30} strokeWidth={1.5} className={item.iconClass || ""} />
               </div>
-              <span className="text-sm md:text-base font-medium tracking-wide uppercase text-center leading-tight transition-colors text-gray-700 group-hover:text-[#d4af37]">
+              <span className="text-sm md:text-base font-medium tracking-wide uppercase text-center leading-tight transition-colors text-gray-700 group-hover:text-[#927447]">
                 {item.label}
               </span>
             </button>
@@ -101,7 +81,7 @@ const ShortcutMenu = ({ navigateTo, currentPage, t }) => {
 
 // --- Component แบนเนอร์หัวเว็บสำหรับหน้าย่อย ---
 const PageBanner = ({ title, bgImage }) => (
-  <div className="relative h-[35vh] min-h-[280px] md:h-[45vh] md:min-h-[380px] w-full flex items-center justify-center overflow-hidden">
+  <div className="hotel-banner relative h-[35vh] min-h-[280px] md:h-[45vh] md:min-h-[380px] w-full flex items-center justify-center overflow-hidden">
     <img 
       src={bgImage} 
       alt={title} 
@@ -113,7 +93,7 @@ const PageBanner = ({ title, bgImage }) => (
     <div className="relative z-10 text-center px-6 mt-10">
       <FadeInSection>
         <h1 className="text-3xl md:text-5xl font-serif text-white tracking-wider font-light mb-4 drop-shadow-lg" style={{ textShadow: '0 4px 15px rgba(0,0,0,0.6), 0 2px 5px rgba(0,0,0,0.8)' }}>{title}</h1>
-        <div className="w-16 h-1 bg-[#d4af37] mx-auto rounded-full shadow-[0_2px_4px_rgba(0,0,0,0.5)]"></div>
+        <div className="w-16 h-1 bg-[#927447] mx-auto rounded-full shadow-[0_2px_4px_rgba(0,0,0,0.5)]"></div>
       </FadeInSection>
     </div>
   </div>
@@ -134,8 +114,8 @@ const ImageCarousel = ({ images, heightClass = "h-[250px] md:h-[450px]" }) => {
   }, [images.length]);
 
   return (
-    <div className={`relative w-full ${heightClass} rounded-3xl overflow-hidden group glass-card p-2 shadow-xl`}>
-      <div className="relative w-full h-full rounded-2xl overflow-hidden">
+    <div className={`relative w-full ${heightClass} rounded-sm overflow-hidden group glass-card p-2 shadow-sm`}>
+      <div className="relative w-full h-full rounded-sm overflow-hidden">
         {images.map((img, idx) => (
           <div
             key={idx}
@@ -149,18 +129,19 @@ const ImageCarousel = ({ images, heightClass = "h-[250px] md:h-[450px]" }) => {
             />
           </div>
         ))}
-        <button onClick={prevSlide} className="absolute left-4 top-1/2 -translate-y-1/2 z-20 glass-button text-gray-800 p-3 rounded-full opacity-0 group-hover:opacity-100 transition-all shadow-md">
+        <button aria-label="Previous image" onClick={prevSlide} className="absolute left-4 top-1/2 -translate-y-1/2 z-20 glass-button text-gray-800 p-3 rounded-full opacity-0 group-hover:opacity-100 transition-all shadow-md">
           <ChevronLeft size={24} />
         </button>
-        <button onClick={nextSlide} className="absolute right-4 top-1/2 -translate-y-1/2 z-20 glass-button text-gray-800 p-3 rounded-full opacity-0 group-hover:opacity-100 transition-all shadow-md">
+        <button aria-label="Next image" onClick={nextSlide} className="absolute right-4 top-1/2 -translate-y-1/2 z-20 glass-button text-gray-800 p-3 rounded-full opacity-0 group-hover:opacity-100 transition-all shadow-md">
           <ChevronRight size={24} />
         </button>
         <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 flex space-x-3">
           {images.map((_, idx) => (
             <button
               key={idx}
+              aria-label={`Show image ${idx + 1}`} aria-pressed={idx === currentIndex}
               onClick={() => setCurrentIndex(idx)}
-              className={`h-2.5 rounded-full transition-all duration-300 shadow-sm ${idx === currentIndex ? 'bg-[#d4af37] w-8' : 'bg-white/80 w-2.5 hover:bg-white'}`}
+              className={`h-2.5 rounded-full transition-all duration-300 shadow-sm ${idx === currentIndex ? 'bg-[#927447] w-8' : 'bg-white/80 w-2.5 hover:bg-white'}`}
             />
           ))}
         </div>
@@ -192,7 +173,7 @@ const CoverflowGallery = ({ images }) => {
         if (offset < -half) offset += images.length;
 
         let styles = "opacity-0 hidden";
-        if (offset === 0) styles = "z-30 scale-100 opacity-100 translate-x-0 shadow-[0_15px_40px_rgba(0,0,0,0.15)] border-[#d4af37]/50";
+        if (offset === 0) styles = "z-30 scale-100 opacity-100 translate-x-0 shadow-[0_15px_40px_rgba(0,0,0,0.15)] border-[#927447]/50";
         else if (offset === 1) styles = "z-20 scale-[0.85] opacity-70 translate-x-[55%] md:translate-x-[65%] blur-[1px]";
         else if (offset === -1) styles = "z-20 scale-[0.85] opacity-70 -translate-x-[55%] md:-translate-x-[65%] blur-[1px]";
         else if (offset === 2) styles = "z-10 scale-75 opacity-30 translate-x-[110%] md:translate-x-[130%] blur-[2px]";
@@ -201,7 +182,7 @@ const CoverflowGallery = ({ images }) => {
         return (
           <div 
             key={idx} 
-            className={`absolute w-[220px] md:w-[400px] h-full transition-all duration-700 ease-in-out cursor-pointer rounded-2xl overflow-hidden glass-card p-1 ${styles}`} 
+            className={`absolute w-[220px] md:w-[400px] h-full transition-all duration-700 ease-in-out cursor-pointer rounded-sm overflow-hidden glass-card p-1 ${styles}`} 
             onClick={() => setCurrentIndex(idx)}
           >
             <div className="w-full h-full rounded-xl overflow-hidden">
@@ -215,10 +196,10 @@ const CoverflowGallery = ({ images }) => {
         );
       })}
       
-      <button onClick={(e) => { e.stopPropagation(); prev(); }} className="absolute left-2 md:left-10 z-40 glass-button text-gray-800 p-3 rounded-full opacity-0 group-hover:opacity-100 transition-all shadow-md">
+      <button aria-label="Previous image" onClick={(e) => { e.stopPropagation(); prev(); }} className="absolute left-2 md:left-10 z-40 glass-button text-gray-800 p-3 rounded-full opacity-0 group-hover:opacity-100 transition-all shadow-md">
         <ChevronLeft size={24} />
       </button>
-      <button onClick={(e) => { e.stopPropagation(); next(); }} className="absolute right-2 md:right-10 z-40 glass-button text-gray-800 p-3 rounded-full opacity-0 group-hover:opacity-100 transition-all shadow-md">
+      <button aria-label="Next image" onClick={(e) => { e.stopPropagation(); next(); }} className="absolute right-2 md:right-10 z-40 glass-button text-gray-800 p-3 rounded-full opacity-0 group-hover:opacity-100 transition-all shadow-md">
         <ChevronRight size={24} />
       </button>
     </div>
@@ -472,74 +453,38 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen text-gray-800 selection:bg-[#d4af37] selection:text-white font-light relative" style={{ fontFamily: "'Kanit', sans-serif" }}>
-      <style dangerouslySetInnerHTML={{__html: `
-        @import url('https://fonts.googleapis.com/css2?family=Kanit:wght@200;300;400;500;600&display=swap');
-        * { font-family: 'Kanit', sans-serif !important; }
-        html { scroll-behavior: smooth; }
-        
-        /* สร้างเอฟเฟกต์แผ่นกระจก (Glassmorphism) */
-        .glass-card {
-          background: rgba(255, 255, 255, 0.65);
-          backdrop-filter: blur(16px);
-          -webkit-backdrop-filter: blur(16px);
-          border: 1px solid rgba(255, 255, 255, 0.7);
-          box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.05);
-        }
-
-        /* สร้างเอฟเฟกต์ปุ่มกระจก */
-        .glass-button {
-          background: rgba(255, 255, 255, 0.5);
-          backdrop-filter: blur(8px);
-          -webkit-backdrop-filter: blur(8px);
-          border: 1px solid rgba(255, 255, 255, 0.8);
-          box-shadow: 0 4px 15px 0 rgba(0, 0, 0, 0.05);
-          transition: all 0.3s ease;
-        }
-        .glass-button:hover {
-          background: rgba(255, 255, 255, 0.9);
-          border-color: #d4af37;
-        }
-
-        /* อนิเมชันสำหรับก้อนสีพื้นหลัง */
-        @keyframes blob {
-          0% { transform: translate(0px, 0px) scale(1); }
-          33% { transform: translate(30px, -50px) scale(1.1); }
-          66% { transform: translate(-20px, 20px) scale(0.9); }
-          100% { transform: translate(0px, 0px) scale(1); }
-        }
-      `}} />
-
-      {/* พื้นหลังสีพาสเทลเคลื่อนไหว */}
-      <SoftMeshBackground />
-
+    <div className="hotel-site min-h-screen text-gray-800 selection:bg-[#927447] selection:text-white relative" lang={lang === 'zh' ? 'zh-Hans' : lang}>
       {/* Navigation */}
-      <nav className="absolute top-0 left-0 w-full z-50 bg-transparent py-5">
+      <nav className="hotel-nav absolute top-0 left-0 w-full z-50 py-5" aria-label={t.navHome}>
         <div className="max-w-7xl mx-auto px-6 lg:px-10">
-          <div className="flex justify-end items-center relative w-full h-12">
+          <div className="flex justify-between items-center relative w-full h-12">
+            <button className="hotel-wordmark" onClick={() => navigateTo('home')} aria-label={t.navHome}>SUVARNABHUMI<span>VILLE</span></button>
             
             <div className="flex items-center gap-3 md:gap-6 relative z-20">
               
-              <div className="relative group hidden md:block">
-                <button className="flex items-center text-sm tracking-wider text-white hover:text-[#d4af37] transition-colors uppercase py-2 font-medium" style={{ textShadow: '0 2px 5px rgba(0,0,0,0.3)' }}>
+              <div className="language-picker relative group hidden md:block">
+                <button className="flex items-center text-sm tracking-wider text-white hover:text-[#927447] transition-colors uppercase py-2 font-medium" style={{ textShadow: '0 2px 5px rgba(0,0,0,0.3)' }}>
                   <Globe size={18} className="mr-1.5" />
                   {lang === 'th' ? 'TH' : lang === 'en' ? 'EN' : '中文'}
                   <ChevronDown size={14} className="ml-1 opacity-70 group-hover:opacity-100 transition-opacity" />
                 </button>
-                <div className="absolute right-0 mt-2 w-32 glass-card rounded-xl overflow-hidden shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform origin-top-right scale-95 group-hover:scale-100">
-                  <button onClick={() => setLang('th')} className={`w-full text-left px-5 py-3 text-sm transition-colors ${lang === 'th' ? 'text-[#d4af37] bg-white/50' : 'text-gray-700 hover:bg-white/80 hover:text-[#d4af37]'}`}>ไทย</button>
-                  <button onClick={() => setLang('en')} className={`w-full text-left px-5 py-3 text-sm transition-colors ${lang === 'en' ? 'text-[#d4af37] bg-white/50' : 'text-gray-700 hover:bg-white/80 hover:text-[#d4af37]'}`}>English</button>
-                  <button onClick={() => setLang('zh')} className={`w-full text-left px-5 py-3 text-sm transition-colors ${lang === 'zh' ? 'text-[#d4af37] bg-white/50' : 'text-gray-700 hover:bg-white/80 hover:text-[#d4af37]'}`}>中文</button>
+                <div className="absolute right-0 mt-2 w-32 glass-card rounded-xl overflow-hidden shadow-sm opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform origin-top-right scale-95 group-hover:scale-100">
+                  <button onClick={() => setLang('th')} className={`w-full text-left px-5 py-3 text-sm transition-colors ${lang === 'th' ? 'text-[#927447] bg-white/50' : 'text-gray-700 hover:bg-white/80 hover:text-[#927447]'}`}>ไทย</button>
+                  <button onClick={() => setLang('en')} className={`w-full text-left px-5 py-3 text-sm transition-colors ${lang === 'en' ? 'text-[#927447] bg-white/50' : 'text-gray-700 hover:bg-white/80 hover:text-[#927447]'}`}>English</button>
+                  <button onClick={() => setLang('zh')} className={`w-full text-left px-5 py-3 text-sm transition-colors ${lang === 'zh' ? 'text-[#927447] bg-white/50' : 'text-gray-700 hover:bg-white/80 hover:text-[#927447]'}`}>中文</button>
                 </div>
               </div>
 
               <div className={`hidden md:block transition-all duration-500`}>
-                <a href="https://www.suvarnabhumiville.com/accommodation/room/room-rate" target="_blank" rel="noreferrer" className="bg-gradient-to-r from-[#d4af37]/90 to-[#c59b27]/90 backdrop-blur-md text-white px-6 py-2.5 text-sm tracking-wider font-medium hover:from-[#d4af37] hover:to-[#d4af37] hover:shadow-[0_4px_15px_rgba(212,175,55,0.5)] transition-all duration-300 rounded-full flex items-center outline-none focus:outline-none shadow-lg border border-white/20">
+                <a href="https://www.suvarnabhumiville.com/accommodation/room/room-rate" target="_blank" rel="noreferrer" className="bg-gradient-to-r from-[#927447]/90 to-[#80623d]/90 backdrop-blur-md text-white px-6 py-2.5 text-sm tracking-wider font-medium hover:from-[#927447] hover:to-[#927447] hover:shadow-[0_4px_15px_rgba(212,175,55,0.5)] transition-all duration-300 rounded-full flex items-center outline-none focus:outline-none shadow-lg border border-white/20">
                   {t.navBook}
                 </a>
               </div>
 
               <button 
+                aria-label={mobileMenuOpen ? (lang === 'th' ? 'ปิดเมนู' : 'Close menu') : (lang === 'th' ? 'เปิดเมนู' : 'Open menu')}
+                aria-expanded={mobileMenuOpen}
+                aria-controls="hotel-menu"
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)} 
                 className="text-white glass-button hover:bg-white hover:text-black p-2 md:p-2.5 rounded-full transition-all duration-300 outline-none focus:outline-none focus:ring-0"
               >
@@ -551,15 +496,15 @@ export default function App() {
         </div>
 
         {/* เมนู Dropdown */}
-        <div className={`absolute top-full left-0 w-full glass-card border-t border-white/40 transition-all duration-500 overflow-y-auto shadow-2xl ${mobileMenuOpen ? 'max-h-[85vh] opacity-100 visible py-6 md:py-10' : 'max-h-0 opacity-0 invisible py-0'}`}>
+        <div id="hotel-menu" className={`absolute top-full left-0 w-full glass-card border-t border-white/40 transition-all duration-500 overflow-y-auto shadow-sm ${mobileMenuOpen ? 'max-h-[85vh] opacity-100 visible py-6 md:py-10' : 'max-h-0 opacity-0 invisible py-0'}`}>
           <div className="max-w-3xl mx-auto px-6 flex flex-col">
             
             <div className="md:hidden flex items-center justify-between py-4 border-b border-gray-200/50 mb-6">
-              <span className="text-sm text-gray-600 uppercase tracking-wider flex items-center"><Globe size={16} className="mr-2 text-[#d4af37]" /> {t.changeLang}</span>
+              <span className="text-sm text-gray-600 uppercase tracking-wider flex items-center"><Globe size={16} className="mr-2 text-[#927447]" /> {t.changeLang}</span>
               <div className="flex space-x-4">
-                <button onClick={() => { setLang('th'); }} className={`${lang === 'th' ? 'text-[#d4af37] font-medium' : 'text-gray-500 hover:text-gray-800'} text-sm outline-none focus:outline-none`}>TH</button>
-                <button onClick={() => { setLang('en'); }} className={`${lang === 'en' ? 'text-[#d4af37] font-medium' : 'text-gray-500 hover:text-gray-800'} text-sm outline-none focus:outline-none`}>EN</button>
-                <button onClick={() => { setLang('zh'); }} className={`${lang === 'zh' ? 'text-[#d4af37] font-medium' : 'text-gray-500 hover:text-gray-800'} text-sm outline-none focus:outline-none`}>ZH</button>
+                <button onClick={() => { setLang('th'); }} className={`${lang === 'th' ? 'text-[#927447] font-medium' : 'text-gray-500 hover:text-gray-800'} text-sm outline-none focus:outline-none`}>TH</button>
+                <button onClick={() => { setLang('en'); }} className={`${lang === 'en' ? 'text-[#927447] font-medium' : 'text-gray-500 hover:text-gray-800'} text-sm outline-none focus:outline-none`}>EN</button>
+                <button onClick={() => { setLang('zh'); }} className={`${lang === 'zh' ? 'text-[#927447] font-medium' : 'text-gray-500 hover:text-gray-800'} text-sm outline-none focus:outline-none`}>ZH</button>
               </div>
             </div>
 
@@ -575,7 +520,7 @@ export default function App() {
                 <button 
                   key={item.id} 
                   onClick={() => navigateTo(item.id)} 
-                  className={`w-full text-center md:text-left py-4 text-lg md:text-xl uppercase tracking-widest font-light transition-all duration-300 hover:tracking-[0.2em] rounded-2xl outline-none focus:outline-none ${currentPage === item.id ? 'text-[#d4af37] bg-white/40 font-medium shadow-inner' : 'text-gray-700 hover:bg-white/40 hover:text-[#d4af37]'}`}
+                  className={`w-full text-center md:text-left py-4 text-lg md:text-xl uppercase tracking-widest font-light transition-all duration-300 hover:tracking-[0.2em] rounded-sm outline-none focus:outline-none ${currentPage === item.id ? 'text-[#927447] bg-white/40 font-medium shadow-inner' : 'text-gray-700 hover:bg-white/40 hover:text-[#927447]'}`}
                 >
                   {item.label}
                 </button>
@@ -583,7 +528,7 @@ export default function App() {
             </div>
 
             <div className="md:hidden mt-10">
-              <a href="https://www.suvarnabhumiville.com/accommodation/room/room-rate" target="_blank" rel="noreferrer" className="bg-gradient-to-r from-[#d4af37]/90 to-[#c59b27]/90 backdrop-blur-md text-white w-full block text-center px-4 py-4 text-sm tracking-widest font-medium hover:from-[#d4af37] hover:to-[#d4af37] rounded-full uppercase outline-none focus:outline-none shadow-[0_4px_15px_rgba(212,175,55,0.4)] transition-all">
+              <a href="https://www.suvarnabhumiville.com/accommodation/room/room-rate" target="_blank" rel="noreferrer" className="bg-gradient-to-r from-[#927447]/90 to-[#80623d]/90 backdrop-blur-md text-white w-full block text-center px-4 py-4 text-sm tracking-widest font-medium hover:from-[#927447] hover:to-[#927447] rounded-full uppercase outline-none focus:outline-none shadow-[0_4px_15px_rgba(212,175,55,0.4)] transition-all">
                 {t.navBook}
               </a>
             </div>
@@ -596,46 +541,46 @@ export default function App() {
       {/* 1. หน้าแรก (Home) */}
       {/* ==================================================== */}
       {currentPage === 'home' && (
-        <section className="relative min-h-screen flex flex-col justify-center overflow-hidden animate-[pop-in_0.5s_ease-out_forwards] pt-20 pb-10">
-          <div className="absolute inset-0 z-0">
-            <img 
-              src="./bg-home.jpg" 
-              alt="Background" 
-              className="w-full h-full object-cover scale-105 transform motion-safe:animate-[pulse_15s_ease-in-out_infinite_alternate]"
-              onError={(e) => { e.target.src = 'https://images.unsplash.com/photo-1542314831-c6a4d27ce605?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80'; }}
-            />
-            <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/40 to-black/90"></div>
-          </div>
-          
-          <div className="relative z-10 text-center px-4 w-full max-w-5xl mx-auto flex-grow flex flex-col justify-center">
-            
-            <FadeInSection delay={100}>
-              <div className="flex justify-center mb-4 md:mb-6 mt-6 md:mt-10">
-                 <img 
-                   src="./logo-large.png" 
-                   alt="Suvarnabhumi Ville Hotel" 
-                   className="h-32 md:h-40 lg:h-48 object-contain drop-shadow-xl hover:scale-105 transition-transform duration-700" 
-                 />
+        <div>
+          <section className="hotel-hero">
+            <img src="./bg-home.jpg" alt="Suvarnabhumi Ville Hotel" className="hotel-hero-image" fetchPriority="high" />
+            <div className="hotel-hero-shade" />
+            <div className="hotel-hero-copy">
+              <p className="hotel-eyebrow">SUVARNABHUMI VILLE · BANGKOK</p>
+              <h1>Suvarnabhumi<span>Ville Hotel</span></h1>
+              <p className="hotel-hero-description">{lang === 'th' ? 'ช่วงเวลาแห่งการพักผ่อน ก่อนการเดินทางครั้งต่อไป' : lang === 'zh' ? '在下一段旅程之前，享受惬意时光。' : 'A moment of calm. Before your next journey.'}</p>
+              <div className="hotel-hero-actions">
+                <a className="hotel-primary" href="https://www.suvarnabhumiville.com/accommodation/room/room-rate" target="_blank" rel="noreferrer">{t.navBook}<ChevronRight size={16} /></a>
+                <button className="hotel-secondary" onClick={() => navigateTo('facilities')}>{t.navFacilities}<ChevronRight size={16} /></button>
               </div>
-            </FadeInSection>
-
-            <FadeInSection delay={300}>
-              <h1 className="font-serif text-4xl md:text-5xl lg:text-7xl text-white mb-6 leading-[1.2] font-medium tracking-wider uppercase" style={{ textShadow: '0 4px 15px rgba(0,0,0,0.6), 0 2px 5px rgba(0,0,0,0.8)' }}>
-                Suvarnabhumi Ville <span className="text-white font-light block md:inline mt-2 md:mt-0">Hotel</span>
-              </h1>
-            </FadeInSection>
-            
-            <FadeInSection delay={500}>
-              <p className="text-base md:text-lg text-white mb-6 max-w-2xl mx-auto font-medium leading-relaxed px-4" style={{ textShadow: '0 2px 8px rgba(0,0,0,0.8)' }}>
-                {t.heroDesc}
-              </p>
-            </FadeInSection>
-          </div>
-
-          <FadeInSection delay={700}>
-             <ShortcutMenu navigateTo={navigateTo} currentPage={currentPage} t={t} />
-          </FadeInSection>
-        </section>
+            </div>
+            <div className="hotel-hero-caption"><span>{t.slogan}</span><span>01 / SUVARNABHUMI VILLE</span></div>
+          </section>
+          <section className="hotel-welcome">
+            <div>
+              <p className="hotel-eyebrow">{lang === 'th' ? 'ยินดีต้อนรับสู่ สุวรรณภูมิ วิลล์' : lang === 'zh' ? '欢迎来到素万那普维尔酒店' : 'WELCOME TO SUVARNABHUMI VILLE'}</p>
+              <h2>{lang === 'th' ? 'พักผ่อนอย่างมีสไตล์\nเดินทางอย่างสบายใจ' : lang === 'zh' ? '舒心入住\n从容出发' : 'Stay in comfort.\nTravel with ease.'}</h2>
+            </div>
+            <div className="hotel-welcome-detail"><p>{t.heroDesc}</p><button className="hotel-text-link" onClick={() => navigateTo('contact')}>{t.navContact}<ChevronRight size={16} /></button></div>
+          </section>
+          <ShortcutMenu navigateTo={navigateTo} currentPage={currentPage} t={t} />
+          <section className="hotel-experiences">
+            <div className="hotel-section-heading"><p className="hotel-eyebrow">THE VILLE EXPERIENCE</p><h2>{lang === 'th' ? 'เติมเต็มทุกช่วงเวลาของการพักผ่อน' : lang === 'zh' ? '享受每一刻入住时光' : 'Make every moment your own.'}</h2></div>
+            <div className="hotel-experience-grid">
+              {[
+                { page: 'facilities', image: './fac-pool.jpg', label: t.navFacilities, detail: t.facDesc },
+                { page: 'dining', image: './s64-1.jpg', label: t.navDining, detail: t.diningDesc },
+                { page: 'airportToHotel', image: './bg-hotel.jpg', label: t.navAirToHotel, detail: t.service24h }
+              ].map((item, index) => (
+                <button key={item.page} className="hotel-experience" onClick={() => navigateTo(item.page)}>
+                  <div className="hotel-experience-image"><img src={item.image} alt={item.label} loading="lazy" /><span>0{index + 1}</span></div>
+                  <div className="hotel-experience-title"><h3>{item.label}</h3><ChevronRight size={20} /></div>
+                  <p>{item.detail}</p>
+                </button>
+              ))}
+            </div>
+          </section>
+        </div>
       )}
 
       {/* ==================================================== */}
@@ -652,19 +597,19 @@ export default function App() {
                 <div className="text-center mb-16">
                   <h2 className="font-serif text-3xl md:text-4xl text-gray-900 mb-4 font-medium flex flex-col md:flex-row items-center justify-center gap-4">
                     {t.shuttleAirToHotel}
-                    <span className="text-sm bg-[#d4af37] text-white px-4 py-1.5 rounded-full font-medium tracking-widest uppercase shadow-md font-sans border border-[#d4af37]">{t.service24h}</span>
+                    <span className="text-sm bg-[#927447] text-white px-4 py-1.5 rounded-full font-medium tracking-widest uppercase shadow-md font-sans border border-[#927447]">{t.service24h}</span>
                   </h2>
                   <p className="text-gray-700 font-light max-w-2xl mx-auto">
-                    {t.step1Desc1} <br/><span className="text-[#d4af37] font-medium">{t.step1Desc2}</span>
+                    {t.step1Desc1} <br/><span className="text-[#927447] font-medium">{t.step1Desc2}</span>
                   </p>
                 </div>
               </FadeInSection>
 
               <div className="grid lg:grid-cols-2 gap-12 items-start">
                 <FadeInSection delay={200}>
-                  <div className="glass-card rounded-3xl p-8 shadow-xl relative">
-                    <span className="absolute top-8 right-8 text-xs tracking-widest text-[#d4af37] border border-[#d4af37]/30 px-3 py-1 rounded-full uppercase bg-white/50 hidden sm:inline-block">{t.noAdvanceBooking}</span>
-                    <h3 className="text-2xl text-gray-900 mb-8 font-serif flex items-center"><Plane className="text-[#d4af37] mr-3 transform rotate-45" /> {t.stepsTitle}</h3>
+                  <div className="glass-card rounded-sm p-8 shadow-sm relative">
+                    <span className="absolute top-8 right-8 text-xs tracking-widest text-[#927447] border border-[#927447]/30 px-3 py-1 rounded-full uppercase bg-white/50 hidden sm:inline-block">{t.noAdvanceBooking}</span>
+                    <h3 className="text-2xl text-gray-900 mb-8 font-serif flex items-center"><Plane className="text-[#927447] mr-3 transform rotate-45" /> {t.stepsTitle}</h3>
                     <div className="space-y-6">
                       {[
                         { step: 1, title: t.step1Title, desc1: t.step1Desc1, desc2: t.step1Desc2, image: './step1.jpg' },
@@ -673,15 +618,15 @@ export default function App() {
                         { step: 4, title: t.step4Title, desc1: t.step4Desc1, desc2: t.step4Desc2, desc3: t.step4Desc3, warning: t.step4Warning, image: './step4.jpg' }
                       ].map((item, idx) => (
                         <div key={idx} className="flex gap-4 group cursor-pointer hover:bg-white/40 p-4 -mx-4 rounded-xl transition-all" onClick={() => setModalImage(item.image)}>
-                          <div className="w-10 h-10 rounded-full glass-card group-hover:bg-[#d4af37] flex items-center justify-center text-gray-600 group-hover:text-white font-medium text-base transition-colors shrink-0">{item.step}</div>
+                          <div className="w-10 h-10 rounded-full glass-card group-hover:bg-[#927447] flex items-center justify-center text-gray-600 group-hover:text-white font-medium text-base transition-colors shrink-0">{item.step}</div>
                           <div>
-                            <h4 className="text-gray-900 font-medium mb-1 group-hover:text-[#d4af37] transition-colors flex items-center">
+                            <h4 className="text-gray-900 font-medium mb-1 group-hover:text-[#927447] transition-colors flex items-center">
                               {item.title}
-                              <ImageIcon size={16} className="ml-2 text-gray-500 group-hover:text-[#d4af37] opacity-0 group-hover:opacity-100 transition-opacity" />
+                              <ImageIcon size={16} className="ml-2 text-gray-500 group-hover:text-[#927447] opacity-0 group-hover:opacity-100 transition-opacity" />
                             </h4>
                             <p className="text-gray-700 text-sm font-light leading-relaxed">{item.desc1}<strong className="text-gray-900 font-medium">{item.desc2}</strong>{item.desc3}</p>
                             {item.warning && <p className="text-yellow-700 text-sm mt-3 font-medium bg-yellow-100/50 p-3 rounded-lg border border-yellow-300/50">{item.warning}</p>}
-                            <div className="mt-2 flex items-center text-xs text-gray-500 group-hover:text-[#d4af37] transition-colors"><ImageIcon size={12} className="mr-1" /> {t.viewImage}</div>
+                            <div className="mt-2 flex items-center text-xs text-gray-500 group-hover:text-[#927447] transition-colors"><ImageIcon size={12} className="mr-1" /> {t.viewImage}</div>
                           </div>
                         </div>
                       ))}
@@ -692,8 +637,8 @@ export default function App() {
                 {/* ช่องวิดีโอแบบกระจก */}
                 <FadeInSection delay={400} className="flex flex-col items-center justify-center h-full">
                   <h3 className="text-gray-900 text-lg font-medium mb-4 text-center">{t.guideVideo}</h3>
-                  <div className="relative w-full max-w-[320px] aspect-[9/16] glass-card rounded-3xl overflow-hidden p-2 shadow-2xl">
-                    <div className="w-full h-full rounded-2xl overflow-hidden relative">
+                  <div className="relative w-full max-w-[320px] aspect-[9/16] glass-card rounded-sm overflow-hidden p-2 shadow-sm">
+                    <div className="w-full h-full rounded-sm overflow-hidden relative">
                       <video 
                         src="./vid-guide1.mp4" 
                         className="w-full h-full object-cover"
@@ -723,7 +668,7 @@ export default function App() {
                 <div className="text-center mb-16">
                   <h2 className="font-serif text-3xl md:text-4xl text-gray-900 mb-4 font-medium flex flex-col md:flex-row items-center justify-center gap-4">
                     {t.shuttleHotelToAir}
-                    <span className="text-sm bg-[#d4af37] text-white px-4 py-1.5 rounded-full font-medium tracking-widest uppercase shadow-md font-sans border border-[#d4af37]">{t.service24h}</span>
+                    <span className="text-sm bg-[#927447] text-white px-4 py-1.5 rounded-full font-medium tracking-widest uppercase shadow-md font-sans border border-[#927447]">{t.service24h}</span>
                   </h2>
                   <p className="text-gray-700 font-light max-w-2xl mx-auto">
                     {t.h2aSubtitle}
@@ -733,8 +678,8 @@ export default function App() {
 
               <div className="max-w-4xl mx-auto items-start">
                 <FadeInSection delay={200}>
-                  <div className="glass-card rounded-3xl p-8 md:p-12 shadow-xl">
-                    <h3 className="text-2xl text-gray-900 mb-8 font-serif flex items-center"><Car className="text-[#d4af37] mr-3" /> {t.detailsTitle}</h3>
+                  <div className="glass-card rounded-sm p-8 md:p-12 shadow-sm">
+                    <h3 className="text-2xl text-gray-900 mb-8 font-serif flex items-center"><Car className="text-[#927447] mr-3" /> {t.detailsTitle}</h3>
                     <div className="space-y-8">
                       {[
                         { icon: Clock, title: t.h2a1Title, desc: t.h2a1Desc },
@@ -744,7 +689,7 @@ export default function App() {
                       ].map((item, idx) => (
                         <div key={idx} className="flex gap-5 items-start">
                           <div className="glass-card p-3 rounded-full shadow-sm mt-1">
-                             <item.icon className="text-[#d4af37] shrink-0" size={24} strokeWidth={1.5} />
+                             <item.icon className="text-[#927447] shrink-0" size={24} strokeWidth={1.5} />
                           </div>
                           <div>
                             <h4 className="text-gray-900 text-lg font-medium mb-2">{item.title}</h4>
@@ -766,7 +711,7 @@ export default function App() {
       {/* ==================================================== */}
       {currentPage === 'facilities' && (
         <div className="animate-[pop-in_0.5s_ease-out_forwards]">
-          <PageBanner title={t.navFacilities} bgImage="./bg-facility.jpg" />
+          <PageBanner title={t.navFacilities} bgImage="./bg-facility.JPG" />
           <ShortcutMenu navigateTo={navigateTo} currentPage={currentPage} t={t} />
 
           <section className="py-12 relative z-10">
@@ -800,8 +745,8 @@ export default function App() {
                   { img: './fac-massage.jpg', title: t.facMassage },
                 ].map((item, idx) => (
                   <FadeInSection key={idx} delay={idx * 100}>
-                    <div className="relative aspect-[4/5] glass-card rounded-3xl overflow-hidden group shadow-lg cursor-default transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 p-1.5">
-                      <div className="relative w-full h-full rounded-2xl overflow-hidden">
+                    <div className="relative aspect-[4/5] glass-card rounded-sm overflow-hidden group shadow-lg cursor-default transition-all duration-500 hover:shadow-sm hover:-translate-y-2 p-1.5">
+                      <div className="relative w-full h-full rounded-sm overflow-hidden">
                         <img 
                           src={item.img} 
                           alt={item.title} 
@@ -810,8 +755,8 @@ export default function App() {
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent opacity-80 group-hover:opacity-90 transition-opacity duration-500"></div>
                         <div className="absolute bottom-0 left-0 w-full p-6 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
-                          <div className="w-8 h-1 bg-[#d4af37] mb-3 transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500 delay-100 rounded-full"></div>
-                          <h3 className="text-white font-medium text-lg md:text-xl drop-shadow-md group-hover:text-[#d4af37] transition-colors duration-300">
+                          <div className="w-8 h-1 bg-[#927447] mb-3 transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500 delay-100 rounded-full"></div>
+                          <h3 className="text-white font-medium text-lg md:text-xl drop-shadow-md group-hover:text-[#927447] transition-colors duration-300">
                             {item.title}
                           </h3>
                         </div>
@@ -844,8 +789,8 @@ export default function App() {
 
               {/* Breakfast Section */}
               <FadeInSection delay={200}>
-                <div className="relative glass-card p-2 rounded-3xl overflow-hidden mb-24 group shadow-xl">
-                  <div className="relative w-full h-full rounded-2xl overflow-hidden">
+                <div className="relative glass-card p-2 rounded-sm overflow-hidden mb-24 group shadow-sm">
+                  <div className="relative w-full h-full rounded-sm overflow-hidden">
                     <img 
                       src="./food-breakfast.jpg" 
                       alt="Breakfast" 
@@ -853,8 +798,8 @@ export default function App() {
                       onError={(e) => { e.target.src = 'https://images.unsplash.com/photo-1533089860892-a7c6f0a88666?w=1200'; }}
                     />
                     <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent flex flex-col justify-center p-8 md:p-16">
-                      <h2 className="text-5xl md:text-7xl font-bold text-white mb-4 tracking-wide drop-shadow-xl">{t.bfTitle}</h2>
-                      <p className="text-lg md:text-2xl text-[#d4af37] font-medium drop-shadow-md">{t.bfTime}</p>
+                      <h2 className="text-5xl md:text-7xl font-bold text-white mb-4 tracking-wide drop-shadow-sm">{t.bfTitle}</h2>
+                      <p className="text-lg md:text-2xl text-[#927447] font-medium drop-shadow-md">{t.bfTime}</p>
                     </div>
                   </div>
                 </div>
@@ -867,7 +812,7 @@ export default function App() {
                     <h3 className="font-serif text-3xl text-gray-900 mb-3">{t.s64Desc.split('(')[0]}</h3>
                     <p className="text-gray-700 font-light max-w-3xl mx-auto mb-6 text-lg">{t.s64Desc}</p>
                     <a href="https://skybar64.com/" target="_blank" rel="noreferrer" className="inline-flex items-center text-sm uppercase tracking-wider text-gray-800 glass-button transition-all px-8 py-3 rounded-full font-medium">
-                      {t.visitWebsite} <ChevronRight size={18} className="ml-2 text-[#d4af37]" />
+                      {t.visitWebsite} <ChevronRight size={18} className="ml-2 text-[#927447]" />
                     </a>
                   </div>
                   <CoverflowGallery images={[
@@ -885,7 +830,7 @@ export default function App() {
                     <h3 className="font-serif text-3xl text-gray-900 mb-3">Steak Gun Aeng 64</h3>
                     <p className="text-gray-700 font-light max-w-3xl mx-auto mb-6 text-lg">{t.steakDesc}</p>
                     <a href="https://www.facebook.com/steakgunang64" target="_blank" rel="noreferrer" className="inline-flex items-center text-sm uppercase tracking-wider text-gray-800 glass-button transition-all px-8 py-3 rounded-full font-medium">
-                      {t.visitFacebook} <ChevronRight size={18} className="ml-2 text-[#d4af37]" />
+                      {t.visitFacebook} <ChevronRight size={18} className="ml-2 text-[#927447]" />
                     </a>
                   </div>
                   <CoverflowGallery images={[
@@ -903,7 +848,7 @@ export default function App() {
                     <h3 className="font-serif text-3xl text-gray-900 mb-3">Café Suvarnabhumi Ville</h3>
                     <p className="text-gray-700 font-light max-w-3xl mx-auto mb-6 text-lg">{t.cafeDesc}</p>
                     <a href="https://www.facebook.com/cafesuvarnabhumiville/" target="_blank" rel="noreferrer" className="inline-flex items-center text-sm uppercase tracking-wider text-gray-800 glass-button transition-all px-8 py-3 rounded-full font-medium">
-                      {t.visitFacebook} <ChevronRight size={18} className="ml-2 text-[#d4af37]" />
+                      {t.visitFacebook} <ChevronRight size={18} className="ml-2 text-[#927447]" />
                     </a>
                   </div>
                   <CoverflowGallery images={[
@@ -930,26 +875,26 @@ export default function App() {
 
           <section className="py-12 relative z-10">
             <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
-              <div className="grid lg:grid-cols-2 gap-0 glass-card rounded-3xl overflow-hidden shadow-xl p-2 md:p-3">
+              <div className="grid lg:grid-cols-2 gap-0 glass-card rounded-sm overflow-hidden shadow-sm p-2 md:p-3">
                 {/* ข้อมูลติดต่อ */}
                 <div className="p-8 md:p-14 flex flex-col justify-center bg-white/40 rounded-t-2xl lg:rounded-l-2xl lg:rounded-tr-none z-10 backdrop-blur-md">
                   <h2 className="font-serif text-3xl text-gray-900 mb-8 font-medium">Suvarnabhumi Ville Hotel</h2>
                   <div className="space-y-6">
                     <div className="flex items-start">
                       <div className="bg-white/60 p-2.5 rounded-full mt-0.5 shrink-0 shadow-sm">
-                        <MapPin className="text-[#d4af37]" size={20} strokeWidth={1.5} />
+                        <MapPin className="text-[#927447]" size={20} strokeWidth={1.5} />
                       </div>
                       <p className="text-gray-800 font-light leading-relaxed ml-4 pt-1">{t.addressDesc}</p>
                     </div>
                     <div className="flex items-center">
                       <div className="bg-white/60 p-2.5 rounded-full shrink-0 shadow-sm">
-                        <Phone className="text-[#d4af37]" size={20} strokeWidth={1.5} />
+                        <Phone className="text-[#927447]" size={20} strokeWidth={1.5} />
                       </div>
                       <p className="text-gray-800 font-light ml-4">+66 (0) 98 267 3888 {t.frontDesk}</p>
                     </div>
                     <div className="flex items-center">
                       <div className="bg-white/60 p-2.5 rounded-full shrink-0 shadow-sm">
-                        <Phone className="text-[#d4af37]" size={20} strokeWidth={1.5} />
+                        <Phone className="text-[#927447]" size={20} strokeWidth={1.5} />
                       </div>
                       <p className="text-gray-800 font-light ml-4">+66 (0) 2 738 4599</p>
                     </div>
@@ -958,10 +903,10 @@ export default function App() {
                   <div className="mt-12 pt-8 border-t border-gray-300/50">
                     <p className="text-sm text-gray-600 uppercase tracking-widest mb-5 font-medium">{t.socialMedia}</p>
                     <div className="flex space-x-4">
-                      <a href="https://www.facebook.com/suvarnabhumi.ville.2025" target="_blank" rel="noreferrer" className="w-12 h-12 rounded-full glass-button flex items-center justify-center text-gray-600 hover:text-[#d4af37]"><FacebookIcon size={20} /></a>
-                      <a href="https://www.instagram.com/suvarnabhumiville/" target="_blank" rel="noreferrer" className="w-12 h-12 rounded-full glass-button flex items-center justify-center text-gray-600 hover:text-[#d4af37]"><InstagramIcon size={20} /></a>
-                      <a href="https://www.tiktok.com/@suvarnabhumivilles64" target="_blank" rel="noreferrer" className="w-12 h-12 rounded-full glass-button flex items-center justify-center text-gray-600 hover:text-[#d4af37]"><TiktokIcon size={20} /></a>
-                      <a href="https://lin.ee/YGQw4ZR" target="_blank" rel="noreferrer" className="w-12 h-12 rounded-full glass-button flex items-center justify-center text-gray-600 hover:text-[#d4af37]"><LineIcon size={20} /></a>
+                      <a href="https://www.facebook.com/suvarnabhumi.ville.2025" target="_blank" rel="noreferrer" className="w-12 h-12 rounded-full glass-button flex items-center justify-center text-gray-600 hover:text-[#927447]"><FacebookIcon size={20} /></a>
+                      <a href="https://www.instagram.com/suvarnabhumiville/" target="_blank" rel="noreferrer" className="w-12 h-12 rounded-full glass-button flex items-center justify-center text-gray-600 hover:text-[#927447]"><InstagramIcon size={20} /></a>
+                      <a href="https://www.tiktok.com/@suvarnabhumivilles64" target="_blank" rel="noreferrer" className="w-12 h-12 rounded-full glass-button flex items-center justify-center text-gray-600 hover:text-[#927447]"><TiktokIcon size={20} /></a>
+                      <a href="https://lin.ee/YGQw4ZR" target="_blank" rel="noreferrer" className="w-12 h-12 rounded-full glass-button flex items-center justify-center text-gray-600 hover:text-[#927447]"><LineIcon size={20} /></a>
                     </div>
                   </div>
                 </div>
@@ -982,7 +927,7 @@ export default function App() {
                     href="https://www.google.com/maps/place/%E0%B9%82%E0%B8%A3%E0%B8%87%E0%B9%81%E0%B8%A3%E0%B8%A1%E0%B8%AA%E0%B8%B8%E0%B8%A7%E0%B8%A3%E0%B8%A3%E0%B8%93%E0%B8%A0%E0%B8%B9%E0%B8%A1%E0%B8%B4+%E0%B8%A7%E0%B8%B4%E0%B8%A5%E0%B8%A5%E0%B9%8C+%E0%B9%81%E0%B8%AD%E0%B8%A3%E0%B9%8C%E0%B8%9E%E0%B8%AD%E0%B8%A3%E0%B9%8C%E0%B8%95+%E0%B9%82%E0%B8%AE%E0%B9%80%E0%B8%97%E0%B8%A5/@13.7129303,100.7369481,17z/data=!4m9!3m8!1s0x311d6710935f0495:0xbd2686a7ab672a9c!5m2!4m1!1i2!8m2!3d13.7129251!4d100.739523!16s%2Fg%2F11by_lwq7s?entry=ttu&g_ep=EgoyMDI2MDYyMy4wIKXMDSoASAFQAw%3D%3D"
                     target="_blank" 
                     rel="noreferrer"
-                    className="absolute bottom-6 right-6 bg-gradient-to-r from-[#d4af37]/90 to-[#c59b27]/90 backdrop-blur-md text-white px-6 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 font-medium tracking-wide flex items-center text-sm z-10 border border-white/20"
+                    className="absolute bottom-6 right-6 bg-gradient-to-r from-[#927447]/90 to-[#80623d]/90 backdrop-blur-md text-white px-6 py-3 rounded-full shadow-lg hover:shadow-sm transition-all duration-300 font-medium tracking-wide flex items-center text-sm z-10 border border-white/20"
                   >
                     <MapPin size={18} className="mr-2" />
                     {t.openMap}
@@ -997,19 +942,19 @@ export default function App() {
       {/* ==================================================== */}
       {/* Footer */}
       {/* ==================================================== */}
-      <footer className="bg-[#14183d] pt-16 pb-8 border-t border-[#14183d] relative z-10">
+      <footer className="bg-[#202b28] pt-16 pb-8 border-t border-[#202b28] relative z-10">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="flex flex-col md:flex-row justify-between items-center gap-6">
             <div className="flex flex-col items-center md:items-start">
-              <span className="font-serif text-xl tracking-[0.15em] text-[#d4af37] uppercase mb-2">Suvarnabhumi <span className="text-white italic font-light lowercase">Ville</span></span>
+              <span className="font-serif text-xl tracking-[0.15em] text-[#927447] uppercase mb-2">Suvarnabhumi <span className="text-white italic font-light lowercase">Ville</span></span>
               <p className="text-xs text-gray-300 font-light tracking-wide">{t.slogan}</p>
             </div>
             
             <div className="flex gap-4">
-               <a href="https://www.facebook.com/suvarnabhumi.ville.2025" target="_blank" rel="noreferrer" className="text-gray-300 hover:text-[#d4af37] transition-colors"><FacebookIcon size={20} /></a>
-               <a href="https://www.instagram.com/suvarnabhumiville/" target="_blank" rel="noreferrer" className="text-gray-300 hover:text-[#d4af37] transition-colors"><InstagramIcon size={20} /></a>
-               <a href="https://www.tiktok.com/@suvarnabhumivilles64" target="_blank" rel="noreferrer" className="text-gray-300 hover:text-[#d4af37] transition-colors"><TiktokIcon size={20} /></a>
-               <a href="https://lin.ee/YGQw4ZR" target="_blank" rel="noreferrer" className="text-gray-300 hover:text-[#d4af37] transition-colors"><LineIcon size={20} /></a>
+               <a href="https://www.facebook.com/suvarnabhumi.ville.2025" target="_blank" rel="noreferrer" className="text-gray-300 hover:text-[#927447] transition-colors"><FacebookIcon size={20} /></a>
+               <a href="https://www.instagram.com/suvarnabhumiville/" target="_blank" rel="noreferrer" className="text-gray-300 hover:text-[#927447] transition-colors"><InstagramIcon size={20} /></a>
+               <a href="https://www.tiktok.com/@suvarnabhumivilles64" target="_blank" rel="noreferrer" className="text-gray-300 hover:text-[#927447] transition-colors"><TiktokIcon size={20} /></a>
+               <a href="https://lin.ee/YGQw4ZR" target="_blank" rel="noreferrer" className="text-gray-300 hover:text-[#927447] transition-colors"><LineIcon size={20} /></a>
             </div>
           </div>
           <div className="text-center md:text-left mt-8 pt-8 border-t border-white/10 text-xs text-gray-400 font-light">
@@ -1021,12 +966,12 @@ export default function App() {
       {/* Popup รูปภาพ (ใช้ Glassmorphism ด้วย) */}
       {modalImage && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 p-4 md:p-10 backdrop-blur-md transition-all" onClick={() => setModalImage(null)}>
-          <button className="absolute top-6 right-6 md:top-10 md:right-10 text-gray-800 hover:text-[#d4af37] glass-button rounded-full p-2 z-10" onClick={() => setModalImage(null)}>
+          <button className="absolute top-6 right-6 md:top-10 md:right-10 text-gray-800 hover:text-[#927447] glass-button rounded-full p-2 z-10" onClick={() => setModalImage(null)}>
             <X size={24} />
           </button>
           <div className="relative max-w-4xl w-full max-h-full flex items-center justify-center transform animate-[pop-in_0.3s_ease-out_forwards]" onClick={(e) => e.stopPropagation()}>
-            <div className="glass-card p-2 md:p-3 rounded-3xl w-full flex justify-center">
-              <img src={modalImage} alt="Preview" className="max-w-full max-h-[80vh] object-contain rounded-2xl shadow-xl" onError={(e) => { e.target.src = 'https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=800'; }} />
+            <div className="glass-card p-2 md:p-3 rounded-sm w-full flex justify-center">
+              <img src={modalImage} alt="Preview" className="max-w-full max-h-[80vh] object-contain rounded-sm shadow-sm" onError={(e) => { e.target.src = 'https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=800'; }} />
             </div>
           </div>
           <style dangerouslySetInnerHTML={{__html: `@keyframes pop-in { 0% { opacity: 0; transform: scale(0.95); } 100% { opacity: 1; transform: scale(1); } }`}} />
