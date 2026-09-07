@@ -32,3 +32,20 @@
 .room-catalogue-note{font-size:13px;color:var(--muted)}.room-catalogue-note a{display:inline-flex;align-items:center;gap:7px;color:#715629;border-bottom:1px solid var(--gold);margin-left:8px}.room-image-fallback{display:flex;min-height:260px;align-items:center;justify-content:center;color:var(--muted);font-size:14px}
 @media(max-width:1050px){.room-card{gap:30px}.room-copy h2{font-size:34px}}
 @media(max-width:767px){.room-card{grid-template-columns:1fr;gap:28px;scroll-margin-top:115px;padding-bottom:36px;margin-bottom:36px}.room-jump-links{flex-wrap:nowrap;overflow-x:auto;white-space:nowrap;padding-bottom:18px;margin-bottom:35px;gap:8px}.room-jump-links a{font-size:14px}.room-copy h2{font-size:34px}.room-copy .eyebrow{font-size:12px}.room-specs{gap:10px 16px;margin:18px 0}.room-specs>span{font-size:14px}.room-description{font-size:16px}.room-book{width:100%;font-size:14px}.room-introduction>p:last-child{font-size:16px}.room-thumbnails{gap:5px}.room-thumbnails button{padding:2px}.room-catalogue-note a{margin-left:0;margin-top:8px}}
+
+/* Load the hotel's existing tour only after the guest chooses to start it. */
+.tour-teaser{display:flex;align-items:center;gap:30px;padding:36px;margin-block:40px 60px;border:1px solid var(--line);background:var(--pearl)}
+.tour-symbol{width:108px;height:108px;flex-shrink:0;border:1px solid #d8c9ad;color:var(--gold);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:5px}
+.tour-symbol span{font-family:'Cormorant Garamond',serif;font-size:28px;line-height:1}
+.tour-teaser .eyebrow{font-size:12px;margin-bottom:8px}.tour-teaser h2{font-size:27px}.tour-teaser p:not(.eyebrow){font-size:15px;color:var(--muted);margin-top:8px}.tour-teaser>.button{margin-left:auto;flex-shrink:0;font-size:14px}
+.virtual-tour{padding-top:55px}.tour-heading{max-width:830px;margin-bottom:32px}.tour-heading h1{font-size:clamp(30px,4vw,50px)}.tour-heading>p:last-child{font-size:16px;color:var(--muted);margin-top:20px}
+.tour-toolbar{display:flex;align-items:center;justify-content:space-between;gap:24px;margin-bottom:20px}
+.tour-toolbar>p{display:flex;align-items:center;gap:12px;font-size:14px;color:var(--muted)}.tour-toolbar svg{color:var(--gold)}.tour-toolbar>a{display:inline-flex;gap:10px;align-items:center;font-size:14px;flex-shrink:0;border-bottom:1px solid var(--gold);padding:10px 0}
+.tour-viewer{height:min(720px,75svh);min-height:450px;background:var(--navy);border:1px solid var(--line)}
+.tour-viewer>iframe{display:block;width:100%;height:100%;border:0}
+.tour-poster{position:relative;height:100%;isolation:isolate;display:flex;align-items:center;justify-content:center}
+.tour-poster>img{position:absolute;inset:0;z-index:-2}.tour-poster:after{content:'';position:absolute;inset:0;background:#101f3c99;z-index:-1}
+.tour-poster>div{display:flex;align-items:center;flex-direction:column;gap:30px}.tour-degree{font-family:'Cormorant Garamond',serif;font-size:100px;color:white;line-height:1}.tour-poster .button{font-size:16px}
+.tour-support{display:flex;align-items:center;justify-content:space-between;gap:20px;margin-top:15px}.tour-support>p{font-size:13px;color:var(--muted)}.tour-support .text-link{margin-top:0;flex-shrink:0;font-size:14px;gap:10px}.tour-source-note{font-size:12px;color:var(--muted);margin-top:14px}
+@media(max-width:1050px){.tour-teaser{flex-wrap:wrap}.tour-teaser>.button{margin-left:138px}.tour-toolbar{align-items:start;flex-direction:column;gap:10px}}
+@media(max-width:767px){.tour-teaser{padding:26px 22px;gap:20px;margin-block:25px 40px}.tour-symbol{width:74px;height:74px}.tour-symbol svg{width:27px}.tour-symbol span{font-size:23px}.tour-teaser>div:nth-child(2){flex:1;min-width:160px}.tour-teaser h2{font-size:23px}.tour-teaser p:not(.eyebrow){font-size:14px}.tour-teaser>.button{width:100%;margin-left:0}.virtual-tour{padding-top:38px}.tour-heading h1{font-size:32px}.tour-heading>p:last-child{font-size:16px}.tour-toolbar>p{font-size:14px}.tour-viewer{height:68svh;min-height:440px}.tour-support{align-items:start;flex-direction:column;gap:8px}.tour-source-note{font-size:12px}}
