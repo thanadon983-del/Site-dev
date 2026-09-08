@@ -1311,3 +1311,62 @@ button .lucide-arrow-right,
     height: 150px;
   }
 }
+
+/* Expand each room's amenities without leaving the catalogue. */
+.room-more-details {
+  margin: 24px 0;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: #fdfcf8;
+}
+.room-more-details > summary {
+  display: flex;
+  align-items: center;
+  min-height: 48px;
+  padding: 14px 18px;
+  list-style: none;
+  cursor: pointer;
+  color: var(--navy);
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  border-radius: 16px;
+}
+.room-more-details > summary::-webkit-details-marker { display: none; }
+.room-more-details > summary:hover { background: #edf1f7; }
+.room-more-details .room-details-open { display: none; }
+.room-more-details[open] .room-details-open { display: inline; }
+.room-more-details[open] .room-details-closed { display: none; }
+.room-details-content { padding: 0 18px 20px; }
+.room-details-content > h3 {
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+  font-size: 15px;
+  margin-bottom: 18px;
+}
+.room-details-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px 16px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.room-details-grid li { display: flex; gap: 10px; align-items: flex-start; min-width: 0; }
+.room-detail-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  border-radius: 12px;
+  background: #eaf0f7;
+  color: var(--navy);
+}
+.room-details-grid h4 { margin: 0 0 5px; font-size: 14px; font-weight: 500; line-height: 1.6; }
+.room-details-grid p { font-size: 12px; color: var(--muted); line-height: 1.8; }
+@media (max-width: 1200px) and (min-width: 901px), (max-width: 480px) {
+  .room-details-grid { grid-template-columns: 1fr; }
+}
