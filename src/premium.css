@@ -1,9 +1,9 @@
 /* Warm editorial surfaces, shared by every existing hotel route. */
 :root {
-  --navy: #192f32;
-  --navy-light: #29484b;
-  --ink: #233638;
-  --muted: #62706e;
+  --navy: #101f3c;
+  --navy-light: #203658;
+  --ink: #182640;
+  --muted: #657083;
   --gold: #997340;
   --gold-light: #edd7af;
   --line: #e2e3dc;
@@ -79,10 +79,10 @@ h2 {
 .site-header {
   background: #fdfcf8f5;
   backdrop-filter: blur(18px);
-  border-color: #23363812;
+  border-color: #18264012;
 }
 .utility {
-  background: #192f32;
+  background: #101f3c;
   font-size: 10px;
   height: 28px;
 }
@@ -123,8 +123,8 @@ h2 {
 }
 .hero-shade {
   background:
-    linear-gradient(90deg, #102928ed 0%, #172b3290 48%, #10292810 100%),
-    linear-gradient(0deg, #132c3466, transparent 70%);
+    linear-gradient(90deg, #0b1d3aed 0%, #14294790 48%, #0b1d3a10 100%),
+    linear-gradient(0deg, #10244066, transparent 70%);
 }
 .home-hero-content {
   padding-bottom: 64px;
@@ -171,7 +171,7 @@ h2 {
   border: 1px solid #ffffff80;
   border-radius: 18px;
   backdrop-filter: blur(16px);
-  box-shadow: 0 18px 50px #061c3030;
+  box-shadow: 0 18px 50px #07152e30;
   transition: transform 0.25s;
 }
 .hero-tour-card:hover {
@@ -200,7 +200,7 @@ h2 {
 .service-dock {
   border-radius: 18px;
   margin-top: -36px;
-  box-shadow: 0 18px 50px #18333413;
+  box-shadow: 0 18px 50px #101f3c13;
   background: #fffefa;
   overflow: hidden;
 }
@@ -231,7 +231,7 @@ h2 {
 .intro-images > img:nth-child(2) {
   border-radius: 22px;
   border-color: #fdfcf8;
-  box-shadow: 0 18px 36px #21393712;
+  box-shadow: 0 18px 36px #18264012;
 }
 .image-seal {
   border-radius: 50%;
@@ -243,7 +243,7 @@ h2 {
 }
 .pearl {
   background:
-    radial-gradient(ellipse at 90% 0, #e7e9de80, transparent 55%), #f3f2ec;
+    radial-gradient(ellipse at 90% 0, #e6eaf280, transparent 55%), #f3f2ec;
 }
 .section-heading {
   margin-bottom: 38px;
@@ -255,7 +255,7 @@ h2 {
 .experience-card {
   border-radius: 20px;
   min-height: 440px;
-  box-shadow: 0 12px 28px #21393710;
+  box-shadow: 0 12px 28px #18264010;
 }
 .experience-card:first-child {
   min-height: 510px;
@@ -290,7 +290,7 @@ h2 {
   min-height: 500px;
 }
 .dining-teaser:after {
-  background: linear-gradient(90deg, #142b30ef, #142b3050);
+  background: linear-gradient(90deg, #101f3cef, #101f3c50);
 }
 .dining-teaser h2 {
   font-size: 76px;
@@ -331,7 +331,7 @@ h2 {
   background: white;
   border: 1px solid var(--line);
   border-radius: 24px;
-  box-shadow: 0 10px 32px #23363808;
+  box-shadow: 0 10px 32px #18264008;
   align-items: center;
 }
 .room-photo {
@@ -340,7 +340,7 @@ h2 {
 .room-photo > svg,
 .room-photo-count {
   border-radius: 100px;
-  background: #192f32d9;
+  background: #101f3cd9;
   backdrop-filter: blur(8px);
 }
 .room-thumbnails button {
@@ -366,7 +366,7 @@ h2 {
 }
 .room-amenities li {
   border-radius: 100px;
-  background: #f2f4ee;
+  background: #f0f2f6;
 }
 .room-access-note {
   border-radius: 0 10px 10px 0;
@@ -381,7 +381,7 @@ h2 {
   width: auto;
 }
 .room-card:nth-child(even) {
-  background: #f7f7f1;
+  background: #f7f7f5;
 }
 .room-availability-note {
   line-height: 1.8;
@@ -389,7 +389,7 @@ h2 {
 .facility-card {
   border-radius: 18px;
   overflow: hidden;
-  box-shadow: 0 10px 24px #192f3208;
+  box-shadow: 0 10px 24px #101f3c08;
   transition:
     transform 0.25s,
     box-shadow 0.25s;
@@ -458,7 +458,7 @@ h2 {
 }
 .info-panel {
   border-radius: 18px;
-  box-shadow: 0 10px 26px #192f3208;
+  box-shadow: 0 10px 26px #101f3c08;
 }
 .step-photo {
   border-radius: 12px;
@@ -498,7 +498,7 @@ h2 {
 .tour-teaser {
   position: relative;
   overflow: hidden;
-  background: linear-gradient(105deg, #e8ede6, #faf7ed);
+  background: linear-gradient(105deg, #e9edf5, #faf7ed);
   border-radius: 24px;
   padding: 42px;
   gap: 30px;
@@ -506,7 +506,7 @@ h2 {
 }
 .tour-symbol {
   border-radius: 50%;
-  border-color: #a7b4a8;
+  border-color: #a7b4cb;
   background: #ffffff60;
   color: var(--navy);
 }
@@ -515,14 +515,14 @@ h2 {
 }
 .concierge {
   background:
-    radial-gradient(ellipse at 80% 0, #345653, transparent 65%), #192f32;
+    radial-gradient(ellipse at 80% 0, #263f67, transparent 65%), #101f3c;
 }
 .concierge p:not(.eyebrow) {
   font-size: 15px;
-  color: #d7e3dc;
+  color: #d7e0ef;
 }
 .footer {
-  background: #122628;
+  background: #0b172d;
 }
 .footer-grid h3 {
   font-size: 14px;
@@ -530,14 +530,14 @@ h2 {
 .footer-grid > div:not(:first-child) > a,
 .footer address {
   font-size: 13px;
-  color: #c6d3cc;
+  color: #c6d1e3;
 }
 .footer-grid > div:first-child > p {
   font-size: 12px;
 }
 .footer-bottom {
   font-size: 11px;
-  color: #b2c4bd;
+  color: #b2c1d8;
 }
 .lightbox {
   border-radius: 18px;
@@ -545,10 +545,10 @@ h2 {
 @media (hover: hover) {
   .facility-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 18px 35px #192f3214;
+    box-shadow: 0 18px 35px #101f3c14;
   }
   .room-card:hover {
-    box-shadow: 0 16px 40px #23363810;
+    box-shadow: 0 16px 40px #18264010;
   }
 }
 @media (min-width: 1201px) {
@@ -703,7 +703,7 @@ h2 {
     top: 8px;
   }
   .hero-shade {
-    background: linear-gradient(90deg, #102928e8, #10292865);
+    background: linear-gradient(90deg, #0b1d3ae8, #0b1d3a65);
   }
   .home-hero > img {
     object-position: 62% center;
