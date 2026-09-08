@@ -1047,3 +1047,73 @@ button .lucide-arrow-right,
     font-size: 18px;
   }
 }
+
+/* Simple heading numerals and a quieter tour entry below the main content. */
+.section-index {
+  font-family: "Noto Sans Thai", Arial, sans-serif;
+  font-size: 40px;
+  font-weight: 400;
+  font-variant-numeric: lining-nums tabular-nums;
+  line-height: 1.2;
+  letter-spacing: 0;
+}
+.home-hero .hero-tour-card {
+  display: none;
+}
+.tour-teaser {
+  background: transparent;
+  border: 0;
+  border-top: 1px solid var(--line);
+  border-radius: 0;
+  padding: 24px 0;
+  margin-block: 32px;
+  gap: 20px;
+  box-shadow: none;
+}
+.tour-teaser .tour-symbol {
+  display: none;
+}
+.tour-teaser h2 {
+  font-size: 20px;
+  line-height: 1.6;
+}
+.tour-teaser p:not(.eyebrow) {
+  font-size: 14px;
+}
+.tour-teaser .eyebrow {
+  font-size: 10px;
+}
+.tour-teaser > .button {
+  width: auto;
+  min-height: 44px;
+  margin: 0 0 0 auto;
+  padding: 8px 0;
+  background: transparent;
+  color: var(--muted);
+  border: 0;
+  border-bottom: 1px solid var(--line);
+  border-radius: 0;
+  box-shadow: none;
+  font-size: 14px;
+  font-weight: 400;
+}
+.tour-teaser > .button:hover {
+  background: transparent;
+  color: var(--ink);
+  border-bottom-color: var(--gold);
+}
+@media (max-width: 1050px) {
+  .tour-teaser > .button {
+    margin-left: 0;
+  }
+}
+@media (max-width: 767px) {
+  .tour-teaser {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .tour-teaser h2 {
+    font-size: 18px;
+  }
+}
