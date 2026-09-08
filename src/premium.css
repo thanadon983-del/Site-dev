@@ -1117,3 +1117,34 @@ button .lucide-arrow-right,
     font-size: 18px;
   }
 }
+
+/* Pre-arrival information is always visible, without disclosure controls. */
+.faq-items {
+  display: grid;
+  gap: 16px;
+  min-width: 0;
+}
+.faq-card {
+  padding: 24px 28px;
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+}
+.faq-card h3 {
+  margin-bottom: 10px;
+  color: var(--ink);
+  font-size: 17px;
+  font-weight: 500;
+  line-height: 1.6;
+}
+.faq-card p {
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.9;
+  overflow-wrap: anywhere;
+}
+@media (max-width: 767px) {
+  .faq-card {
+    padding: 22px 20px;
+  }
+}
