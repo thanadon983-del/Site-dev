@@ -1,6 +1,5 @@
 import { Heart, Camera, Mail, MessageCircle, CheckCircle2 } from 'lucide-react';
 
-const source = 'https://www.suvarnabhumiville.com/promotion_th';
 const copy = {
   th: {
     nav: 'โปรโมชั่น', title: 'สิทธิพิเศษ\nสำหรับสมาชิก',
@@ -12,7 +11,7 @@ const copy = {
     booking: 'สอบถามราคาสมาชิก', bookingText: 'ให้ทีมโรงแรมช่วยดูแลการจองของคุณ',
     line: 'สอบถามผ่าน LINE', email: 'ส่งอีเมล', terms: 'เงื่อนไขสิทธิ์สมาชิก',
     termsText: 'สำหรับผู้มีคุณสมบัติตามเงื่อนไขเท่านั้น ไม่ใช่โปรโมชั่นทั่วไป และอยู่ภายใต้ข้อกำหนดของโรงแรม',
-    source: 'ดูเงื่อนไขจากโรงแรม', stay: 'ดูห้องพัก',
+    stay: 'ดูห้องพัก',
   },
   en: {
     nav: 'Offers', title: 'A special stay.\nMember privileges.',
@@ -24,7 +23,7 @@ const copy = {
     booking: 'Request member rates', bookingText: 'Let the hotel team arrange your stay.',
     line: 'Chat on LINE', email: 'Email reservations', terms: 'Member conditions',
     termsText: 'Eligible guests only. This is not a general promotion. Hotel terms apply.',
-    source: 'Hotel conditions', stay: 'Explore rooms',
+    stay: 'Explore rooms',
   },
   zh: {
     nav: '优惠', title: '会员专属\n住宿礼遇',
@@ -36,7 +35,7 @@ const copy = {
     booking: '咨询会员房价', bookingText: '让酒店团队协助安排您的住宿。',
     line: '通过 LINE 咨询', email: '发送邮件', terms: '会员条件',
     termsText: '仅限符合资格的宾客，不属于一般促销，须遵守酒店条款。',
-    source: '查看酒店条款', stay: '浏览客房',
+    stay: '浏览客房',
   },
 };
 const socials = [
@@ -73,7 +72,6 @@ export default function Promotions({ lang, lineUrl }) {
         <div className="promotion-terms">
           <CheckCircle2 size={22} aria-hidden="true" />
           <div><h3>{c.terms}</h3><p>{c.termsText}</p>
-            <a href={source} target="_blank" rel="noreferrer" className="text-link">{c.source}</a>
           </div>
         </div>
       </div>
