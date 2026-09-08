@@ -1370,3 +1370,35 @@ button .lucide-arrow-right,
 @media (max-width: 1200px) and (min-width: 901px), (max-width: 480px) {
   .room-details-grid { grid-template-columns: 1fr; }
 }
+
+/* Member offers share the hotel palette and keep eligibility visible. */
+.promotion-hero { padding-bottom: 48px; }
+.promotion-layout { display: grid; grid-template-columns: minmax(0,1.35fr) minmax(0,1fr); gap: 56px; align-items: start; }
+.promotion-steps { display: grid; gap: 16px; }
+.promotion-step { display: flex; align-items: flex-start; gap: 20px; padding: 28px; border: 1px solid var(--line); border-radius: 18px; background: white; }
+.promotion-icon { display: flex; align-items: center; justify-content: center; flex: 0 0 52px; height: 52px; border-radius: 16px; color: var(--navy); background: #edf1f7; }
+.promotion-step h3 { font-size: 19px; margin-bottom: 8px; }
+.promotion-step p, .promotion-terms p { font-size: 15px; color: var(--muted); }
+.promotion-socials { display: flex; flex-wrap: wrap; gap: 8px 18px; margin-top: 12px; }
+.promotion-socials a { display: inline-flex; min-height: 44px; align-items: center; font-size: 14px; color: #715629; text-decoration: underline; text-underline-offset: 5px; }
+.promotion-terms { display: flex; align-items: flex-start; gap: 16px; padding: 26px 0 0; margin-top: 28px; border-top: 1px solid var(--line); }
+.promotion-terms > svg { color: var(--gold); margin-top: 4px; }
+.promotion-terms h3 { font-size: 17px; margin-bottom: 8px; }
+.promotion-terms .text-link { margin-top: 6px; }
+.promotion-booking { overflow: hidden; border-radius: 24px; background: white; border: 1px solid var(--line); box-shadow: 0 14px 40px #101f3c0c; }
+.promotion-booking > img { height: 240px; }
+.promotion-booking-copy { padding: 32px; }
+.promotion-booking h2 { font-size: 28px; }
+.promotion-booking-copy > p:not(.eyebrow) { font-size: 15px; color: var(--muted); margin: 16px 0 24px; }
+.promotion-booking .button { display: flex; width: 100%; }
+.promotion-contact-detail { display: block; text-align: center; font-size: 12px; color: var(--muted); margin: 9px 0 22px; overflow-wrap: anywhere; }
+.promotion-booking .text-link { margin-top: 0; }
+@media (max-width: 1050px) { .promotion-layout { gap: 28px; } .promotion-step { padding: 22px; gap: 14px; } .promotion-booking-copy { padding: 24px; } }
+@media (max-width: 767px) {
+  .promotion-layout { grid-template-columns: 1fr; gap: 36px; }
+  .promotion-step { padding: 22px 18px; }
+  .promotion-icon { flex-basis: 42px; height: 42px; border-radius: 12px; }
+  .promotion-step h3 { font-size: 18px; }
+  .promotion-booking > img { height: 220px; }
+  .promotion-booking h2 { font-size: 26px; }
+}
