@@ -1214,3 +1214,59 @@ button .lucide-arrow-right,
     transform: none;
   }
 }
+
+/* Dining photo ribbons: two identical groups create a seamless leftward loop. */
+.venue-photo-ribbon { margin-top: 28px; }
+.venue-photo-controls { display: flex; justify-content: flex-end; margin-bottom: 8px; }
+.venue-photo-toggle {
+  min-height: 44px;
+  padding: 8px 12px;
+  color: var(--muted);
+  font-size: 13px;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.venue-photo-viewport { overflow: hidden; border-radius: 16px; }
+.venue-photo-track {
+  display: flex;
+  width: 200%;
+  min-width: 1800px;
+  animation: venue-photo-drift 36s linear infinite;
+}
+.venue-photo-group {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 16px;
+  flex: 0 0 50%;
+  min-width: 0;
+  padding-right: 16px;
+}
+.venue-photo-group button {
+  display: block;
+  width: 100%;
+  padding: 0;
+  aspect-ratio: 4 / 3;
+  border-radius: 14px;
+  overflow: hidden;
+}
+.venue-photo-group img { transition: filter 200ms ease; }
+.venue-photo-group button:hover img { filter: brightness(1.06); }
+.venue-photo-ribbon[data-paused="true"] .venue-photo-track { animation-play-state: paused; }
+@media (hover: hover) {
+  .venue-photo-ribbon:hover .venue-photo-track { animation-play-state: paused; }
+}
+/* Keyboard users receive a stationary strip that can scroll focused photos into view. */
+.venue-photo-viewport:focus-within { overflow-x: auto; }
+.venue-photo-viewport:focus-within .venue-photo-track { animation: none; }
+.venue-photo-group button:focus-visible { outline-offset: -4px; }
+@keyframes venue-photo-drift {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .venue-photo-controls { display: none; }
+  .venue-photo-viewport { overflow-x: auto; }
+  .venue-photo-track { animation: none; width: 100%; min-width: 900px; }
+  .venue-photo-group { flex-basis: 100%; }
+  .venue-photo-group[aria-hidden="true"] { display: none; }
+}
