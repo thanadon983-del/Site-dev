@@ -1265,3 +1265,49 @@ button .lucide-arrow-right,
   .venue-photo-group { flex-basis: 100%; }
   .venue-photo-group[aria-hidden="true"] { display: none; }
 }
+
+/* Use the supplied hotel logo without recreating its lettering. */
+.brand .hotel-logo {
+  display: block;
+  width: 112px;
+  height: 96px;
+  object-fit: contain;
+}
+.footer-brand .hotel-logo {
+  display: block;
+  width: 180px;
+  height: 180px;
+  object-fit: contain;
+}
+.hotel-logo-seal {
+  position: absolute;
+  left: 20px;
+  bottom: 30px;
+  width: 128px;
+  height: 128px;
+  padding: 8px;
+  border-radius: 14px;
+  background: #fdfcf8;
+  box-shadow: 0 8px 24px #101f3c18;
+}
+.hotel-logo-seal img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+@media (max-width: 767px) {
+  .brand .hotel-logo {
+    width: 90px;
+    height: 78px;
+  }
+  .hotel-logo-seal {
+    left: 14px;
+    bottom: 20px;
+    width: 104px;
+    height: 104px;
+  }
+  .footer-brand .hotel-logo {
+    width: 150px;
+    height: 150px;
+  }
+}
