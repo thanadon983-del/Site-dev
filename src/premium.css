@@ -1217,16 +1217,12 @@ button .lucide-arrow-right,
 
 /* Dining photo ribbons: two identical groups create a seamless leftward loop. */
 .venue-photo-ribbon { margin-top: 28px; }
-.venue-photo-controls { display: flex; justify-content: flex-end; margin-bottom: 8px; }
-.venue-photo-toggle {
-  min-height: 44px;
-  padding: 8px 12px;
-  color: var(--muted);
-  font-size: 13px;
-  text-decoration: underline;
-  text-underline-offset: 4px;
+.venue-photo-viewport {
+  overflow: hidden;
+  border-radius: 16px;
+  -webkit-mask-image: linear-gradient(to right, transparent, black 24px, black calc(100% - 24px), transparent);
+  mask-image: linear-gradient(to right, transparent, black 24px, black calc(100% - 24px), transparent);
 }
-.venue-photo-viewport { overflow: hidden; border-radius: 16px; }
 .venue-photo-track {
   display: flex;
   width: 200%;
@@ -1251,20 +1247,19 @@ button .lucide-arrow-right,
 }
 .venue-photo-group img { transition: filter 200ms ease; }
 .venue-photo-group button:hover img { filter: brightness(1.06); }
-.venue-photo-ribbon[data-paused="true"] .venue-photo-track { animation-play-state: paused; }
-@media (hover: hover) {
-  .venue-photo-ribbon:hover .venue-photo-track { animation-play-state: paused; }
-}
 /* Keyboard users receive a stationary strip that can scroll focused photos into view. */
-.venue-photo-viewport:focus-within { overflow-x: auto; }
-.venue-photo-viewport:focus-within .venue-photo-track { animation: none; }
+.venue-photo-viewport:has(button:focus-visible) {
+  overflow-x: auto;
+  -webkit-mask-image: none;
+  mask-image: none;
+}
+.venue-photo-viewport:has(button:focus-visible) .venue-photo-track { animation: none; }
 .venue-photo-group button:focus-visible { outline-offset: -4px; }
 @keyframes venue-photo-drift {
   from { transform: translateX(0); }
   to { transform: translateX(-50%); }
 }
 @media (prefers-reduced-motion: reduce) {
-  .venue-photo-controls { display: none; }
   .venue-photo-viewport { overflow-x: auto; }
   .venue-photo-track { animation: none; width: 100%; min-width: 900px; }
   .venue-photo-group { flex-basis: 100%; }
