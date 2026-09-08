@@ -44,6 +44,12 @@ const socials = [
   ['Instagram', 'https://www.instagram.com/suvarnabhumiville'],
 ];
 
+function SocialIcon({ name }) {
+  if (name === 'Instagram') return <svg viewBox="0 0 24 24" width="23" height="23" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true" focusable="false"><rect x="3" y="3" width="18" height="18" rx="5" /><circle cx="12" cy="12" r="4" /><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" /></svg>;
+  if (name === 'Facebook') return <svg viewBox="0 0 24 24" width="23" height="23" fill="currentColor" aria-hidden="true" focusable="false"><path d="M14 21v-8h3l.5-4H14V7c0-1.2.4-2 2-2h2V1.4C17.4 1.2 16.3 1 15 1c-3 0-5 1.8-5 5v3H7v4h3v8z" /></svg>;
+  return <svg viewBox="0 0 24 24" width="23" height="23" fill="currentColor" aria-hidden="true" focusable="false"><path d="M16.5 2c.3 2.7 1.8 4.4 4.5 4.7v3.4a9 9 0 0 1-4.5-1.4v7.1a6.2 6.2 0 1 1-5.3-6.1v3.5a2.8 2.8 0 1 0 1.8 2.6V2z" /></svg>;
+}
+
 export default function Promotions({ lang, lineUrl }) {
   const c = copy[lang] || copy.en;
   const steps = [[Heart,c.follow,c.followText],[Camera,c.proof,c.proofText],[Mail,c.contact,c.contactText]];
@@ -64,7 +70,7 @@ export default function Promotions({ lang, lineUrl }) {
             <span className="promotion-icon"><Icon size={25} strokeWidth={1.6} aria-hidden="true" /></span>
             <div><h3>{title}</h3><p>{body}</p>
               {index === 0 && <div className="promotion-socials">{socials.map(([name,url]) =>
-                <a key={name} href={url} target="_blank" rel="noreferrer">{name}</a>
+                <a key={name} href={url} target="_blank" rel="noreferrer" aria-label={name} title={name}><SocialIcon name={name} /></a>
               )}</div>}
             </div>
           </article>)}
