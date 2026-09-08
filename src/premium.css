@@ -1148,3 +1148,69 @@ button .lucide-arrow-right,
     padding: 22px 20px;
   }
 }
+
+/* A single soft sweep on interaction; no continuous animation. */
+:where(.button:not(.tour-teaser > .button), .room-jump-links a, .gallery-filters button) {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  transition:
+    background-color 220ms ease,
+    color 220ms ease,
+    border-color 220ms ease,
+    box-shadow 220ms ease,
+    transform 160ms ease;
+}
+:where(.button:not(.tour-teaser > .button), .room-jump-links a, .gallery-filters button)::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+  top: -50%;
+  bottom: -50%;
+  left: -60%;
+  width: 45%;
+  background: linear-gradient(90deg, transparent, rgb(255 238 199 / 28%), transparent);
+  transform: translateX(0) skewX(-20deg);
+  opacity: 0;
+}
+@keyframes ville-button-shine {
+  0% { transform: translateX(0) skewX(-20deg); opacity: 0; }
+  15% { opacity: 1; }
+  85% { opacity: 1; }
+  100% { transform: translateX(400%) skewX(-20deg); opacity: 0; }
+}
+@keyframes ville-button-press-shine {
+  0% { transform: translateX(0) skewX(-20deg); opacity: 0; }
+  20% { opacity: 1; }
+  100% { transform: translateX(400%) skewX(-20deg); opacity: 0; }
+}
+@media (hover: hover) and (pointer: fine) {
+  :is(.button:not(.tour-teaser > .button), .room-jump-links a, .gallery-filters button):hover {
+    box-shadow: 0 0 0 1px rgb(190 149 79 / 25%), 0 4px 18px rgb(177 131 61 / 24%);
+  }
+  :is(.button:not(.tour-teaser > .button), .room-jump-links a, .gallery-filters button):hover::after {
+    animation: ville-button-shine 700ms ease-out both;
+  }
+}
+:is(.button:not(.tour-teaser > .button), .room-jump-links a, .gallery-filters button):focus-visible {
+  box-shadow: 0 0 0 1px rgb(190 149 79 / 25%), 0 4px 18px rgb(177 131 61 / 24%);
+}
+:is(.button:not(.tour-teaser > .button), .room-jump-links a, .gallery-filters button):focus-visible::after {
+  animation: ville-button-shine 700ms ease-out both;
+}
+:is(.button:not(.tour-teaser > .button), .room-jump-links a, .gallery-filters button):active {
+  transform: scale(0.98);
+  box-shadow: 0 0 0 1px rgb(190 149 79 / 35%), 0 0 16px rgb(177 131 61 / 30%);
+}
+:is(.button:not(.tour-teaser > .button), .room-jump-links a, .gallery-filters button):active::after {
+  animation: ville-button-press-shine 400ms ease-out both;
+}
+@media (prefers-reduced-motion: reduce) {
+  :is(.button:not(.tour-teaser > .button), .room-jump-links a, .gallery-filters button)::after {
+    display: none;
+    animation: none;
+  }
+  :is(.button:not(.tour-teaser > .button), .room-jump-links a, .gallery-filters button):active {
+    transform: none;
+  }
+}
