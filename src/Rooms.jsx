@@ -20,7 +20,6 @@ import { FASTBOOKING_URL } from './booking.js';
 
 const IMAGE_BASE = 'https://d3ehecxdotm942.cloudfront.net/b01bf1a53760e71e7923a93af7d0f295/2544e5b1e7659a7/';
 const HOTEL_ROOMS_URL = 'https://www.suvarnabhumiville.com/accommodation/room/';
-const PREMIER_SUITE_TOUR_URL = 'https://www.suvarnabhumiville.com/mapping/view360/accommodation/room/premier-suite-pool-access';
 
 const rooms = [
   {
@@ -115,7 +114,6 @@ const rooms = [
     bed: 'king',
     features: ['poolAccess', 'bathtub', 'sofa', 'desk', 'wifi'],
     imageUrls: ['https://www.suvarnabhumiville.com/admin/main/image/0401201802465465.jpg'],
-    tourUrl: PREMIER_SUITE_TOUR_URL,
     description: {
       th: 'ห้องพักขนาดใหญ่ที่สุด 47 ตร.ม. พร้อมเตียงคิงไซส์ โซฟา โต๊ะทำงาน ห้องน้ำกระจกพร้อมอ่างอาบน้ำ และระเบียงส่วนตัวที่เชื่อมต่อสู่สระว่ายน้ำโดยตรง',
       en: 'The hotel’s largest room at 47 m², with a king bed, sofa, work desk, glass bathroom with bathtub, and a private balcony with direct pool access.',
