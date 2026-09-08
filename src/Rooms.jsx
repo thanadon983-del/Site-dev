@@ -17,6 +17,7 @@ import {
   Check,
 } from 'lucide-react';
 import { FASTBOOKING_URL } from './booking.js';
+import RoomDetails from './RoomDetails.jsx';
 
 const IMAGE_BASE = 'https://d3ehecxdotm942.cloudfront.net/b01bf1a53760e71e7923a93af7d0f295/2544e5b1e7659a7/';
 const HOTEL_ROOMS_URL = 'https://www.suvarnabhumiville.com/accommodation/room/';
@@ -42,7 +43,7 @@ const rooms = [
     size: '24–26',
     occupancy: 3,
     bed: 'queenTwin',
-    features: ['wifi', 'air', 'fridge', 'shower'],
+    features: ['wifi', 'air', 'fridge'],
     images: ['e2be65f7bfacf1b2f000015b20eddf10', 'ed0770a82f63b721548df7901782d5ee', '2af6e52e78d49a09cf8b7d7683e84e99', '81a717d6f899b552664e18294fbba53c', '9cab8b734e755727a05c9bc7329cf45f'],
     description: {
       th: 'ห้องพักร่วมสมัยขนาด 24–26 ตร.ม. จัดพื้นที่ได้ลงตัว พร้อมสิ่งอำนวยความสะดวกสำหรับการพักผ่อน และมีเตียงควีนไซส์หรือเตียงแฝดให้เลือกตามห้องว่าง',
@@ -290,6 +291,7 @@ function RoomCard({ room, index, c, lang, onImage }) {
             );
           })}
         </ul>
+        <RoomDetails roomId={room.id} roomName={room.name} lang={lang} />
         <div className="actions">
           <a className="button gold room-book" href={FASTBOOKING_URL} target="_blank" rel="noreferrer" aria-label={c.book + ': ' + room.name}>{c.book}<ArrowUpRight size={18} /></a>
           {room.tourUrl && <a className="text-link" href={room.tourUrl} target="_blank" rel="noreferrer">{c.tour}<ArrowUpRight size={15} /></a>}
