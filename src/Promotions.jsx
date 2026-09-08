@@ -87,7 +87,7 @@ export default function Promotions({ lang, lineUrl }) {
           <p className="eyebrow">SUVARNABHUMI VILLE</p>
           <h2>{c.booking}</h2><p>{c.bookingText}</p>
           <a className="button gold" href={lineUrl} target="_blank" rel="noreferrer"><MessageCircle size={18} aria-hidden="true" />{c.line}</a>
-          <span className="promotion-contact-detail">@suv_ville</span>
+          <span className="promotion-contact-detail">@0982673888ville</span>
           <a className="button outline" href="mailto:front@suvarnabhumiville.com"><Mail size={18} aria-hidden="true" />{c.email}</a>
           <span className="promotion-contact-detail">front@suvarnabhumiville.com</span>
           <a className="text-link" href="#stay">{c.stay}</a>
