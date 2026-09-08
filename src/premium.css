@@ -1402,3 +1402,27 @@ button .lucide-arrow-right,
   .promotion-booking > img { height: 220px; }
   .promotion-booking h2 { font-size: 26px; }
 }
+
+/* Social links use recognizable icons with comfortable touch targets. */
+.promotion-socials { gap: 12px; margin-top: 18px; }
+.promotion-socials a {
+  width: 48px;
+  height: 48px;
+  min-height: 48px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: #f4f6fa;
+  color: var(--navy);
+  text-decoration: none;
+  transition: background-color 180ms ease, color 180ms ease, box-shadow 180ms ease;
+}
+.promotion-socials a:hover,
+.promotion-socials a:focus-visible {
+  background: var(--navy);
+  color: white;
+  box-shadow: 0 3px 14px #101f3c20;
+}
+.promotion-socials a:active { background: var(--navy-light); }
