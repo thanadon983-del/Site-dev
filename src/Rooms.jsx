@@ -244,7 +244,7 @@ const getImageSrc = (room, index) => {
   return IMAGE_BASE + room.images[index] + '-w704-scale.jpg';
 };
 
-function RoomCard({ room, index, c, lang, onImage }) {
+function RoomCard({ room, c, lang, onImage }) {
   const [selected, setSelected] = useState(0);
   const [failed, setFailed] = useState(false);
   const imageCount = room.imageUrls?.length || room.images.length;
@@ -271,7 +271,6 @@ function RoomCard({ room, index, c, lang, onImage }) {
       </div>
 
       <div className="room-copy">
-        <p className="eyebrow">THE VILLE ROOMS · 0{index + 1}</p>
         <h2>{room.name}</h2>
         <div className="room-specs">
           <span><Maximize2 size={17} />{room.size} {c.area}</span>
@@ -317,7 +316,7 @@ export default function RoomCatalogue({ lang, onImage }) {
         ))}
       </nav>
       <div className="room-list">
-        {rooms.map((room, index) => <RoomCard key={room.id} room={room} index={index} c={c} lang={lang} onImage={onImage} />)}
+        {rooms.map((room) => <RoomCard key={room.id} room={room} c={c} lang={lang} onImage={onImage} />)}
       </div>
       <p className="room-catalogue-note">
         {c.note} <a href={HOTEL_ROOMS_URL} target="_blank" rel="noreferrer">{c.source}<ArrowUpRight size={14} /></a>
