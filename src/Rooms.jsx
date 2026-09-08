@@ -20,7 +20,6 @@ import { FASTBOOKING_URL } from './booking.js';
 import RoomDetails from './RoomDetails.jsx';
 
 const IMAGE_BASE = 'https://d3ehecxdotm942.cloudfront.net/b01bf1a53760e71e7923a93af7d0f295/2544e5b1e7659a7/';
-const HOTEL_ROOMS_URL = 'https://www.suvarnabhumiville.com/accommodation/room/';
 
 const rooms = [
   {
@@ -318,9 +317,6 @@ export default function RoomCatalogue({ lang, onImage }) {
       <div className="room-list">
         {rooms.map((room) => <RoomCard key={room.id} room={room} c={c} lang={lang} onImage={onImage} />)}
       </div>
-      <p className="room-catalogue-note">
-        {c.note} <a href={HOTEL_ROOMS_URL} target="_blank" rel="noreferrer">{c.source}<ArrowUpRight size={14} /></a>
-      </p>
     </section>
   );
 }
