@@ -324,6 +324,14 @@ h2 {
   border-radius: 100px;
   background: #fffefa;
 }
+.room-jump-links a[aria-current] {
+  color: white;
+  background: var(--navy);
+  border-color: var(--navy);
+}
+.room-mobile-selector {
+  display: none;
+}
 .room-card {
   gap: 40px;
   padding: 24px;
@@ -837,11 +845,40 @@ h2 {
     border-radius: 12px;
   }
   .room-jump-links {
-    margin: 25px 0 30px;
-    scroll-snap-type: x proximity;
+    display: none;
   }
-  .room-jump-links a {
-    scroll-snap-align: start;
+  .room-mobile-selector {
+    position: sticky;
+    top: 100px;
+    z-index: 45;
+    display: grid;
+    gap: 5px;
+    margin: 24px -10px 28px;
+    padding: 10px 12px 12px;
+    border: 1px solid #d9d9d2;
+    border-radius: 16px;
+    background: #fdfcf8f2;
+    box-shadow: 0 10px 28px #101f3c18;
+    backdrop-filter: blur(16px);
+  }
+  .room-mobile-selector label {
+    padding-inline: 5px;
+    color: var(--gold);
+    font-size: 10px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+  }
+  .room-mobile-selector select {
+    width: 100%;
+    min-height: 48px;
+    padding: 8px 42px 8px 14px;
+    border: 0;
+    border-radius: 11px;
+    color: white;
+    background: var(--navy);
+    font: inherit;
+    font-size: 15px;
+    font-weight: 600;
   }
   .room-thumbnails {
     gap: 5px;

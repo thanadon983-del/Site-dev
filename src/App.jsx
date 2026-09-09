@@ -305,7 +305,7 @@ function Header({ page, lang, setLang, t, w }) {
       <nav className="desktop-nav" aria-label={w.menu}>{links.map(([id,label])=><a key={id} href={'#'+id} aria-current={page===id || (id==='airportToHotel' && page==='hotelToAirport') ? 'page':undefined}>{label}</a>)}</nav>
       <div className="header-actions"><label className="language"><span className="sr-only">{w.language}</span><select value={lang} onChange={e=>setLang(e.target.value)}><option value="th">TH</option><option value="en">EN</option><option value="zh">中文</option></select></label><External href={BOOK} className="button gold header-book">{t.navBook}</External><button ref={toggle} className="icon-button menu-toggle" aria-label={open?w.close:w.menu} aria-expanded={open} aria-controls="mobile-menu" onClick={()=>setOpen(!open)}>{open?<X />:<Menu />}</button></div>
     </div>
-    <nav id="mobile-menu" className="mobile-menu" hidden={!open} aria-label={w.menu}>{links.map(([id,label],i)=><a key={id} href={'#'+id} onClick={()=>setOpen(false)} aria-current={page===id?'page':undefined}><span>0{i+1}</span>{label}<ArrowUpRight size={17} /></a>)}<a href="#hotelToAirport" onClick={()=>setOpen(false)}>{t.navHotelToAir}<ArrowUpRight size={17} /></a></nav>
+    <nav id="mobile-menu" className="mobile-menu" hidden={!open} aria-label={w.menu}>{links.map(([id,label])=><a key={id} href={'#'+id} onClick={()=>setOpen(false)} aria-current={page===id?'page':undefined}>{label}<ArrowUpRight size={17} /></a>)}<a href="#hotelToAirport" onClick={()=>setOpen(false)}>{t.navHotelToAir}<ArrowUpRight size={17} /></a></nav>
   </header>;
 }
 function Banner({ title, subtitle, image, w }) {

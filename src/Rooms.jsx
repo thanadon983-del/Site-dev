@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   ArrowUpRight,
   Maximize2,
@@ -299,6 +299,25 @@ function RoomCard({ room, c, lang, onImage }) {
 
 export default function RoomCatalogue({ lang, onImage }) {
   const c = copy[lang];
+  const [activeRoom, setActiveRoom] = useState(rooms[0].id);
+  const goToRoom = (roomId) => {
+    setActiveRoom(roomId);
+    document.getElementById('room-' + roomId)?.scrollIntoView({
+      behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth',
+      block: 'start',
+    });
+  };
+
+  useEffect(() => {
+    const cards = rooms.map((room) => document.getElementById('room-' + room.id)).filter(Boolean);
+    const observer = new IntersectionObserver((entries) => {
+      const visible = entries.filter((entry) => entry.isIntersecting).sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+      if (visible) setActiveRoom(visible.target.id.replace('room-', ''));
+    }, { rootMargin: '-34% 0px -55% 0px', threshold: [0, 0.15, 0.4] });
+    cards.forEach((card) => observer.observe(card));
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <section className="section wrap room-catalogue">
       <div className="room-introduction">
@@ -308,9 +327,15 @@ export default function RoomCatalogue({ lang, onImage }) {
       </div>
       <nav className="room-jump-links" aria-label={c.category}>
         {rooms.map((room) => (
-          <a href="#stay" key={room.id} onClick={(e) => { e.preventDefault(); document.getElementById('room-' + room.id)?.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' }); }}>{room.name}</a>
+          <a href={'#room-' + room.id} key={room.id} aria-current={activeRoom === room.id ? 'location' : undefined} onClick={(e) => { e.preventDefault(); goToRoom(room.id); }}>{room.name}</a>
         ))}
       </nav>
+      <div className="room-mobile-selector">
+        <label htmlFor="mobile-room-select">{c.category}</label>
+        <select id="mobile-room-select" value={activeRoom} onChange={(event) => goToRoom(event.target.value)}>
+          {rooms.map((room) => <option key={room.id} value={room.id}>{room.name}</option>)}
+        </select>
+      </div>
       <div className="room-list">
         {rooms.map((room) => <RoomCard key={room.id} room={room} c={c} lang={lang} onImage={onImage} />)}
       </div>
