@@ -17,10 +17,7 @@ import {
   Check,
 } from 'lucide-react';
 import { FASTBOOKING_URL } from './booking.js';
-
-const IMAGE_BASE = 'https://d3ehecxdotm942.cloudfront.net/b01bf1a53760e71e7923a93af7d0f295/2544e5b1e7659a7/';
-const HOTEL_ROOMS_URL = 'https://www.suvarnabhumiville.com/accommodation/room/';
-const PREMIER_SUITE_TOUR_URL = 'https://www.suvarnabhumiville.com/mapping/view360/accommodation/room/premier-suite-pool-access';
+import RoomDetails from './RoomDetails.jsx';
 
 const rooms = [
   {
@@ -30,7 +27,7 @@ const rooms = [
     occupancy: 2,
     bed: 'kingTwin',
     features: ['wifi', 'air', 'balcony', 'fridge'],
-    images: ['553df2905579e8045978fa69914aa41d', '3b5dc5c8965ce0d8206eedc19f535b30', 'd628e2050cf1c19394982b9e39535b63', 'a296c8230a268603a3b40d7a223c937f', '32958cbc82558445b7b678d9f044169e'],
+    images: ['room-standard-1.webp', 'room-standard-2.webp', 'room-standard-3.webp', 'room-standard-4.webp', 'room-standard-5.webp'],
     description: {
       th: 'ห้องพักขนาด 28–30 ตร.ม. พร้อมระเบียง เหมาะสำหรับการพักแบบเรียบง่ายและสบาย มีตัวเลือกเตียงคิงไซส์หรือเตียงแฝดตามห้องว่าง',
       en: 'A comfortable 28–30 m² room with a balcony and a choice of king or twin bedding, subject to availability.',
@@ -43,8 +40,8 @@ const rooms = [
     size: '24–26',
     occupancy: 3,
     bed: 'queenTwin',
-    features: ['wifi', 'air', 'fridge', 'shower'],
-    images: ['e2be65f7bfacf1b2f000015b20eddf10', 'ed0770a82f63b721548df7901782d5ee', '2af6e52e78d49a09cf8b7d7683e84e99', '81a717d6f899b552664e18294fbba53c', '9cab8b734e755727a05c9bc7329cf45f'],
+    features: ['wifi', 'air', 'fridge'],
+    images: ['room-deluxe-1.webp', 'room-deluxe-2.webp', 'room-deluxe-3.webp', 'room-deluxe-4.webp', 'room-deluxe-5.webp'],
     description: {
       th: 'ห้องพักร่วมสมัยขนาด 24–26 ตร.ม. จัดพื้นที่ได้ลงตัว พร้อมสิ่งอำนวยความสะดวกสำหรับการพักผ่อน และมีเตียงควีนไซส์หรือเตียงแฝดให้เลือกตามห้องว่าง',
       en: 'A contemporary 24–26 m² room with practical in-room comforts and queen or twin bedding options, subject to availability.',
@@ -58,7 +55,7 @@ const rooms = [
     occupancy: 3,
     bed: 'kingTwin',
     features: ['wifi', 'air', 'balcony', 'shower'],
-    images: ['2d278fdb465917058de9a39db7466b0c', 'cbdcef2e0345f9af16e2ccc46996d61b', 'a02d2100f903cc24fc6297c23b7df63b', 'be9341cc77ababa1c4f9feec36667b83', 'b24e4013d79176c7485a0cf65961dd51'],
+    images: ['room-executive-1.webp', 'room-executive-2.webp', 'room-executive-3.webp', 'room-executive-4.webp', 'room-executive-5.webp'],
     description: {
       th: 'ห้องพักขนาด 28–30 ตร.ม. พร้อมระเบียงส่วนตัว พื้นที่เก็บสัมภาระ และตู้เสื้อผ้าขนาดใหญ่ เหมาะสำหรับผู้ที่ต้องการพื้นที่ใช้สอยเพิ่มขึ้น',
       en: 'A 28–30 m² room with a private balcony, generous wardrobe space and dedicated luggage storage for a more relaxed stay.',
@@ -72,7 +69,7 @@ const rooms = [
     occupancy: 3,
     bed: 'kingTwin',
     features: ['wifi', 'air', 'balcony', 'poolView'],
-    images: ['1bd9281d22a4ce937142ebd4bb57c454', '0b0ae0e1fc4ebc722de333cf8692beff', '3789b9b75d24477d6af1f456e3afe2b6', 'd8a724f2693e9ec216b1a165c8072216', 'cb78d03be4e4471b0dabdaf44fb02d81'],
+    images: ['room-executive-pool-view-1.webp', 'room-executive-pool-view-2.webp', 'room-executive-pool-view-3.webp', 'room-executive-pool-view-4.webp', 'room-executive-pool-view-5.webp'],
     description: {
       th: 'ห้องพักขนาด 28–30 ตร.ม. ที่เพิ่มบรรยากาศผ่อนคลายด้วยระเบียงส่วนตัวและวิวสระว่ายน้ำจากหน้าต่างบานใหญ่',
       en: 'A 28–30 m² room with a private balcony and relaxing pool views through large windows.',
@@ -86,7 +83,7 @@ const rooms = [
     occupancy: 3,
     bed: 'king',
     features: ['wifi', 'air', 'poolAccess', 'bathrobe'],
-    images: ['364b6e59aba3d5ecec2adc71658531ad', 'cac569d6cd58119fc0072e8e89d4a2f2', '7e059e78e72d11475510c5e37675acd9', 'd9066fa24249bc54abfa3d796021a20e', '844e0413999350417e99b2a610a2f53e'],
+    images: ['room-premier-pool-access-1.webp', 'room-premier-pool-access-2.webp', 'room-premier-pool-access-3.webp', 'room-premier-pool-access-4.webp', 'room-premier-pool-access-5.webp', 'room-premier-pool-access-6.webp'],
     description: {
       th: 'ห้องพักขนาด 28–30 ตร.ม. พร้อมเตียงคิงไซส์และระเบียงส่วนตัวที่เชื่อมต่อสู่สระว่ายน้ำกลางแจ้งได้โดยตรง',
       en: 'A 28–30 m² king room with a private balcony offering direct access to the outdoor swimming pool.',
@@ -100,7 +97,7 @@ const rooms = [
     occupancy: 3,
     bed: 'king',
     features: ['wifi', 'bathtub', 'sofa', 'bathrobe'],
-    images: ['84543c10968f2f67bd171d5f3ad15647', 'ea4f5f5c410074ec8b0605d73ddc6208', '04a09e57d97fd2038ab9bc0f4463c139', 'aeaf2a5292d23df94628ff2c898358bf', '2fbc29675d980192f3cc7674ca33e282'],
+    images: ['room-premier-junior-suite-1.webp', 'room-premier-junior-suite-2.webp', 'room-premier-junior-suite-3.webp', 'room-premier-junior-suite-4.webp', 'room-premier-junior-suite-5.webp'],
     description: {
       th: 'ห้องสวีทขนาด 38 ตร.ม. พร้อมเตียงคิงไซส์ โซฟา และห้องน้ำกระจกที่มีอ่างอาบน้ำ ให้พื้นที่พักผ่อนกว้างขึ้นอย่างลงตัว',
       en: 'A spacious 38 m² suite with a king bed, sofa and glass bathroom with a bathtub for added comfort.',
@@ -114,8 +111,7 @@ const rooms = [
     occupancy: 3,
     bed: 'king',
     features: ['poolAccess', 'bathtub', 'sofa', 'desk', 'wifi'],
-    imageUrls: ['https://www.suvarnabhumiville.com/admin/main/image/0401201802465465.jpg'],
-    tourUrl: PREMIER_SUITE_TOUR_URL,
+    images: ['room-premier-suite-pool-access-1.webp', 'room-premier-suite-pool-access-2.webp', 'room-premier-suite-pool-access-3.webp', 'room-premier-suite-pool-access-4.webp', 'room-premier-suite-pool-access-5.webp'],
     description: {
       th: 'ห้องพักขนาดใหญ่ที่สุด 47 ตร.ม. พร้อมเตียงคิงไซส์ โซฟา โต๊ะทำงาน ห้องน้ำกระจกพร้อมอ่างอาบน้ำ และระเบียงส่วนตัวที่เชื่อมต่อสู่สระว่ายน้ำโดยตรง',
       en: 'The hotel’s largest room at 47 m², with a king bed, sofa, work desk, glass bathroom with bathtub, and a private balcony with direct pool access.',
@@ -241,14 +237,13 @@ const featureIcons = {
 };
 
 const getImageSrc = (room, index) => {
-  if (room.imageUrls) return room.imageUrls[index];
-  return IMAGE_BASE + room.images[index] + '-w704-scale.jpg';
+  return './' + room.images[index];
 };
 
-function RoomCard({ room, index, c, lang, onImage }) {
+function RoomCard({ room, c, lang, onImage }) {
   const [selected, setSelected] = useState(0);
   const [failed, setFailed] = useState(false);
-  const imageCount = room.imageUrls?.length || room.images.length;
+  const imageCount = room.images.length;
   const src = getImageSrc(room, selected);
 
   return (
@@ -272,7 +267,6 @@ function RoomCard({ room, index, c, lang, onImage }) {
       </div>
 
       <div className="room-copy">
-        <p className="eyebrow">THE VILLE ROOMS · 0{index + 1}</p>
         <h2>{room.name}</h2>
         <div className="room-specs">
           <span><Maximize2 size={17} />{room.size} {c.area}</span>
@@ -292,6 +286,7 @@ function RoomCard({ room, index, c, lang, onImage }) {
             );
           })}
         </ul>
+        <RoomDetails roomId={room.id} roomName={room.name} lang={lang} />
         <div className="actions">
           <a className="button gold room-book" href={FASTBOOKING_URL} target="_blank" rel="noreferrer" aria-label={c.book + ': ' + room.name}>{c.book}<ArrowUpRight size={18} /></a>
           {room.tourUrl && <a className="text-link" href={room.tourUrl} target="_blank" rel="noreferrer">{c.tour}<ArrowUpRight size={15} /></a>}
@@ -317,11 +312,8 @@ export default function RoomCatalogue({ lang, onImage }) {
         ))}
       </nav>
       <div className="room-list">
-        {rooms.map((room, index) => <RoomCard key={room.id} room={room} index={index} c={c} lang={lang} onImage={onImage} />)}
+        {rooms.map((room) => <RoomCard key={room.id} room={room} c={c} lang={lang} onImage={onImage} />)}
       </div>
-      <p className="room-catalogue-note">
-        {c.note} <a href={HOTEL_ROOMS_URL} target="_blank" rel="noreferrer">{c.source}<ArrowUpRight size={14} /></a>
-      </p>
     </section>
   );
 }

@@ -18,7 +18,7 @@ export default function VirtualTour({lang}) {
     <div className="tour-heading"><p className="eyebrow">SUVARNABHUMI VILLE · VIRTUAL TOUR</p><h1>{c.title}</h1><p>{c.description}</p></div>
     <div className="tour-toolbar"><p><Rotate3D size={20}/>{c.hint}</p><a href={TOUR_URL} target="_blank" rel="noreferrer">{c.open}<ArrowUpRight size={17}/></a></div>
     <div className="tour-viewer">
-      {started?<iframe src={TOUR_URL} title={c.title} allowFullScreen referrerPolicy="strict-origin-when-cross-origin"/>:<div className="tour-poster"><img src="./bg-home.jpg" alt="" loading="lazy"/><div><span className="tour-degree" aria-hidden="true">360°</span><button className="button gold" onClick={()=>setStarted(true)}><Play size={18}/>{c.start}</button></div></div>}
+      {started?<iframe src={TOUR_URL} title={c.title} allowFullScreen referrerPolicy="strict-origin-when-cross-origin"/>:<div className="tour-poster"><img src="./bg-tour.webp" alt="" loading="lazy"/><div><span className="tour-degree" aria-hidden="true">360°</span><button className="button gold" onClick={()=>setStarted(true)}><Play size={18}/>{c.start}</button></div></div>}
     </div>
     <div className="tour-support"><p>{c.fallback}</p>{started&&<button className="text-link" onClick={()=>setStarted(false)}><X size={17}/>{c.stop}</button>}</div>
     <p className="tour-source-note">{c.note}</p>
