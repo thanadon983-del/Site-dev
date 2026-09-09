@@ -55,7 +55,7 @@ export default function Promotions({ lang, lineUrl }) {
   const steps = [[Heart,c.follow,c.followText],[Camera,c.proof,c.proofText],[Mail,c.contact,c.contactText]];
   return <>
     <section className="page-hero promotion-hero">
-      <img src="./bg-home.jpg" alt="" fetchPriority="high" />
+      <img src="./bg-promotions.webp" alt="" fetchPriority="high" />
       <div className="hero-shade" />
       <div className="wrap page-hero-content">
         <p className="eyebrow pale">{c.nav}</p>
@@ -82,7 +82,7 @@ export default function Promotions({ lang, lineUrl }) {
         </div>
       </div>
       <aside className="promotion-booking">
-        <img src="./fac-pool.jpg" alt="" loading="lazy" />
+        <img src="./promotion-vans.webp" alt="" loading="lazy" />
         <div className="promotion-booking-copy">
           <p className="eyebrow">SUVARNABHUMI VILLE</p>
           <h2>{c.booking}</h2><p>{c.bookingText}</p>
