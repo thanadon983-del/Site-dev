@@ -316,8 +316,7 @@ h2 {
   font-size: 13px;
 }
 .room-jump-links {
-  gap: 10px;
-  margin-bottom: 38px;
+  display: none;
 }
 .room-jump-links a,
 .gallery-filters button {
@@ -330,7 +329,38 @@ h2 {
   border-color: var(--navy);
 }
 .room-mobile-selector {
-  display: none;
+  position: sticky;
+  top: 116px;
+  z-index: 45;
+  display: grid;
+  gap: 5px;
+  width: min(100%, 480px);
+  margin: 28px 0 38px;
+  padding: 10px 12px 12px;
+  border: 1px solid #d9d9d2;
+  border-radius: 16px;
+  background: #fdfcf8f2;
+  box-shadow: 0 10px 28px #101f3c18;
+  backdrop-filter: blur(16px);
+}
+.room-mobile-selector label {
+  padding-inline: 5px;
+  color: var(--gold);
+  font-size: 10px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+.room-mobile-selector select {
+  width: 100%;
+  min-height: 48px;
+  padding: 8px 42px 8px 14px;
+  border: 0;
+  border-radius: 11px;
+  color: white;
+  background: var(--navy);
+  font: inherit;
+  font-size: 15px;
+  font-weight: 600;
 }
 .room-card {
   gap: 40px;
@@ -844,41 +874,10 @@ h2 {
     aspect-ratio: 4/3;
     border-radius: 12px;
   }
-  .room-jump-links {
-    display: none;
-  }
   .room-mobile-selector {
-    position: sticky;
     top: 100px;
-    z-index: 45;
-    display: grid;
-    gap: 5px;
+    width: auto;
     margin: 24px -10px 28px;
-    padding: 10px 12px 12px;
-    border: 1px solid #d9d9d2;
-    border-radius: 16px;
-    background: #fdfcf8f2;
-    box-shadow: 0 10px 28px #101f3c18;
-    backdrop-filter: blur(16px);
-  }
-  .room-mobile-selector label {
-    padding-inline: 5px;
-    color: var(--gold);
-    font-size: 10px;
-    letter-spacing: .1em;
-    text-transform: uppercase;
-  }
-  .room-mobile-selector select {
-    width: 100%;
-    min-height: 48px;
-    padding: 8px 42px 8px 14px;
-    border: 0;
-    border-radius: 11px;
-    color: white;
-    background: var(--navy);
-    font: inherit;
-    font-size: 15px;
-    font-weight: 600;
   }
   .room-thumbnails {
     gap: 5px;
