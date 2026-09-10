@@ -5,7 +5,7 @@ const copy = {
   th: {
     nav: 'โปรโมชั่นพิเศษ', title: 'พักสบายกว่าเดิม\nในราคาพิเศษ',
     intro: 'รับส่วนลดห้องพัก 32% สำหรับลูกค้าที่ Walk-in หรือจองตรงผ่าน LINE ของโรงแรมเท่านั้น',
-    limited: 'DIRECT BOOKING PRIVILEGE', off: 'ลดทันที', offer: 'ส่วนลดห้องพัก 32%',
+    limited: 'DIRECT BOOKING PRIVILEGE', off: 'ลดทันที', offer: 'สิทธิพิเศษสำหรับการจองตรง',
     offerText: 'รับราคาพิเศษสำหรับการเข้าพักที่ Suvarnabhumi Ville เมื่อจองผ่านช่องทางที่ร่วมรายการ',
     eligible: 'ช่องทางที่รับโปรโมชั่น', walkin: 'Walk-in ที่โรงแรม',
     walkinText: 'ติดต่อแผนกต้อนรับโดยตรงเมื่อเดินทางมาถึงโรงแรม',
@@ -17,7 +17,7 @@ const copy = {
   en: {
     nav: 'Special offer', title: 'More comfort.\nA better direct rate.',
     intro: 'Enjoy 32% off room rates, exclusively for walk-in guests or reservations made directly through the hotel’s LINE account.',
-    limited: 'DIRECT BOOKING PRIVILEGE', off: 'Save', offer: '32% off your stay',
+    limited: 'DIRECT BOOKING PRIVILEGE', off: 'SAVE ON YOUR STAY', offer: 'An exclusive direct-booking rate',
     offerText: 'Receive a preferred rate at Suvarnabhumi Ville when booking through an eligible direct channel.',
     eligible: 'How to claim this offer', walkin: 'Walk in at the hotel',
     walkinText: 'Contact reception directly when you arrive at the hotel.',
@@ -29,7 +29,7 @@ const copy = {
   zh: {
     nav: '特别优惠', title: '舒适入住\n专享直订价格',
     intro: '客房价格立减32%，仅限到店客人或通过酒店 LINE 直接预订。',
-    limited: '直订专享礼遇', off: '立省', offer: '住宿优惠32%',
+    limited: '直订专享礼遇', off: '住宿立省', offer: '直订专属价格',
     offerText: '通过指定直订渠道预订 Suvarnabhumi Ville，即可享受专属价格。',
     eligible: '优惠使用方式', walkin: '到店预订',
     walkinText: '抵达酒店后直接联系前台办理预订。',
@@ -50,13 +50,13 @@ export default function Promotions({ lang, lineUrl }) {
         <p className="eyebrow pale">{c.nav}</p>
         <h1>{c.title}</h1><p>{c.intro}</p>
       </div>
-      <div className="promotion-hero-discount" aria-label={c.offer}><strong>32</strong><span>%<small>OFF</small></span></div>
+      <div className="promotion-hero-discount" aria-label={`${c.off} 32%`}><strong>32</strong><span>%<small>OFF</small></span></div>
     </section>
     <section className="section promotion-offer-section">
       <div className="wrap promotion-offer-grid">
         <div className="promotion-offer-copy">
           <p className="eyebrow">{c.limited}</p>
-          <p className="promotion-kicker">{c.off} <strong>32%</strong></p>
+          <div className="promotion-rate-lockup"><strong>32%</strong><span>{c.off}</span></div>
           <h2>{c.offer}</h2>
           <p className="muted promotion-lead">{c.offerText}</p>
           <div className="promotion-channels" aria-label={c.eligible}>
