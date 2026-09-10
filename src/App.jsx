@@ -305,7 +305,6 @@ function GalleryStrip({ prefix, title, onImage, w }) {
       <div className="coverflow-dots" role="group" aria-label={w.select}>
         {images.map((image,index)=><button key={image.src} type="button" className={index===active?'active':''} onClick={()=>setActive(index)} aria-label={`${title} ${index+1}`} aria-current={index===active?'true':undefined} />)}
       </div>
-      <p className="coverflow-count"><span>{String(active+1).padStart(2,'0')}</span> / {String(images.length).padStart(2,'0')}</p>
     </div>
   );
 }
