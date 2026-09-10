@@ -308,8 +308,8 @@ function Header({ page, lang, setLang, t, w }) {
     <nav id="mobile-menu" className="mobile-menu" hidden={!open} aria-label={w.menu}>{links.map(([id,label])=><a key={id} href={'#'+id} onClick={()=>setOpen(false)} aria-current={page===id?'page':undefined}>{label}<ArrowUpRight size={17} /></a>)}<a href="#hotelToAirport" onClick={()=>setOpen(false)}>{t.navHotelToAir}<ArrowUpRight size={17} /></a></nav>
   </header>;
 }
-function Banner({ title, subtitle, image, w }) {
-  return <section className="page-hero"><Photo src={image} alt={title.replaceAll('\n',' ')} eager /><div className="hero-shade" /><div className="wrap page-hero-content"><p className="eyebrow pale">SUVARNABHUMI VILLE</p><h1>{title}</h1><p>{subtitle}</p></div><a href={BOOK} className="hero-reserve" target="_blank" rel="noreferrer"><CalendarDays size={19} />{w.official}<ArrowUpRight size={18} /></a></section>;
+function Banner({ title, subtitle, image }) {
+  return <section className="page-hero"><Photo src={image} alt={title.replaceAll('\n',' ')} eager /><div className="hero-shade" /><div className="wrap page-hero-content"><p className="eyebrow pale">SUVARNABHUMI VILLE</p><h1>{title}</h1><p>{subtitle}</p></div></section>;
 }
 function Concierge({ w }) {
   return <section className="concierge"><div className="wrap concierge-inner"><div><p className="eyebrow pale">AT YOUR SERVICE</p><h2>{w.help}</h2><p>{w.helpBody}</p></div><div className="actions"><a href="tel:+66982673888" className="button gold"><Phone size={17} />{w.call}</a><External href={LINE} className="button outline-light">{w.chat}</External></div></div><span className="concierge-mark" aria-hidden="true">V</span></section>;
