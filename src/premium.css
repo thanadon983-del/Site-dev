@@ -1927,4 +1927,72 @@ button .lucide-arrow-right,
   .steps .step,
   .steps .step::before { transition: none; }
 }
+/* Airport pickup becomes a scroll stack; supporting information follows the stack. */
+.transfer-layout.airport-stack-layout {
+  grid-template-columns: minmax(0, 1fr);
+  gap: 56px;
+}
+.airport-stack-layout > div:first-child {
+  width: 100%;
+  max-width: 940px;
+  margin-inline: auto;
+}
+.airport-stack-layout .steps {
+  position: relative;
+  gap: 0;
+  padding-bottom: 36px;
+}
+.airport-stack-layout .step-stack-card {
+  position: sticky;
+  top: 136px;
+  z-index: 10;
+  min-height: 430px;
+  margin-bottom: 34px;
+  transform-origin: center top;
+}
+.airport-stack-layout .step-stack-card:nth-child(2) { top: 150px; z-index: 11; }
+.airport-stack-layout .step-stack-card:nth-child(3) { top: 164px; z-index: 12; }
+.airport-stack-layout .step-stack-card:nth-child(4) { top: 178px; z-index: 13; }
+.airport-stack-layout .step-stack-card:not(:last-child) {
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 90%),
+    0 22px 54px rgb(39 29 14 / 14%);
+}
+.airport-stack-layout .step-stack-card .step-photo {
+  height: 285px;
+}
+.airport-stack-layout .transfer-aside {
+  display: grid;
+  grid-template-columns: minmax(280px, .82fr) minmax(0, 1.18fr);
+  gap: 34px;
+  align-items: start;
+  width: 100%;
+  max-width: 940px;
+  margin: 8px auto 0;
+}
+.airport-stack-layout .guide-video {
+  margin-top: 0;
+}
+@media (max-width: 767px) {
+  .transfer-layout.airport-stack-layout { gap: 38px; }
+  .airport-stack-layout .steps { padding-bottom: 18px; }
+  .airport-stack-layout .step-stack-card {
+    top: 106px;
+    min-height: 370px;
+    margin-bottom: 24px;
+  }
+  .airport-stack-layout .step-stack-card:nth-child(2) { top: 115px; }
+  .airport-stack-layout .step-stack-card:nth-child(3) { top: 124px; }
+  .airport-stack-layout .step-stack-card:nth-child(4) { top: 133px; }
+  .airport-stack-layout .step-stack-card .step-photo {
+    height: 220px;
+  }
+  .airport-stack-layout .transfer-aside {
+    grid-template-columns: 1fr;
+    gap: 26px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .airport-stack-layout .step-stack-card { transform: none; }
+}
 
