@@ -1276,6 +1276,81 @@ button .lucide-arrow-right,
   }
 }
 
+/* A graphic restaurant identity replaces the duplicated lead photograph. */
+.venue-identity {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  grid-template-columns: 150px minmax(0, 1fr) auto;
+  gap: 42px;
+  align-items: center;
+  padding: 38px 44px;
+  overflow: hidden;
+  border: 1px solid rgb(255 255 255 / 18%);
+  border-radius: 24px;
+  color: white;
+  background:
+    radial-gradient(circle at 12% 18%, rgb(213 175 108 / 28%), transparent 30%),
+    linear-gradient(120deg, #0b1a34 0%, #132b50 58%, #09162c 100%);
+  box-shadow: 0 24px 64px rgb(10 24 47 / 18%);
+}
+.venue-identity::before,
+.venue-identity::after {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  border: 1px solid rgb(202 163 96 / 18%);
+  border-radius: 50%;
+}
+.venue-identity::before { width: 330px; height: 330px; right: -110px; top: -210px; }
+.venue-identity::after { width: 240px; height: 240px; right: -45px; top: -155px; }
+.venue-monogram {
+  display: grid;
+  place-items: center;
+  align-content: center;
+  width: 134px;
+  aspect-ratio: 1;
+  border: 1px solid rgb(218 184 124 / 55%);
+  border-radius: 50%;
+  color: var(--gold-light);
+  background: rgb(255 255 255 / 6%);
+  box-shadow: inset 0 0 0 7px rgb(255 255 255 / 3%);
+  backdrop-filter: blur(12px);
+}
+.venue-monogram span { font-size: 10px; letter-spacing: .22em; }
+.venue-monogram strong {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 31px;
+  font-weight: 500;
+  letter-spacing: .06em;
+}
+.venue-identity .venue-copy h2 {
+  color: white;
+  font-size: clamp(38px, 5vw, 66px);
+  line-height: 1;
+}
+.venue-identity .venue-copy .eyebrow { color: var(--gold-light); margin-bottom: 13px; }
+.venue-identity .venue-copy .muted { max-width: 690px; margin-top: 18px; color: rgb(235 239 246 / 76%); }
+.venue-meta { min-width: 170px; padding-left: 28px; border-left: 1px solid rgb(255 255 255 / 16%); }
+.venue-meta .hours { margin: 0 0 20px; color: var(--gold-light); }
+.venue-meta .text-link { color: white; }
+.venue-meta .text-link::after { background: var(--gold-light); }
+@media (max-width: 900px) {
+  .venue-identity { grid-template-columns: 100px 1fr; gap: 28px; padding: 30px; }
+  .venue-monogram { width: 94px; }
+  .venue-monogram strong { font-size: 24px; }
+  .venue-meta { grid-column: 2; display: flex; align-items: center; gap: 28px; padding: 0; border: 0; }
+  .venue-meta .hours { margin: 0; }
+}
+@media (max-width: 600px) {
+  .venue-identity { grid-template-columns: 1fr; gap: 22px; padding: 28px 24px; border-radius: 18px; }
+  .venue-monogram { width: 78px; }
+  .venue-monogram strong { font-size: 21px; }
+  .venue-identity .venue-copy h2 { font-size: 38px; }
+  .venue-identity .venue-copy .muted { margin-top: 14px; }
+  .venue-meta { grid-column: auto; flex-wrap: wrap; gap: 18px 26px; }
+}
+
 /* Restaurant galleries use a cinematic 3D coverflow inspired by the supplied reference. */
 .venue-coverflow {
   position: relative;
