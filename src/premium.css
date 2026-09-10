@@ -1854,7 +1854,7 @@ button .lucide-arrow-right,
   color: var(--gold-deep);
 }
 .promotion-rate-lockup strong {
-  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-family: 'Noto Sans Thai', Arial, sans-serif;
   font-size: clamp(68px, 8vw, 112px);
   font-weight: 400;
   line-height: .9;
