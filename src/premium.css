@@ -1840,4 +1840,91 @@ button .lucide-arrow-right,
   .facility-card .facility-photo::after,
   .facility-card .facility-photo > span { transition: none; }
 }
+/* Four-step directions use a pointer-reactive warm glow inspired by the reference. */
+.steps {
+  display: grid;
+  gap: 18px;
+}
+.steps .step {
+  --glow-x: 50%;
+  --glow-y: 50%;
+  position: relative;
+  isolation: isolate;
+  grid-template-columns: 58px minmax(0, 1fr);
+  gap: 22px;
+  margin: 0;
+  padding: 28px;
+  overflow: hidden;
+  border: 1px solid rgb(167 134 76 / 22%);
+  border-radius: 22px;
+  background:
+    linear-gradient(145deg, rgb(255 255 255 / 82%), rgb(247 240 225 / 58%));
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 88%),
+    0 16px 42px rgb(38 31 21 / 8%);
+  -webkit-backdrop-filter: blur(16px) saturate(125%);
+  backdrop-filter: blur(16px) saturate(125%);
+  transition: border-color 260ms ease, box-shadow 260ms ease, transform 260ms ease;
+}
+.steps .step::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  pointer-events: none;
+  inset: -1px;
+  opacity: .28;
+  background: radial-gradient(360px circle at var(--glow-x) var(--glow-y), rgb(232 157 48 / 48%), rgb(201 129 35 / 12%) 38%, transparent 70%);
+  transition: opacity 260ms ease;
+}
+.steps .step::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  pointer-events: none;
+  inset: 1px;
+  border-radius: 20px;
+  background: linear-gradient(155deg, rgb(255 255 255 / 42%), transparent 45%);
+}
+.steps .step-number,
+.steps .step > div {
+  position: relative;
+  z-index: 1;
+}
+.steps .step-number {
+  color: #9b6b27;
+  text-shadow: 0 0 22px rgb(224 151 47 / 28%);
+}
+.steps .step-photo {
+  border-radius: 14px;
+  box-shadow: 0 10px 26px rgb(16 31 60 / 12%);
+}
+@media (hover: hover) and (pointer: fine) {
+  .steps .step:hover {
+    border-color: rgb(207 143 49 / 62%);
+    box-shadow:
+      inset 0 1px 0 rgb(255 255 255 / 92%),
+      0 18px 48px rgb(190 118 27 / 18%),
+      0 0 0 1px rgb(232 157 48 / 10%);
+    transform: translateY(-3px);
+  }
+  .steps .step:hover::before { opacity: 1; }
+}
+@media (max-width: 767px) {
+  .steps { gap: 14px; }
+  .steps .step {
+    grid-template-columns: 40px minmax(0, 1fr);
+    gap: 14px;
+    padding: 20px 18px;
+    border-radius: 18px;
+  }
+  .steps .step::after { border-radius: 16px; }
+  .steps .step::before {
+    opacity: .42;
+    background: radial-gradient(280px circle at 82% 12%, rgb(232 157 48 / 28%), transparent 68%);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .steps .step,
+  .steps .step::before { transition: none; }
+}
 
