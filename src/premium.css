@@ -1347,16 +1347,6 @@ button .lucide-arrow-right,
   transition: width 300ms ease, background 300ms ease;
 }
 .coverflow-dots button.active { width: 30px; background: var(--gold); }
-.coverflow-count {
-  position: absolute;
-  right: 0;
-  bottom: 27px;
-  margin: 0;
-  color: var(--navy);
-  font-size: 12px;
-  letter-spacing: .16em;
-}
-.coverflow-count span { color: var(--gold-deep); font-size: 20px; }
 @media (max-width: 767px) {
   .venue-coverflow { margin-top: 30px; }
   .venue-coverflow-stage { height: 330px; margin-inline: -20px; }
@@ -1364,7 +1354,6 @@ button .lucide-arrow-right,
   .coverflow-arrow { width: 42px; height: 42px; }
   .coverflow-arrow.previous { left: 4%; }
   .coverflow-arrow.next { right: 4%; }
-  .coverflow-count { display: none; }
 }
 @media (prefers-reduced-motion: reduce) {
   .venue-coverflow-slide, .coverflow-dots button { transition: none; }
