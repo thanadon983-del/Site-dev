@@ -1743,4 +1743,101 @@ button .lucide-arrow-right,
   box-shadow: 0 3px 14px #101f3c20;
 }
 .promotion-socials a:active { background: var(--navy-light); }
+/* Facility cards are interactive now and can receive richer detail content later. */
+.facility-card {
+  position: relative;
+  display: block;
+  width: 100%;
+  padding: 0;
+  overflow: hidden;
+  color: var(--ink);
+  text-align: left;
+  border: 1px solid rgb(24 38 64 / 10%);
+  border-radius: 20px;
+  background: rgb(255 255 255 / 82%);
+  box-shadow: 0 12px 34px rgb(16 31 60 / 8%);
+  transition: border-color 280ms ease, box-shadow 280ms ease, transform 280ms ease;
+}
+.facility-card .facility-photo {
+  display: block;
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+}
+.facility-card .facility-photo::after {
+  content: "";
+  position: absolute;
+  inset: 45% 0 0;
+  background: linear-gradient(transparent, rgb(9 22 45 / 38%));
+  opacity: 0;
+  transition: opacity 280ms ease;
+}
+.facility-card .facility-photo img {
+  transition: transform 650ms cubic-bezier(.2,.75,.25,1);
+}
+.facility-card .facility-photo > span {
+  position: absolute;
+  z-index: 1;
+  right: 14px;
+  bottom: 14px;
+  display: grid;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  place-items: center;
+  color: white;
+  border: 1px solid rgb(255 255 255 / 48%);
+  border-radius: 50%;
+  background: rgb(16 31 60 / 55%);
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 28%);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  transition: transform 280ms ease, background 280ms ease;
+}
+.facility-card .facility-body {
+  display: block;
+  padding: 20px 21px 22px;
+}
+.facility-card .facility-body strong {
+  display: block;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.6;
+}
+.facility-card .facility-body > span {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-top: 11px;
+  color: #796038;
+  font-size: 12px;
+  line-height: 1.7;
+}
+@media (hover: hover) and (pointer: fine) {
+  .facility-card:hover {
+    border-color: rgb(167 134 76 / 40%);
+    box-shadow: 0 20px 46px rgb(16 31 60 / 16%);
+    transform: translateY(-6px);
+  }
+  .facility-card:hover .facility-photo img { transform: scale(1.065); }
+  .facility-card:hover .facility-photo::after { opacity: 1; }
+  .facility-card:hover .facility-photo > span {
+    background: rgb(16 31 60 / 76%);
+    transform: scale(1.08);
+  }
+}
+.facility-card:active { transform: translateY(-1px) scale(.99); }
+@media (max-width: 767px) {
+  .facility-card { border-radius: 16px; }
+  .facility-card .facility-body { padding: 15px 14px 17px; }
+  .facility-card .facility-body strong { font-size: 14px; }
+  .facility-card .facility-body > span { font-size: 11px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .facility-card,
+  .facility-card .facility-photo img,
+  .facility-card .facility-photo::after,
+  .facility-card .facility-photo > span { transition: none; }
+}
 
