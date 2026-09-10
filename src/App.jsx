@@ -278,23 +278,34 @@ function Lightbox({ image, onClose, w }) {
   </dialog>;
 }
 function GalleryStrip({ prefix, title, onImage, w }) {
+  const [active, setActive] = useState(0);
+  const images = [1, 2, 3, 4, 5].map(n => ({
+    src: `${prefix}-${n}.webp`,
+    alt: `${title} · ${n}`
+  }));
+  const move = direction => setActive(current => (current + direction + images.length) % images.length);
   return (
-    <div className="venue-photo-ribbon">
-      <div className="venue-photo-viewport" id={'photos-' + prefix} role="group" aria-label={title}>
-        <div className="venue-photo-track">
-          {[0, 1].map(copy => (
-            <div className="venue-photo-group" key={copy} aria-hidden={copy === 1 ? true : undefined}>
-              {[1, 2, 3, 4, 5].map(n => (
-                <button key={n} type="button" tabIndex={copy === 1 ? -1 : 0}
-                  onClick={() => onImage({ src: prefix + '-' + n + '.webp', alt: title + ' · ' + n })}
-                  aria-label={w.image + ': ' + title + ' ' + n}>
-                  <Photo src={prefix + '-' + n + '.webp'} alt={copy === 1 ? '' : title + ' · ' + n} />
-                </button>
-              ))}
-            </div>
-          ))}
-        </div>
+    <div className="venue-coverflow" id={'photos-' + prefix} role="region" aria-roledescription="carousel" aria-label={title}>
+      <div className="venue-coverflow-stage">
+        {images.map((image, index) => {
+          let offset = index - active;
+          if (offset > images.length / 2) offset -= images.length;
+          if (offset < -images.length / 2) offset += images.length;
+          return <button key={image.src} type="button" className="venue-coverflow-slide"
+            style={{'--slide-x':`${offset*38}%`,'--slide-rotate':`${offset*-38}deg`,'--slide-scale':1-Math.abs(offset)*.14,'--slide-opacity':1-Math.abs(offset)*.2,zIndex:10-Math.abs(offset)}} data-active={offset === 0} aria-hidden={Math.abs(offset) > 2}
+            tabIndex={offset === 0 ? 0 : -1}
+            onClick={() => offset === 0 ? onImage(image) : setActive(index)}
+            aria-label={offset === 0 ? `${w.image}: ${image.alt}` : image.alt}>
+            <Photo src={image.src} alt={offset === 0 ? image.alt : ''} />
+          </button>;
+        })}
+        <button type="button" className="coverflow-arrow previous" onClick={() => move(-1)} aria-label={w.previous}><ArrowRight /></button>
+        <button type="button" className="coverflow-arrow next" onClick={() => move(1)} aria-label={w.next}><ArrowRight /></button>
       </div>
+      <div className="coverflow-dots" role="group" aria-label={w.select}>
+        {images.map((image,index)=><button key={image.src} type="button" className={index===active?'active':''} onClick={()=>setActive(index)} aria-label={`${title} ${index+1}`} aria-current={index===active?'true':undefined} />)}
+      </div>
+      <p className="coverflow-count"><span>{String(active+1).padStart(2,'0')}</span> / {String(images.length).padStart(2,'0')}</p>
     </div>
   );
 }
