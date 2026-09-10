@@ -2454,3 +2454,23 @@ body,
 @media (prefers-reduced-motion: reduce) {
   .site-header .nav-active-pill.ready { transition: none; }
 }
+
+
+/* Responsive sticky room selector and larger desktop navigation. */
+.room-mobile-selector {
+  top: calc(var(--site-header-height, 116px) + 8px);
+}
+@media (min-width: 768px) {
+  .site-header .tubelight-nav a {
+    padding-inline: 12px;
+    font-size: 14px;
+  }
+}
+@media (max-width: 767px) {
+  .room-mobile-selector {
+    top: calc(var(--site-header-height, 176px) + 8px);
+  }
+  .room-card {
+    scroll-margin-top: calc(var(--site-header-height, 176px) + 108px);
+  }
+}
