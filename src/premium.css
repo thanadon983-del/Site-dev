@@ -1871,16 +1871,28 @@ button .lucide-arrow-right,
   align-items: start;
 }
 .promotion-offer-copy { padding-top: 18px; }
-.promotion-kicker { margin: 18px 0 4px; color: var(--gold-deep); font-size: 16px; letter-spacing: .04em; }
-.promotion-kicker strong {
-  display: block;
+.promotion-rate-lockup {
+  display: flex;
+  align-items: flex-end;
+  gap: 18px;
+  margin: 22px 0 8px;
+  color: var(--gold-deep);
+}
+.promotion-rate-lockup strong {
   font-family: 'Cormorant Garamond', Georgia, serif;
   font-size: clamp(68px, 8vw, 112px);
   font-weight: 400;
   line-height: .9;
   letter-spacing: -.04em;
 }
-.promotion-offer-copy > h2 { margin-top: 22px; font-size: clamp(34px, 4vw, 54px); }
+.promotion-rate-lockup span {
+  padding-bottom: 12px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+}
+.promotion-offer-copy > h2 { max-width: 620px; margin-top: 22px; font-size: clamp(34px, 4vw, 54px); }
 .promotion-lead { max-width: 610px; margin-top: 18px; font-size: 16px; }
 .promotion-channels { display: grid; gap: 12px; margin: 34px 0; }
 .promotion-channels article {
@@ -1953,7 +1965,7 @@ button .lucide-arrow-right,
   .promotion-hero-discount small { font-size: 7px; }
   .promotion-offer-grid { grid-template-columns: 1fr; gap: 46px; }
   .promotion-offer-copy { padding-top: 0; }
-  .promotion-kicker strong { font-size: 78px; }
+  .promotion-rate-lockup strong { font-size: 78px; }
   .promotion-channels article { padding: 18px; gap: 14px; }
   .promotion-line-cta { width: 100%; }
   .promotion-poster { position: static; }
