@@ -3,7 +3,7 @@ import VirtualTour, { TourTeaser } from './VirtualTour.jsx';
 import RoomCatalogue from './Rooms.jsx';
 import { FASTBOOKING_URL } from './booking.js';
 import { useEffect, useRef, useState } from 'react';
-import { ArrowUpRight, ArrowRight, Menu, X, Phone, MapPin, Clock, Plane, CalendarDays, Waves, Coffee, Image as ImageIcon } from 'lucide-react';
+import { ArrowUpRight, ArrowRight, ChevronDown, Menu, X, Phone, MapPin, Clock, Plane, CalendarDays, Waves, Coffee, Image as ImageIcon } from 'lucide-react';
 
 const translations = {
   th: {
@@ -315,13 +315,14 @@ function Concierge({ w }) {
   return <section className="concierge"><div className="wrap concierge-inner"><div><p className="eyebrow pale">AT YOUR SERVICE</p><h2>{w.help}</h2><p>{w.helpBody}</p></div><div className="actions"><a href="tel:+66982673888" className="button gold"><Phone size={17} />{w.call}</a><External href={LINE} className="button outline-light">{w.chat}</External></div></div><span className="concierge-mark" aria-hidden="true">V</span></section>;
 }
 function FAQ({ t,w }) {
-  return <section className="section wrap faq-grid"><div><p className="eyebrow">GOOD TO KNOW</p><h2>{w.faq}</h2><p className="muted">{w.faqIntro}</p></div><div className="faq-items">{[
+  const items = [
     [t.navAirToHotel,t.step1Desc1+t.step1Desc2+' · '+t.step2Desc1+t.step2Desc2],
     [t.h2a1Title,t.h2a1Desc],
     [t.h2a3Title,t.h2a3Desc],
     [t.bfTitle,t.bfTime],
     [w.stay,w.roomNote]
-  ].map(([q,a])=><article className="faq-card" key={q}><h3>{q}</h3><p>{a}</p></article>)}</div></section>;
+  ];
+  return <section className="section wrap faq-grid"><div><p className="eyebrow">GOOD TO KNOW</p><h2>{w.faq}</h2><p className="muted">{w.faqIntro}</p></div><div className="faq-items">{items.map(([q,a],itemIndex)=><details className="faq-item" name="pre-arrival-faq" key={q} open={itemIndex===0}><summary><span>{q}</span><ChevronDown size={20} aria-hidden="true" /></summary><p className="faq-answer" aria-label={a}>{Array.from(a).map((char,index)=><span aria-hidden="true" className="faq-letter" style={{'--letter-index':index}} key={index}>{char===' ' ? '\u00a0' : char}</span>)}</p></details>)}</div></section>;
 }
 function Home({t,w,lang}) {
   return <>
