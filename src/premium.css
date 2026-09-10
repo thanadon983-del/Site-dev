@@ -1600,6 +1600,95 @@ button .lucide-arrow-right,
     width: 100%;
   }
 }
+
+/* Pre-arrival FAQ: native single-open accordion with a soft text reveal. */
+.faq-items {
+  display: block;
+  border-top: 1px solid var(--line);
+}
+.faq-item {
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid var(--line);
+  border-radius: 0;
+}
+.faq-item summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  min-height: 68px;
+  padding: 19px 2px;
+  color: var(--ink);
+  cursor: pointer;
+  list-style: none;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.65;
+}
+.faq-item summary::-webkit-details-marker {
+  display: none;
+}
+.faq-item summary svg {
+  flex: 0 0 auto;
+  color: var(--gold);
+  transition: transform 220ms ease;
+}
+.faq-item[open] summary svg {
+  transform: rotate(180deg);
+}
+.faq-answer {
+  padding: 0 44px 24px 2px;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.9;
+  overflow-wrap: anywhere;
+}
+.faq-letter {
+  display: inline-block;
+}
+.faq-item[open] .faq-letter {
+  animation: faq-letter-reveal 300ms ease-out both;
+  animation-delay: min(calc(var(--letter-index) * 15ms), 600ms);
+}
+@keyframes faq-letter-reveal {
+  from {
+    opacity: 0;
+    filter: blur(10px);
+    transform: translateY(2px);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0);
+  }
+}
+@media (hover: hover) and (pointer: fine) {
+  .faq-item summary:hover {
+    color: #765828;
+  }
+}
+@media (max-width: 767px) {
+  .faq-item summary {
+    min-height: 62px;
+    padding-block: 17px;
+    font-size: 15px;
+  }
+  .faq-answer {
+    padding: 0 28px 21px 0;
+    font-size: 14px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .faq-item summary svg {
+    transition: none;
+  }
+  .faq-item[open] .faq-letter {
+    animation: none;
+  }
+}
 .promotion-contact-detail { display: block; text-align: center; font-size: 12px; color: var(--muted); margin: 9px 0 22px; overflow-wrap: anywhere; }
 .promotion-booking .text-link { margin-top: 0; }
 @media (max-width: 1050px) { .promotion-layout { gap: 28px; } .promotion-step { padding: 22px; gap: 14px; } .promotion-booking-copy { padding: 24px; } }
