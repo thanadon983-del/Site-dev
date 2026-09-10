@@ -1556,6 +1556,50 @@ button .lucide-arrow-right,
     animation: none;
   }
 }
+
+/* The 360 tour teaser remains a quiet text link, outside the glass CTA system. */
+.tour-teaser > .button {
+  width: auto;
+  min-height: 44px;
+  margin: 0 0 0 auto;
+  padding: 8px 0;
+  overflow: visible;
+  color: var(--muted);
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid var(--line);
+  border-radius: 0;
+  box-shadow: none;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  transform: none;
+}
+.tour-teaser > .button::before,
+.tour-teaser > .button::after {
+  display: none;
+  content: none;
+}
+.tour-teaser > .button:hover {
+  color: var(--ink);
+  background: transparent;
+  border-bottom-color: var(--gold);
+  box-shadow: none;
+  transform: none;
+}
+.tour-teaser > .button:active {
+  box-shadow: none;
+  transform: none;
+}
+@media (max-width: 1050px) {
+  .tour-teaser > .button {
+    margin-left: 0;
+  }
+}
+@media (max-width: 767px) {
+  .tour-teaser > .button {
+    width: 100%;
+  }
+}
 .promotion-contact-detail { display: block; text-align: center; font-size: 12px; color: var(--muted); margin: 9px 0 22px; overflow-wrap: anywhere; }
 .promotion-booking .text-link { margin-top: 0; }
 @media (max-width: 1050px) { .promotion-layout { gap: 28px; } .promotion-step { padding: 22px; gap: 14px; } .promotion-booking-copy { padding: 24px; } }
