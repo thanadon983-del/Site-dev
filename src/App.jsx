@@ -3,7 +3,7 @@ import VirtualTour, { TourTeaser } from './VirtualTour.jsx';
 import RoomCatalogue from './Rooms.jsx';
 import { FASTBOOKING_URL } from './booking.js';
 import { useEffect, useRef, useState } from 'react';
-import { ArrowUpRight, ArrowRight, Menu, X, Phone, MapPin, Clock, Plane, CalendarDays, Waves, Coffee, Image as ImageIcon } from 'lucide-react';
+import { ArrowUpRight, ArrowRight, ChevronDown, X, Phone, MapPin, Clock, Plane, CalendarDays, Waves, Coffee, Image as ImageIcon } from 'lucide-react';
 
 const translations = {
   th: {
@@ -222,6 +222,8 @@ const translations = {
 const BOOK = FASTBOOKING_URL;
 const MAP = 'https://www.google.com/maps/search/?api=1&query=Suvarnabhumi+Ville+Airport+Hotel';
 const LINE = 'https://line.me/R/ti/p/%400982673888ville';
+const WHATSAPP = 'https://wa.me/66982673888';
+const WECHAT_QR = './wechat-front-suv.svg';
 const pages = ['home', 'stay', 'airportToHotel', 'hotelToAirport', 'facilities', 'dining', 'promotions', 'virtualTour', 'contact'];
 const words = {
   th: { promotions:'โปรโมชั่น', tour:'ชมโรงแรม 360°', stay:'ห้องพัก', gallery:'แกลเลอรี', explore:'ค้นพบประสบการณ์', more:'ดูรายละเอียด', welcome:'พื้นที่สำหรับการพักผ่อนของคุณ', intro:'จากการเดินทาง สู่ช่วงเวลาของคุณ', introBody:'พักผ่อนริมสระว่ายน้ำ พบกับรสชาติที่ชื่นชอบ และใช้เวลาในแบบของคุณที่สุวรรณภูมิ วิลล์ พร้อมข้อมูลการเดินทางที่ช่วยให้การเข้าพักเป็นเรื่องง่าย', hero:'ให้ทุกการเดินทาง\nมีช่วงเวลาที่น่าจดจำ', heroBody:'พักผ่อน อิ่มอร่อย และเตรียมพร้อมสำหรับจุดหมายต่อไป ณ สุวรรณภูมิ วิลล์', experiences:'ค้นพบทุกมุมของการพักผ่อน', stayTitle:'พักสบาย\nในจังหวะของคุณ', stayBody:'ค้นพบห้องพักแต่ละประเภท พร้อมภาพและรายละเอียด เพื่อเลือกการพักผ่อนที่เหมาะกับคุณ', official:'ตรวจสอบห้องว่างและราคาบนเว็บไซต์โรงแรม', roomLink:'ดูห้องพักและราคา', request:'สอบถามความต้องการพิเศษ', requestBody:'เดินทางกับครอบครัว มีคำขอเกี่ยวกับห้องพัก หรือวางแผนเข้าพักก่อนออกเดินทาง ติดต่อทีมโรงแรมเพื่อสอบถามรายละเอียดก่อนจอง', arrival:'การเดินทางที่สะดวก เริ่มต้นที่นี่', departure:'พร้อมสำหรับจุดหมายต่อไป', help:'ให้เราช่วยดูแลการเดินทางของคุณ', helpBody:'สอบถามการเข้าพัก บริการรถรับส่ง และข้อมูลโรงแรมได้กับทีมแผนกต้อนรับ', call:'โทรหาโรงแรม', chat:'สอบถามผ่าน LINE', faq:'ข้อมูลก่อนเข้าพัก', faqIntro:'คำตอบที่ช่วยให้คุณวางแผนได้สะดวกขึ้น', galleryTitle:'มองเห็นการพักผ่อน\nในแบบของคุณ', all:'ทั้งหมด', pool:'พักผ่อนและดูแลตัวเอง', food:'รสชาติและบรรยากาศ', convenience:'ความสะดวกระหว่างเข้าพัก', contactIntro:'เราพร้อมช่วยให้การเข้าพักของคุณราบรื่น', reception:'แผนกต้อนรับ', address:'ที่ตั้งโรงแรม', social:'ติดตามโรงแรม', close:'ปิด', previous:'ภาพก่อนหน้า', next:'ภาพถัดไป', menu:'เมนู', skip:'ข้ามไปเนื้อหา', language:'ภาษา', image:'เปิดภาพ', journey:'รถรับ–ส่งสนามบิน', home:'หน้าแรก', breakfast:'เริ่มวันใหม่อย่างอิ่มอร่อย', breakfastBody:'เติมพลังมื้อเช้าก่อนออกเดินทาง หรือค่อยๆ เริ่มต้นวันพักผ่อนของคุณ', hours:'เวลาให้บริการ', directions:'เส้นทางและจุดนัดพบ', roomNote:'รายละเอียดห้อง ราคา และเงื่อนไขการจองแสดงบนเว็บไซต์โรงแรม', hotel:'โรงแรม', viewAll:'ดูภาพทั้งหมด', facts:'สิ่งที่ควรรู้', select:'เลือกหมวดภาพ', findUs:'พบกันที่สุวรรณภูมิ วิลล์', confirm:'กรุณาตรวจสอบรายละเอียดล่าสุดกับโรงแรมก่อนใช้บริการ' },
@@ -250,6 +252,11 @@ function readPage() {
 function Photo({ src, alt, className = '', eager = false }) {
   return <img src={src.startsWith('https://') ? src : './' + src} alt={alt} className={className} loading={eager ? 'eager' : 'lazy'} fetchPriority={eager ? 'high' : 'auto'} decoding="async" />;
 }
+function trackCardGlow(event) {
+  const bounds = event.currentTarget.getBoundingClientRect();
+  event.currentTarget.style.setProperty('--glow-x', `${event.clientX - bounds.left}px`);
+  event.currentTarget.style.setProperty('--glow-y', `${event.clientY - bounds.top}px`);
+}
 function External({ href, children, className = 'button gold' }) {
   return <a href={href} target="_blank" rel="noreferrer" className={className}>{children}<ArrowUpRight size={17} aria-hidden="true" /></a>;
 }
@@ -273,55 +280,89 @@ function Lightbox({ image, onClose, w }) {
   </dialog>;
 }
 function GalleryStrip({ prefix, title, onImage, w }) {
+  const [active, setActive] = useState(0);
+  const images = [1, 2, 3, 4, 5].map(n => ({
+    src: `${prefix}-${n}.webp`,
+    alt: `${title} · ${n}`
+  }));
+  const move = direction => setActive(current => (current + direction + images.length) % images.length);
   return (
-    <div className="venue-photo-ribbon">
-      <div className="venue-photo-viewport" id={'photos-' + prefix} role="group" aria-label={title}>
-        <div className="venue-photo-track">
-          {[0, 1].map(copy => (
-            <div className="venue-photo-group" key={copy} aria-hidden={copy === 1 ? true : undefined}>
-              {[1, 2, 3, 4, 5].map(n => (
-                <button key={n} type="button" tabIndex={copy === 1 ? -1 : 0}
-                  onClick={() => onImage({ src: prefix + '-' + n + '.webp', alt: title + ' · ' + n })}
-                  aria-label={w.image + ': ' + title + ' ' + n}>
-                  <Photo src={prefix + '-' + n + '.webp'} alt={copy === 1 ? '' : title + ' · ' + n} />
-                </button>
-              ))}
-            </div>
-          ))}
-        </div>
+    <div className="venue-coverflow" id={'photos-' + prefix} role="region" aria-roledescription="carousel" aria-label={title}>
+      <div className="venue-coverflow-stage">
+        {images.map((image, index) => {
+          let offset = index - active;
+          if (offset > images.length / 2) offset -= images.length;
+          if (offset < -images.length / 2) offset += images.length;
+          return <button key={image.src} type="button" className="venue-coverflow-slide"
+            style={{'--slide-x':`${offset*38}%`,'--slide-rotate':`${offset*-38}deg`,'--slide-scale':1-Math.abs(offset)*.14,'--slide-opacity':1-Math.abs(offset)*.2,zIndex:10-Math.abs(offset)}} data-active={offset === 0} aria-hidden={Math.abs(offset) > 2}
+            tabIndex={offset === 0 ? 0 : -1}
+            onClick={() => offset === 0 ? onImage(image) : setActive(index)}
+            aria-label={offset === 0 ? `${w.image}: ${image.alt}` : image.alt}>
+            <Photo src={image.src} alt={offset === 0 ? image.alt : ''} />
+          </button>;
+        })}
+        <button type="button" className="coverflow-arrow previous" onClick={() => move(-1)} aria-label={w.previous}><ArrowRight /></button>
+        <button type="button" className="coverflow-arrow next" onClick={() => move(1)} aria-label={w.next}><ArrowRight /></button>
+      </div>
+      <div className="coverflow-dots" role="group" aria-label={w.select}>
+        {images.map((image,index)=><button key={image.src} type="button" className={index===active?'active':''} onClick={()=>setActive(index)} aria-label={`${title} ${index+1}`} aria-current={index===active?'true':undefined} />)}
       </div>
     </div>
   );
 }
 function Header({ page, lang, setLang, t, w }) {
-  const [open,setOpen] = useState(false);
-  const toggle = useRef(null);
-  useEffect(() => { if (!open) return; const onKey = e => { if (e.key === 'Escape') { setOpen(false); toggle.current?.focus(); } }; window.addEventListener('keydown',onKey); return () => window.removeEventListener('keydown',onKey); },[open]);
+  const header = useRef(null);
+  const nav = useRef(null);
+  const [activePill, setActivePill] = useState({ left: 0, width: 0, ready: false });
   const links = [['home',t.navHome],['stay',w.stay],['promotions',w.promotions],['facilities',t.navFacilities],['dining',t.navDining],['airportToHotel',w.journey],['virtualTour',w.tour],['contact',t.navContact]];
-  return <header className="site-header">
-    <div className="utility"><span>SUVARNABHUMI VILLE AIRPORT HOTEL</span><a href="tel:+66982673888"><Phone size={12} /> +66 (0) 98 267 3888</a></div>
+  useEffect(() => {
+    const updatePosition = () => {
+      const container = nav.current;
+      const active = container?.querySelector('[aria-current="page"]');
+      if (!container || !active) return;
+      setActivePill({ left: active.offsetLeft, width: active.offsetWidth, ready: true });
+      const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const target = active.offsetLeft - (container.clientWidth - active.offsetWidth) / 2;
+      container.scrollTo({ left: Math.max(0, target), behavior: reduced ? 'auto' : 'smooth' });
+    };
+    const frame = requestAnimationFrame(updatePosition);
+    window.addEventListener('resize', updatePosition);
+    return () => { cancelAnimationFrame(frame); window.removeEventListener('resize', updatePosition); };
+  }, [page, lang]);
+  useEffect(() => {
+    const updateHeaderHeight = () => {
+      if (header.current) document.documentElement.style.setProperty('--site-header-height', `${header.current.offsetHeight}px`);
+    };
+    updateHeaderHeight();
+    const observer = new ResizeObserver(updateHeaderHeight);
+    if (header.current) observer.observe(header.current);
+    window.addEventListener('resize', updateHeaderHeight);
+    return () => { observer.disconnect(); window.removeEventListener('resize', updateHeaderHeight); };
+  }, []);
+  return <header ref={header} className="site-header">
+    <div className="utility"><span>SUVARNABHUMI VILLE AIRPORT HOTEL</span><div className="utility-actions"><a href="tel:+66982673888"><Phone size={12} /> +66 (0) 98 267 3888</a><label className="utility-language"><span className="sr-only">{w.language}</span><select value={lang} onChange={e=>setLang(e.target.value)}><option value="th">TH</option><option value="en">EN</option><option value="zh">中文</option></select></label></div></div>
     <div className="navigation wrap">
       <a href="#home" className="brand" aria-label="Suvarnabhumi Ville — Home"><img className="hotel-logo" src="./logo-large.png" alt="Suvarnabhumi Ville" /></a>
-      <nav className="desktop-nav" aria-label={w.menu}>{links.map(([id,label])=><a key={id} href={'#'+id} aria-current={page===id || (id==='airportToHotel' && page==='hotelToAirport') ? 'page':undefined}>{label}</a>)}</nav>
-      <div className="header-actions"><label className="language"><span className="sr-only">{w.language}</span><select value={lang} onChange={e=>setLang(e.target.value)}><option value="th">TH</option><option value="en">EN</option><option value="zh">中文</option></select></label><External href={BOOK} className="button gold header-book">{t.navBook}</External><button ref={toggle} className="icon-button menu-toggle" aria-label={open?w.close:w.menu} aria-expanded={open} aria-controls="mobile-menu" onClick={()=>setOpen(!open)}>{open?<X />:<Menu />}</button></div>
+      <nav ref={nav} className="desktop-nav tubelight-nav" aria-label={w.menu}><i className={'nav-active-pill'+(activePill.ready?' ready':'')} style={{ left: activePill.left, width: activePill.width }} aria-hidden="true" />{links.map(([id,label])=><a key={id} href={'#'+id} aria-current={page===id || (id==='airportToHotel' && page==='hotelToAirport') ? 'page':undefined}><span>{label}</span></a>)}</nav>
+      <div className="header-actions"><External href={BOOK} className="button gold header-book">{t.navBook}</External></div>
     </div>
-    <nav id="mobile-menu" className="mobile-menu" hidden={!open} aria-label={w.menu}>{links.map(([id,label])=><a key={id} href={'#'+id} onClick={()=>setOpen(false)} aria-current={page===id?'page':undefined}>{label}<ArrowUpRight size={17} /></a>)}<a href="#hotelToAirport" onClick={()=>setOpen(false)}>{t.navHotelToAir}<ArrowUpRight size={17} /></a></nav>
   </header>;
 }
-function Banner({ title, subtitle, image, w }) {
-  return <section className="page-hero"><Photo src={image} alt={title.replaceAll('\n',' ')} eager /><div className="hero-shade" /><div className="wrap page-hero-content"><p className="eyebrow pale">SUVARNABHUMI VILLE</p><h1>{title}</h1><p>{subtitle}</p></div><a href={BOOK} className="hero-reserve" target="_blank" rel="noreferrer"><CalendarDays size={19} />{w.official}<ArrowUpRight size={18} /></a></section>;
+function Banner({ title, subtitle, image }) {
+  return <section className="page-hero"><Photo src={image} alt={title.replaceAll('\n',' ')} eager /><div className="hero-shade" /><div className="wrap page-hero-content"><p className="eyebrow pale">SUVARNABHUMI VILLE</p><h1>{title}</h1><p>{subtitle}</p></div></section>;
 }
 function Concierge({ w }) {
   return <section className="concierge"><div className="wrap concierge-inner"><div><p className="eyebrow pale">AT YOUR SERVICE</p><h2>{w.help}</h2><p>{w.helpBody}</p></div><div className="actions"><a href="tel:+66982673888" className="button gold"><Phone size={17} />{w.call}</a><External href={LINE} className="button outline-light">{w.chat}</External></div></div><span className="concierge-mark" aria-hidden="true">V</span></section>;
 }
 function FAQ({ t,w }) {
-  return <section className="section wrap faq-grid"><div><p className="eyebrow">GOOD TO KNOW</p><h2>{w.faq}</h2><p className="muted">{w.faqIntro}</p></div><div className="faq-items">{[
+  const items = [
     [t.navAirToHotel,t.step1Desc1+t.step1Desc2+' · '+t.step2Desc1+t.step2Desc2],
     [t.h2a1Title,t.h2a1Desc],
     [t.h2a3Title,t.h2a3Desc],
     [t.bfTitle,t.bfTime],
     [w.stay,w.roomNote]
-  ].map(([q,a])=><article className="faq-card" key={q}><h3>{q}</h3><p>{a}</p></article>)}</div></section>;
+  ];
+  return <section className="section wrap faq-grid"><div><p className="eyebrow">GOOD TO KNOW</p><h2>{w.faq}</h2><p className="muted">{w.faqIntro}</p></div><div className="faq-items">{items.map(([q,a],itemIndex)=><details className="faq-item" name="pre-arrival-faq" key={q} open={itemIndex===0}><summary><span>{q}</span><ChevronDown size={20} aria-hidden="true" /></summary><p className="faq-answer" aria-label={a}>{Array.from(a).map((char,index)=><span aria-hidden="true" className="faq-letter" style={{'--letter-index':index}} key={index}>{char===' ' ? '\u00a0' : char}</span>)}</p></details>)}</div></section>;
 }
 function Home({t,w,lang}) {
   return <>
@@ -338,19 +379,19 @@ function Stay({t,w,lang,onImage}) {
 }
 function Transfer({departure,t,w,onImage}) {
   const steps = [1,2,3,4].map(n=>({ title:t['step'+n+'Title'],body:(t['step'+n+'Desc1']||'')+(t['step'+n+'Desc2']||'')+(t['step'+n+'Desc3']||''),src:'step'+n+'.webp' }));
-  return <><Banner title={departure?w.departure:w.arrival} subtitle={departure?t.h2aSubtitle:t.shuttleAirToHotel} image={departure?'bg-hotel.webp':'bg-airport.webp'} w={w} /><div className="transfer-tabs wrap"><a href="#airportToHotel" aria-current={!departure?'page':undefined}><Plane size={18} />{t.navAirToHotel}</a><a href="#hotelToAirport" aria-current={departure?'page':undefined}><ArrowUpRight size={18} />{t.navHotelToAir}</a></div><section className="section wrap transfer-layout"><div><p className="eyebrow">{w.directions}</p><h2>{departure?t.detailsTitle:t.stepsTitle}</h2><div className="steps">{(departure?[1,2,3,4].map(n=>({title:t['h2a'+n+'Title'],body:t['h2a'+n+'Desc']})):steps).map((step,i)=><article className="step" key={step.title}><span className="step-number">0{i+1}</span><div><h3>{step.title}</h3><p>{step.body}</p>{step.src&&<button className="step-photo" onClick={()=>onImage({src:step.src,alt:step.title})}><Photo src={step.src} alt={step.title} /><span><ImageIcon size={15} />{t.viewImage}</span></button>}</div></article>)}</div></div><aside className="transfer-aside"><div className="info-panel"><p className="eyebrow">{w.facts}</p><h3>{t.service24h}</h3><div className="info-line"><Clock /><p>{departure?t.h2a2Desc:t.step4Desc1+t.step4Desc2+t.step4Desc3}</p></div><div className="info-line"><MapPin /><p>{departure?t.h2a4Desc:t.step1Desc2+' · '+t.step2Desc2}</p></div><a href="tel:+66982673888" className="button navy"><Phone size={17} />098 267 3888</a>{!departure&&<p className="service-note">{t.step4Warning}</p>}</div>{!departure&&<div className="guide-video"><h3>{t.guideVideo}</h3><video src="./vid-guide1.mp4" controls preload="none" playsInline aria-label={t.guideVideo} /><p>{w.confirm}</p></div>}</aside></section></>;
+  return <><Banner title={departure?w.departure:w.arrival} subtitle={departure?t.h2aSubtitle:t.shuttleAirToHotel} image={departure?'bg-hotel.webp':'bg-airport.webp'} w={w} /><div className="transfer-tabs wrap"><a href="#airportToHotel" aria-current={!departure?'page':undefined}><Plane size={18} />{t.navAirToHotel}</a><a href="#hotelToAirport" aria-current={departure?'page':undefined}><ArrowUpRight size={18} />{t.navHotelToAir}</a></div><section className={'section wrap transfer-layout '+(!departure?'airport-stack-layout':'')}><div><p className="eyebrow">{w.directions}</p><h2>{departure?t.detailsTitle:t.stepsTitle}</h2><div className="steps">{(departure?[1,2,3,4].map(n=>({title:t['h2a'+n+'Title'],body:t['h2a'+n+'Desc']})):steps).map((step,i)=><article className={'step '+(!departure?'step-stack-card':'')} key={step.title} onPointerMove={trackCardGlow}><span className="step-number">0{i+1}</span><div><h3>{step.title}</h3><p>{step.body}</p>{step.src&&<button className="step-photo" onClick={()=>onImage({src:step.src,alt:step.title})}><Photo src={step.src} alt={step.title} /><span><ImageIcon size={15} />{t.viewImage}</span></button>}</div></article>)}</div></div><aside className="transfer-aside"><div className="info-panel"><p className="eyebrow">{w.facts}</p><h3>{t.service24h}</h3><div className="info-line"><Clock /><p>{departure?t.h2a2Desc:t.step4Desc1+t.step4Desc2+t.step4Desc3}</p></div><div className="info-line"><MapPin /><p>{departure?t.h2a4Desc:t.step1Desc2+' · '+t.step2Desc2}</p></div><a href="tel:+66982673888" className="button navy"><Phone size={17} />098 267 3888</a>{!departure&&<p className="service-note">{t.step4Warning}</p>}</div>{!departure&&<div className="guide-video"><h3>{t.guideVideo}</h3><video src="./vid-guide1.mp4" controls preload="none" playsInline aria-label={t.guideVideo} /><p>{w.confirm}</p></div>}</aside></section></>;
 }
 function Facilities({t,w,onImage}) {
-  return <><Banner title={w.pool} subtitle={t.facDesc} image="bg-facility.webp" w={w} />{['relax','comfort'].map((group,gi)=><section className={'section '+(gi?'pearl':'')} key={group}><div className="wrap"><div className="section-heading"><div><h2>{gi?w.convenience:w.pool}</h2></div></div><div className="facility-grid">{facilityData.filter(f=>f[3]===group).map(([key,src,hours])=><article className="facility-card" key={key}><button className="facility-photo" onClick={()=>onImage({src,alt:t[key]})} aria-label={w.image+': '+t[key]}><Photo src={src} alt={t[key]} /><span><ImageIcon size={17} /></span></button><div className="facility-body"><h3>{t[key].split(' (')[0]}</h3><p><Clock size={15} />{hours==='24h'?t.service24h:hours}</p></div></article>)}</div></div></section>)}<p className="wrap service-note bottom-note">{w.confirm}</p></>;
+  return <><Banner title={w.pool} subtitle={t.facDesc} image="bg-facility.webp" w={w} />{['relax','comfort'].map((group,gi)=><section className={'section '+(gi?'pearl':'')} key={group}><div className="wrap"><div className="section-heading"><div><h2>{gi?w.convenience:w.pool}</h2></div></div><div className="facility-grid">{facilityData.filter(f=>f[3]===group).map(([key,src,hours])=><button className="facility-card" key={key} onClick={()=>onImage({src,alt:t[key]})} aria-label={w.image+': '+t[key]}><span className="facility-photo"><Photo src={src} alt="" /><span><ImageIcon size={17} /></span></span><span className="facility-body"><strong>{t[key].split(' (')[0]}</strong><span><Clock size={15} />{hours==='24h'?t.service24h:hours}</span></span></button>)}</div></div></section>)}<p className="wrap service-note bottom-note">{w.confirm}</p></>;
 }
 function Dining({t,w,onImage}) {
-  return <><Banner title={w.food} subtitle={t.diningDesc} image="bg-dining.webp" w={w} /><div className="venue-nav wrap">{venues.map(v=><a key={v.id} href={'#dining'} onClick={e=>{e.preventDefault();document.getElementById('venue-'+v.id)?.scrollIntoView({behavior:'smooth'});}}>{v.name}<ArrowRight size={15} /></a>)}</div><section className="section wrap breakfast-block"><Photo src="food-breakfast.webp" alt={t.bfTitle} /><div><p className="eyebrow">A GOOD MORNING</p><h2>{w.breakfast}</h2><p className="muted">{w.breakfastBody}</p><span className="hours"><Clock size={17} />{t.bfTime}</span></div></section>{venues.map((v,i)=><section id={'venue-'+v.id} className={'section venue '+(i%2===0?'pearl':'')} key={v.id}><div className="wrap"><div className={'venue-feature '+(i%2?'reverse':'')}><div className="venue-main-photo"><Photo src={v.prefix+'-1.webp'} alt={v.name} /><span className="venue-number">0{i+1}</span></div><div className="venue-copy"><h2>{v.name}</h2><p className="muted">{t[v.key]}</p><p className="hours"><Clock size={17} />{v.hours==='24h'?t.service24h:v.hours}</p><External href={v.url} className="text-link">{v.id==='sky'?t.visitWebsite:t.visitFacebook}</External></div></div><GalleryStrip prefix={v.prefix} title={v.name} onImage={onImage} w={w} /></div></section>)}<p className="wrap service-note bottom-note">{w.confirm}</p></>;
+  return <><Banner title={w.food} subtitle={t.diningDesc} image="bg-dining.webp" w={w} /><section className="section wrap breakfast-block"><Photo src="food-breakfast.webp" alt={t.bfTitle} /><div><p className="eyebrow">A GOOD MORNING</p><h2>{w.breakfast}</h2><p className="muted">{w.breakfastBody}</p><span className="hours"><Clock size={17} />{t.bfTime}</span></div></section>{venues.map((v,i)=><section id={'venue-'+v.id} className={'section venue '+(i%2===0?'pearl':'')} key={v.id}><div className="wrap"><div className="venue-identity"><div className="venue-copy"><h2>{v.name}</h2><p className="muted">{t[v.key].replace(/\s*\([^)]*\)\s*$/, '')}</p></div><div className="venue-meta"><p className="hours"><Clock size={17} />{v.hours==='24h'?t.service24h:v.hours}</p><External href={v.url} className="text-link">{v.id==='sky'?t.visitWebsite:t.visitFacebook}</External></div></div><GalleryStrip prefix={v.prefix} title={v.name} onImage={onImage} w={w} /></div></section>)}<p className="wrap service-note bottom-note">{w.confirm}</p></>;
 }
 function Contact({t,w}) {
-  return <><Banner title={w.findUs} subtitle={w.contactIntro} image="bg-contact.webp" w={w}/><section className="section wrap"><div className="contact-grid"><article><MapPin/><p className="eyebrow">{w.address}</p><h2>Suvarnabhumi Ville</h2><address>{t.addressDesc}</address><External href={MAP} className="text-link">{t.openMap}</External></article><article><Phone/><p className="eyebrow">{w.reception}</p><h2>{t.service24h}</h2><a className="contact-phone" href="tel:+66982673888">+66 (0) 98 267 3888</a><a className="contact-phone" href="tel:+6627384599">+66 (0) 2 738 4599</a><External href={LINE} className="text-link">{w.chat}</External></article><article><CalendarDays/><p className="eyebrow">{w.stay}</p><h2>{t.navBook}</h2><p>{w.roomNote}</p><External href={BOOK} className="text-link">{w.roomLink}</External></article></div><div className="map-panel"><iframe title={t.openMap} src="https://maps.google.com/maps?q=Suvarnabhumi%20Ville%20Airport%20Hotel&output=embed" loading="lazy" referrerPolicy="no-referrer-when-downgrade" /><div className="map-caption"><MapPin size={20}/><span>{t.addressDesc}</span><External href={MAP} className="button navy">{t.openMap}</External></div></div></section><section className="section pearl"><div className="wrap section-heading"><div><p className="eyebrow">ARRIVE WITH EASE</p><h2>{w.journey}</h2></div><div className="actions"><a href="#airportToHotel" className="button navy">{t.navAirToHotel}<ArrowRight size={17}/></a><a href="#hotelToAirport" className="button outline">{t.navHotelToAir}<ArrowRight size={17}/></a></div></div></section><FAQ t={t} w={w}/></>;
+  return <><Banner title={w.findUs} subtitle={w.contactIntro} image="bg-contact.webp" w={w}/><section className="section wrap"><div className="contact-grid"><article><MapPin/><p className="eyebrow">{w.address}</p><h2>Suvarnabhumi Ville</h2><address>{t.addressDesc}</address><External href={MAP} className="text-link">{t.openMap}</External></article><article><Phone/><p className="eyebrow">{w.reception}</p><h2>{t.service24h}</h2><a className="contact-phone" href="tel:+66982673888">+66 (0) 98 267 3888</a><a className="contact-phone" href="tel:+6627384599">+66 (0) 2 738 4599</a><div className="contact-messaging"><External href={LINE} className="text-link">LINE</External><External href={WHATSAPP} className="text-link">WhatsApp</External></div></article><article><CalendarDays/><p className="eyebrow">{w.stay}</p><h2>{t.navBook}</h2><p>{w.roomNote}</p><External href={BOOK} className="text-link">{w.roomLink}</External></article></div><a className="wechat-contact-card" href={WECHAT_QR} target="_blank" rel="noreferrer"><img src={WECHAT_QR} alt="WeChat QR Code — Front SUV" loading="lazy" /><span><small>WECHAT</small><strong>Front SUV</strong><em>Scan QR code to contact the hotel</em></span><ArrowUpRight aria-hidden="true" /></a><div className="map-panel"><iframe title={t.openMap} src="https://maps.google.com/maps?q=Suvarnabhumi%20Ville%20Airport%20Hotel&output=embed" loading="lazy" referrerPolicy="no-referrer-when-downgrade" /><div className="map-caption"><MapPin size={20}/><span>{t.addressDesc}</span><External href={MAP} className="button navy">{t.openMap}</External></div></div></section><section className="section pearl"><div className="wrap section-heading"><div><p className="eyebrow">ARRIVE WITH EASE</p><h2>{w.journey}</h2></div><div className="actions"><a href="#airportToHotel" className="button navy">{t.navAirToHotel}<ArrowRight size={17}/></a><a href="#hotelToAirport" className="button outline">{t.navHotelToAir}<ArrowRight size={17}/></a></div></div></section><FAQ t={t} w={w}/></>;
 }
 function Footer({t,w}) {
-  return <><footer className="footer"><div className="wrap footer-grid"><div><a href="#home" className="footer-brand"><img className="hotel-logo" src="./logo-large.png" alt="Suvarnabhumi Ville" loading="lazy" /></a><p>{t.slogan}</p><address>{t.addressDesc}</address></div><div><h3>{w.explore}</h3>{[['stay',w.stay],['promotions',w.promotions],['facilities',t.navFacilities],['dining',t.navDining],['virtualTour',w.tour]].map(([id,label])=><a href={'#'+id} key={id}>{label}</a>)}</div><div><h3>{w.journey}</h3><a href="#airportToHotel">{t.navAirToHotel}</a><a href="#hotelToAirport">{t.navHotelToAir}</a><a href="#contact">{t.navContact}</a><a href="tel:+66982673888">+66 (0) 98 267 3888</a></div><div><h3>{w.social}</h3>{[['Facebook','https://www.facebook.com/suvarnabhumi.ville.2025'],['Instagram','https://www.instagram.com/suvarnabhumiville/'],['TikTok','https://www.tiktok.com/@suvarnabhumivilles64'],['LINE',LINE]].map(([name,url])=><External key={name} href={url} className="footer-social">{name}</External>)}</div></div><div className="wrap footer-bottom"><span>© {new Date().getFullYear()} Suvarnabhumi Ville Hotel. {t.allRightsReserved}</span><a href="#home">SUVARNABHUMI VILLE AIRPORT HOTEL</a></div></footer><div className="mobile-booking"><a href="tel:+66982673888"><Phone size={18}/>{w.call}</a><External href={BOOK}>{t.navBook}</External></div></>;
+  return <><footer className="footer"><div className="wrap footer-grid"><div><a href="#home" className="footer-brand"><img className="hotel-logo" src="./logo-large.png" alt="Suvarnabhumi Ville" loading="lazy" /></a><p>{t.slogan}</p><address>{t.addressDesc}</address></div><div><h3>{w.explore}</h3>{[['stay',w.stay],['promotions',w.promotions],['facilities',t.navFacilities],['dining',t.navDining],['virtualTour',w.tour]].map(([id,label])=><a href={'#'+id} key={id}>{label}</a>)}</div><div><h3>{w.journey}</h3><a href="#airportToHotel">{t.navAirToHotel}</a><a href="#hotelToAirport">{t.navHotelToAir}</a><a href="#contact">{t.navContact}</a><a href="tel:+66982673888">+66 (0) 98 267 3888</a><a href="mailto:front@suvarnabhumiville.com">front@suvarnabhumiville.com</a></div><div><h3>{w.social}</h3>{[['Facebook','https://www.facebook.com/suvarnabhumi.ville.2025'],['Instagram','https://www.instagram.com/suvarnabhumiville/'],['TikTok','https://www.tiktok.com/@suvarnabhumivilles64'],['LINE',LINE],['WhatsApp',WHATSAPP],['WeChat',WECHAT_QR]].map(([name,url])=><External key={name} href={url} className="footer-social">{name}</External>)}</div></div><div className="wrap footer-bottom"><span>© {new Date().getFullYear()} Suvarnabhumi Ville Hotel. {t.allRightsReserved}</span><a href="#home">SUVARNABHUMI VILLE AIRPORT HOTEL</a></div></footer><div className="mobile-booking"><a href="tel:+66982673888"><Phone size={18}/>{w.call}</a><External href={BOOK}>{t.navBook}</External></div></>;
 }
 export default function App() {
   const [page,setPage]=useState(readPage);
@@ -359,11 +400,12 @@ export default function App() {
   const main=useRef(null);
   const t=translations[lang],w=words[lang];
   useEffect(()=>{
-    const update=()=>{setPage(readPage());setImage(null);window.scrollTo({top:0,behavior:'instant'});requestAnimationFrame(()=>main.current?.focus({preventScroll:true}));};
+    const update=()=>{setPage(readPage());setImage(null);const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;window.scrollTo({top:0,behavior:reduced?'auto':'smooth'});requestAnimationFrame(()=>main.current?.focus({preventScroll:true}));};
     window.addEventListener('hashchange',update);return()=>window.removeEventListener('hashchange',update);
   },[]);
   useEffect(()=>{try {localStorage.setItem('ville-language',lang);} catch { /* Language remains available without storage. */ }document.documentElement.lang=lang==='zh'?'zh-Hans':lang;},[lang]);
   useEffect(()=>{const titles={home:t.navHome,stay:w.stay,airportToHotel:t.navAirToHotel,hotelToAirport:t.navHotelToAir,facilities:t.navFacilities,dining:t.navDining,promotions:w.promotions,virtualTour:w.tour,contact:t.navContact};document.title=titles[page]+' | Suvarnabhumi Ville Airport Hotel';},[page,t,w]);
   const content={home:<Home t={t} w={w} lang={lang}/>,stay:<Stay t={t} w={w} lang={lang} onImage={setImage}/>,airportToHotel:<Transfer t={t} w={w} onImage={setImage}/>,hotelToAirport:<Transfer departure t={t} w={w} onImage={setImage}/>,facilities:<Facilities t={t} w={w} onImage={setImage}/>,dining:<Dining t={t} w={w} onImage={setImage}/>,promotions:<Promotions lang={lang} lineUrl={LINE}/>,virtualTour:<VirtualTour lang={lang}/>,contact:<Contact t={t} w={w}/>};
-  return <><a className="skip-link" href="#main-content" onClick={e=>{e.preventDefault();main.current?.focus();}}>{w.skip}</a><Header key={page} page={page} lang={lang} setLang={setLang} t={t} w={w}/><main id="main-content" ref={main} tabIndex={-1}>{content[page]}<Concierge w={w} t={t}/></main><Footer t={t} w={w}/><Lightbox image={image} onClose={()=>setImage(null)} w={w}/></>;
+  return <><a className="skip-link" href="#main-content" onClick={e=>{e.preventDefault();main.current?.focus();}}>{w.skip}</a><Header page={page} lang={lang} setLang={setLang} t={t} w={w}/><main id="main-content" ref={main} tabIndex={-1}><div className="page-transition" key={page}>{content[page]}</div><Concierge w={w} t={t}/></main><Footer t={t} w={w}/><Lightbox image={image} onClose={()=>setImage(null)} w={w}/></>;
 }
+

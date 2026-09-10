@@ -1,60 +1,49 @@
-import { Heart, Camera, Mail, MessageCircle, CheckCircle2 } from 'lucide-react';
+import { ArrowRight, CheckCircle2, MapPin, MessageCircle } from 'lucide-react';
+import promotionArtwork from './promotionArtwork.js';
 
 const copy = {
   th: {
-    nav: 'โปรโมชั่น', title: 'สิทธิพิเศษ\nสำหรับสมาชิก',
-    intro: 'พักผ่อนในแบบของคุณ พร้อมอัตราห้องพักสำหรับผู้สนับสนุนโซเชียลมีเดียของโรงแรม',
-    heading: 'รับสิทธิ์ได้อย่างไร', sub: 'เตรียมพร้อมก่อนสอบถามราคาสมาชิก',
-    follow: 'ติดตาม กดถูกใจ และแชร์', followText: 'ผ่านช่องทางโซเชียลมีเดียของโรงแรมด้านล่าง',
-    proof: 'เตรียมหลักฐาน', proofText: 'โรงแรมอาจขอภาพหน้าจอเพื่อตรวจสอบสิทธิ์ก่อนยืนยันราคา',
-    contact: 'ติดต่อเพื่อจอง', contactText: 'ส่งรายละเอียดการจองผ่าน LINE หรืออีเมล',
-    booking: 'สอบถามราคาสมาชิก', bookingText: 'ให้ทีมโรงแรมช่วยดูแลการจองของคุณ',
-    line: 'สอบถามผ่าน LINE', email: 'ส่งอีเมล', terms: 'เงื่อนไขสิทธิ์สมาชิก',
-    termsText: 'สำหรับผู้มีคุณสมบัติตามเงื่อนไขเท่านั้น ไม่ใช่โปรโมชั่นทั่วไป และอยู่ภายใต้ข้อกำหนดของโรงแรม',
-    stay: 'ดูห้องพัก',
+    nav: 'โปรโมชั่นพิเศษ', title: 'พักสบายกว่าเดิม\nในราคาพิเศษ',
+    intro: 'รับส่วนลดห้องพัก 32% สำหรับลูกค้าที่ Walk-in หรือจองตรงผ่าน LINE ของโรงแรมเท่านั้น',
+    limited: 'DIRECT BOOKING PRIVILEGE', off: 'ลดทันที', offer: 'สิทธิพิเศษสำหรับการจองตรง',
+    offerText: 'รับราคาพิเศษสำหรับการเข้าพักที่ Suvarnabhumi Ville เมื่อจองผ่านช่องทางที่ร่วมรายการ',
+    eligible: 'ช่องทางที่รับโปรโมชั่น', walkin: 'Walk-in ที่โรงแรม',
+    walkinText: 'ติดต่อแผนกต้อนรับโดยตรงเมื่อเดินทางมาถึงโรงแรม',
+    lineOnly: 'จองผ่าน LINE', lineText: 'ส่งวันเข้าพัก จำนวนผู้เข้าพัก และประเภทห้องที่ต้องการให้ทีมโรงแรมตรวจสอบ',
+    line: 'จองโปรโมชั่นผ่าน LINE', condition: 'เงื่อนไขสำคัญ',
+    conditionText: 'โปรโมชั่นลด 32% ใช้สำหรับราคา Walk-in หรือการจองผ่าน LINE ของโรงแรมเท่านั้น ไม่สามารถใช้กับการจองผ่านเว็บไซต์หรือแพลตฟอร์มอื่นได้ ห้องพักขึ้นอยู่กับจำนวนห้องว่างและเงื่อนไขของโรงแรม',
+    artwork: 'โปสเตอร์ราคาและโปรโมชั่นห้องพักของ Suvarnabhumi Ville', viewRooms: 'ดูประเภทห้องพัก', poster: 'อัตราห้องพักโปรโมชั่น',
   },
   en: {
-    nav: 'Offers', title: 'A special stay.\nMember privileges.',
-    intro: 'Member room rates for supporters of the hotel’s social channels.',
-    heading: 'How to qualify', sub: 'Before requesting a member rate',
-    follow: 'Follow, like & share', followText: 'Use the hotel’s social channels below.',
-    proof: 'Keep your screenshots', proofText: 'The hotel may request proof before confirming eligibility.',
-    contact: 'Contact reservations', contactText: 'Send booking details by LINE or email.',
-    booking: 'Request member rates', bookingText: 'Let the hotel team arrange your stay.',
-    line: 'Chat on LINE', email: 'Email reservations', terms: 'Member conditions',
-    termsText: 'Eligible guests only. This is not a general promotion. Hotel terms apply.',
-    stay: 'Explore rooms',
+    nav: 'Special offer', title: 'More comfort.\nA better direct rate.',
+    intro: 'Enjoy 32% off room rates, exclusively for walk-in guests or reservations made directly through the hotel’s LINE account.',
+    limited: 'DIRECT BOOKING PRIVILEGE', off: 'SAVE ON YOUR STAY', offer: 'An exclusive direct-booking rate',
+    offerText: 'Receive a preferred rate at Suvarnabhumi Ville when booking through an eligible direct channel.',
+    eligible: 'How to claim this offer', walkin: 'Walk in at the hotel',
+    walkinText: 'Contact reception directly when you arrive at the hotel.',
+    lineOnly: 'Book through LINE', lineText: 'Send your stay dates, number of guests, and preferred room type to the hotel team.',
+    line: 'Book this offer on LINE', condition: 'Important conditions',
+    conditionText: 'The 32% discount is available only for walk-in rates or reservations made through the hotel’s LINE account. It does not apply to website or third-party platform bookings. Rooms are subject to availability and hotel terms.',
+    artwork: 'Suvarnabhumi Ville room rate and promotion poster', viewRooms: 'Explore room types', poster: 'Promotional room rates',
   },
   zh: {
-    nav: '优惠', title: '会员专属\n住宿礼遇',
-    intro: '为支持酒店社交媒体的宾客提供会员房价。',
-    heading: '如何获得资格', sub: '咨询会员房价前的准备',
-    follow: '关注、点赞并分享', followText: '通过以下酒店社交媒体渠道参与。',
-    proof: '保留截图', proofText: '酒店可能要求提供截图，核实资格后确认房价。',
-    contact: '联系预订', contactText: '通过 LINE 或电子邮件发送预订详情。',
-    booking: '咨询会员房价', bookingText: '让酒店团队协助安排您的住宿。',
-    line: '通过 LINE 咨询', email: '发送邮件', terms: '会员条件',
-    termsText: '仅限符合资格的宾客，不属于一般促销，须遵守酒店条款。',
-    stay: '浏览客房',
+    nav: '特别优惠', title: '舒适入住\n专享直订价格',
+    intro: '客房价格立减32%，仅限到店客人或通过酒店 LINE 直接预订。',
+    limited: '直订专享礼遇', off: '住宿立省', offer: '直订专属价格',
+    offerText: '通过指定直订渠道预订 Suvarnabhumi Ville，即可享受专属价格。',
+    eligible: '优惠使用方式', walkin: '到店预订',
+    walkinText: '抵达酒店后直接联系前台办理预订。',
+    lineOnly: '通过 LINE 预订', lineText: '将入住日期、人数和所需房型发送给酒店团队查询。',
+    line: '通过 LINE 预订优惠', condition: '重要条件',
+    conditionText: '32%优惠仅适用于到店价格或通过酒店 LINE 账号完成的预订，不适用于官网或第三方平台预订。客房视供应情况及酒店条款而定。',
+    artwork: 'Suvarnabhumi Ville 客房价格及优惠海报', viewRooms: '查看房型', poster: '优惠客房价格',
   },
 };
-const socials = [
-  ['Facebook', 'https://www.facebook.com/SuvarnabhumivilleHotel/'],
-  ['TikTok', 'https://www.tiktok.com/@suvarnabhumivilles64'],
-  ['Instagram', 'https://www.instagram.com/suvarnabhumiville'],
-];
-
-function SocialIcon({ name }) {
-  if (name === 'Instagram') return <svg viewBox="0 0 24 24" width="23" height="23" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true" focusable="false"><rect x="3" y="3" width="18" height="18" rx="5" /><circle cx="12" cy="12" r="4" /><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" /></svg>;
-  if (name === 'Facebook') return <svg viewBox="0 0 24 24" width="23" height="23" fill="currentColor" aria-hidden="true" focusable="false"><path d="M14 21v-8h3l.5-4H14V7c0-1.2.4-2 2-2h2V1.4C17.4 1.2 16.3 1 15 1c-3 0-5 1.8-5 5v3H7v4h3v8z" /></svg>;
-  return <svg viewBox="0 0 24 24" width="23" height="23" fill="currentColor" aria-hidden="true" focusable="false"><path d="M16.5 2c.3 2.7 1.8 4.4 4.5 4.7v3.4a9 9 0 0 1-4.5-1.4v7.1a6.2 6.2 0 1 1-5.3-6.1v3.5a2.8 2.8 0 1 0 1.8 2.6V2z" /></svg>;
-}
 
 export default function Promotions({ lang, lineUrl }) {
   const c = copy[lang] || copy.en;
-  const steps = [[Heart,c.follow,c.followText],[Camera,c.proof,c.proofText],[Mail,c.contact,c.contactText]];
   return <>
-    <section className="page-hero promotion-hero">
+    <section className="page-hero promotion-hero promotion-hero-new">
       <img src="./bg-promotions.webp" alt="" fetchPriority="high" />
       <div className="hero-shade" />
       <div className="wrap page-hero-content">
@@ -62,37 +51,27 @@ export default function Promotions({ lang, lineUrl }) {
         <h1>{c.title}</h1><p>{c.intro}</p>
       </div>
     </section>
-    <section className="section wrap promotion-layout">
-      <div className="promotion-main">
-        <div className="section-heading"><div><p className="eyebrow">{c.sub}</p><h2>{c.heading}</h2></div></div>
-        <div className="promotion-steps">
-          {steps.map(([Icon,title,body],index) => <article className="promotion-step" key={title}>
-            <span className="promotion-icon"><Icon size={25} strokeWidth={1.6} aria-hidden="true" /></span>
-            <div><h3>{title}</h3><p>{body}</p>
-              {index === 0 && <div className="promotion-socials">{socials.map(([name,url]) =>
-                <a key={name} href={url} target="_blank" rel="noreferrer" aria-label={name} title={name}><SocialIcon name={name} /></a>
-              )}</div>}
-            </div>
-          </article>)}
-        </div>
-        <div className="promotion-terms">
-          <CheckCircle2 size={22} aria-hidden="true" />
-          <div><h3>{c.terms}</h3><p>{c.termsText}</p>
+    <section className="section promotion-offer-section">
+      <div className="wrap promotion-offer-grid">
+        <div className="promotion-offer-copy">
+          <p className="eyebrow">{c.limited}</p>
+          <div className="promotion-rate-lockup"><strong>32%</strong><span>{c.off}</span></div>
+          <h2>{c.offer}</h2>
+          <p className="muted promotion-lead">{c.offerText}</p>
+          <div className="promotion-channels" aria-label={c.eligible}>
+            <article><span><MapPin aria-hidden="true" /></span><div><h3>{c.walkin}</h3><p>{c.walkinText}</p></div></article>
+            <article><span><MessageCircle aria-hidden="true" /></span><div><h3>{c.lineOnly}</h3><p>{c.lineText}</p></div></article>
           </div>
+          <a className="button gold promotion-line-cta" href={lineUrl} target="_blank" rel="noreferrer"><MessageCircle size={19} aria-hidden="true" />{c.line}<ArrowRight size={18} aria-hidden="true" /></a>
+          <span className="promotion-line-id">LINE: @0982673888ville</span>
+          <div className="promotion-new-terms"><CheckCircle2 aria-hidden="true" /><div><h3>{c.condition}</h3><p>{c.conditionText}</p></div></div>
         </div>
+        <figure className="promotion-poster">
+          <div className="promotion-poster-frame"><img src={promotionArtwork} alt={c.artwork} loading="eager" /></div>
+          <figcaption><span>{c.poster}</span><a className="text-link" href="#stay">{c.viewRooms}<ArrowRight size={16} aria-hidden="true" /></a></figcaption>
+        </figure>
       </div>
-      <aside className="promotion-booking">
-        <img src="./promotion-vans.webp" alt="" loading="lazy" />
-        <div className="promotion-booking-copy">
-          <p className="eyebrow">SUVARNABHUMI VILLE</p>
-          <h2>{c.booking}</h2><p>{c.bookingText}</p>
-          <a className="button gold" href={lineUrl} target="_blank" rel="noreferrer"><MessageCircle size={18} aria-hidden="true" />{c.line}</a>
-          <span className="promotion-contact-detail">@0982673888ville</span>
-          <a className="button outline" href="mailto:front@suvarnabhumiville.com"><Mail size={18} aria-hidden="true" />{c.email}</a>
-          <span className="promotion-contact-detail">front@suvarnabhumiville.com</span>
-          <a className="text-link" href="#stay">{c.stay}</a>
-        </div>
-      </aside>
     </section>
   </>;
 }
+
