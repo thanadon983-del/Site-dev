@@ -1276,55 +1276,98 @@ button .lucide-arrow-right,
   }
 }
 
-/* Dining photo ribbons: two identical groups create a seamless leftward loop. */
-.venue-photo-ribbon { margin-top: 28px; }
-.venue-photo-viewport {
+/* Restaurant galleries use a cinematic 3D coverflow inspired by the supplied reference. */
+.venue-coverflow {
+  position: relative;
+  margin-top: 46px;
+  padding-bottom: 34px;
+}
+.venue-coverflow-stage {
+  position: relative;
+  height: clamp(330px, 38vw, 510px);
+  perspective: 1500px;
   overflow: hidden;
-  border-radius: 16px;
-  -webkit-mask-image: linear-gradient(to right, transparent, black 24px, black calc(100% - 24px), transparent);
-  mask-image: linear-gradient(to right, transparent, black 24px, black calc(100% - 24px), transparent);
 }
-.venue-photo-track {
-  display: flex;
-  width: 200%;
-  min-width: 1800px;
-  animation: venue-photo-drift 36s linear infinite;
-}
-.venue-photo-group {
-  display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: 16px;
-  flex: 0 0 50%;
-  min-width: 0;
-  padding-right: 16px;
-}
-.venue-photo-group button {
-  display: block;
-  width: 100%;
+.venue-coverflow-slide {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: min(62%, 680px);
+  height: 88%;
   padding: 0;
-  aspect-ratio: 4 / 3;
-  border-radius: 14px;
   overflow: hidden;
+  border: 1px solid rgb(255 255 255 / 66%);
+  border-radius: 22px;
+  background: #0f213f;
+  box-shadow: 0 28px 70px rgb(11 24 48 / 22%);
+  transform: translate(-50%, -50%) translateX(var(--slide-x)) rotateY(var(--slide-rotate)) scale(var(--slide-scale));
+  opacity: var(--slide-opacity);
+  transition: transform 620ms cubic-bezier(.22,.8,.24,1), opacity 420ms ease, filter 420ms ease;
+  transform-style: preserve-3d;
 }
-.venue-photo-group img { transition: filter 200ms ease; }
-.venue-photo-group button:hover img { filter: brightness(1.06); }
-/* Keyboard users receive a stationary strip that can scroll focused photos into view. */
-.venue-photo-viewport:has(button:focus-visible) {
-  overflow-x: auto;
-  -webkit-mask-image: none;
-  mask-image: none;
+.venue-coverflow-slide::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgb(8 21 43 / 38%), transparent 45%, rgb(8 21 43 / 20%));
+  opacity: .75;
+  transition: opacity 420ms ease;
 }
-.venue-photo-viewport:has(button:focus-visible) .venue-photo-track { animation: none; }
-.venue-photo-group button:focus-visible { outline-offset: -4px; }
-@keyframes venue-photo-drift {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
+.venue-coverflow-slide[data-active="true"] { cursor: zoom-in; }
+.venue-coverflow-slide[data-active="true"]::after { opacity: 0; }
+.venue-coverflow-slide img { width: 100%; height: 100%; object-fit: cover; }
+.coverflow-arrow {
+  position: absolute;
+  top: 50%;
+  z-index: 30;
+  display: grid;
+  place-items: center;
+  width: 50px;
+  height: 50px;
+  padding: 0;
+  border: 1px solid rgb(255 255 255 / 66%);
+  border-radius: 50%;
+  color: white;
+  background: rgb(14 34 65 / 68%);
+  box-shadow: 0 10px 30px rgb(10 20 40 / 20%);
+  backdrop-filter: blur(14px);
+  transform: translateY(-50%);
+}
+.coverflow-arrow:hover { background: rgb(176 132 66 / 88%); }
+.coverflow-arrow.previous { left: 3%; }
+.coverflow-arrow.previous svg { transform: rotate(180deg); }
+.coverflow-arrow.next { right: 3%; }
+.coverflow-dots { display: flex; justify-content: center; gap: 9px; margin-top: 18px; }
+.coverflow-dots button {
+  width: 8px;
+  height: 8px;
+  padding: 0;
+  border-radius: 99px;
+  background: rgb(15 33 63 / 24%);
+  transition: width 300ms ease, background 300ms ease;
+}
+.coverflow-dots button.active { width: 30px; background: var(--gold); }
+.coverflow-count {
+  position: absolute;
+  right: 0;
+  bottom: 27px;
+  margin: 0;
+  color: var(--navy);
+  font-size: 12px;
+  letter-spacing: .16em;
+}
+.coverflow-count span { color: var(--gold-deep); font-size: 20px; }
+@media (max-width: 767px) {
+  .venue-coverflow { margin-top: 30px; }
+  .venue-coverflow-stage { height: 330px; margin-inline: -20px; }
+  .venue-coverflow-slide { width: 76%; height: 82%; border-radius: 16px; }
+  .coverflow-arrow { width: 42px; height: 42px; }
+  .coverflow-arrow.previous { left: 4%; }
+  .coverflow-arrow.next { right: 4%; }
+  .coverflow-count { display: none; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .venue-photo-viewport { overflow-x: auto; }
-  .venue-photo-track { animation: none; width: 100%; min-width: 900px; }
-  .venue-photo-group { flex-basis: 100%; }
-  .venue-photo-group[aria-hidden="true"] { display: none; }
+  .venue-coverflow-slide, .coverflow-dots button { transition: none; }
 }
 
 /* Use the supplied hotel logo without recreating its lettering. */
