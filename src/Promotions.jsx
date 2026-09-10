@@ -50,7 +50,6 @@ export default function Promotions({ lang, lineUrl }) {
         <p className="eyebrow pale">{c.nav}</p>
         <h1>{c.title}</h1><p>{c.intro}</p>
       </div>
-      <div className="promotion-hero-discount" aria-label={`${c.off} 32%`}><strong>32</strong><span>%<small>OFF</small></span></div>
     </section>
     <section className="section promotion-offer-section">
       <div className="wrap promotion-offer-grid">
