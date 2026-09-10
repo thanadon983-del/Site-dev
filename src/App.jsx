@@ -3,7 +3,7 @@ import VirtualTour, { TourTeaser } from './VirtualTour.jsx';
 import RoomCatalogue from './Rooms.jsx';
 import { FASTBOOKING_URL } from './booking.js';
 import { useEffect, useRef, useState } from 'react';
-import { ArrowUpRight, ArrowRight, ChevronDown, Menu, X, Phone, MapPin, Clock, Plane, CalendarDays, Waves, Coffee, Image as ImageIcon } from 'lucide-react';
+import { ArrowUpRight, ArrowRight, ChevronDown, X, Phone, MapPin, Clock, Plane, CalendarDays, Waves, Coffee, Image as ImageIcon } from 'lucide-react';
 
 const translations = {
   th: {
@@ -309,18 +309,14 @@ function GalleryStrip({ prefix, title, onImage, w }) {
   );
 }
 function Header({ page, lang, setLang, t, w }) {
-  const [open,setOpen] = useState(false);
-  const toggle = useRef(null);
-  useEffect(() => { if (!open) return; const onKey = e => { if (e.key === 'Escape') { setOpen(false); toggle.current?.focus(); } }; window.addEventListener('keydown',onKey); return () => window.removeEventListener('keydown',onKey); },[open]);
   const links = [['home',t.navHome],['stay',w.stay],['promotions',w.promotions],['facilities',t.navFacilities],['dining',t.navDining],['airportToHotel',w.journey],['virtualTour',w.tour],['contact',t.navContact]];
   return <header className="site-header">
     <div className="utility"><span>SUVARNABHUMI VILLE AIRPORT HOTEL</span><a href="tel:+66982673888"><Phone size={12} /> +66 (0) 98 267 3888</a></div>
     <div className="navigation wrap">
       <a href="#home" className="brand" aria-label="Suvarnabhumi Ville — Home"><img className="hotel-logo" src="./logo-large.png" alt="Suvarnabhumi Ville" /></a>
-      <nav className="desktop-nav" aria-label={w.menu}>{links.map(([id,label])=><a key={id} href={'#'+id} aria-current={page===id || (id==='airportToHotel' && page==='hotelToAirport') ? 'page':undefined}>{label}</a>)}</nav>
-      <div className="header-actions"><label className="language"><span className="sr-only">{w.language}</span><select value={lang} onChange={e=>setLang(e.target.value)}><option value="th">TH</option><option value="en">EN</option><option value="zh">中文</option></select></label><External href={BOOK} className="button gold header-book">{t.navBook}</External><button ref={toggle} className="icon-button menu-toggle" aria-label={open?w.close:w.menu} aria-expanded={open} aria-controls="mobile-menu" onClick={()=>setOpen(!open)}>{open?<X />:<Menu />}</button></div>
+      <nav className="desktop-nav tubelight-nav" aria-label={w.menu}>{links.map(([id,label])=><a key={id} href={'#'+id} aria-current={page===id || (id==='airportToHotel' && page==='hotelToAirport') ? 'page':undefined}><span>{label}</span></a>)}</nav>
+      <div className="header-actions"><label className="language"><span className="sr-only">{w.language}</span><select value={lang} onChange={e=>setLang(e.target.value)}><option value="th">TH</option><option value="en">EN</option><option value="zh">中文</option></select></label><External href={BOOK} className="button gold header-book">{t.navBook}</External></div>
     </div>
-    <nav id="mobile-menu" className="mobile-menu" hidden={!open} aria-label={w.menu}>{links.map(([id,label])=><a key={id} href={'#'+id} onClick={()=>setOpen(false)} aria-current={page===id?'page':undefined}>{label}<ArrowUpRight size={17} /></a>)}<a href="#hotelToAirport" onClick={()=>setOpen(false)}>{t.navHotelToAir}<ArrowUpRight size={17} /></a></nav>
   </header>;
 }
 function Banner({ title, subtitle, image }) {
