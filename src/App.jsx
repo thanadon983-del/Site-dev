@@ -310,17 +310,27 @@ function GalleryStrip({ prefix, title, onImage, w }) {
 }
 function Header({ page, lang, setLang, t, w }) {
   const nav = useRef(null);
+  const [activePill, setActivePill] = useState({ left: 0, width: 0, ready: false });
   const links = [['home',t.navHome],['stay',w.stay],['promotions',w.promotions],['facilities',t.navFacilities],['dining',t.navDining],['airportToHotel',w.journey],['virtualTour',w.tour],['contact',t.navContact]];
   useEffect(() => {
-    const active = nav.current?.querySelector('[aria-current="page"]');
-    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    requestAnimationFrame(() => active?.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'nearest', inline: 'center' }));
-  }, [page]);
+    const updatePosition = () => {
+      const container = nav.current;
+      const active = container?.querySelector('[aria-current="page"]');
+      if (!container || !active) return;
+      setActivePill({ left: active.offsetLeft, width: active.offsetWidth, ready: true });
+      const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const target = active.offsetLeft - (container.clientWidth - active.offsetWidth) / 2;
+      container.scrollTo({ left: Math.max(0, target), behavior: reduced ? 'auto' : 'smooth' });
+    };
+    const frame = requestAnimationFrame(updatePosition);
+    window.addEventListener('resize', updatePosition);
+    return () => { cancelAnimationFrame(frame); window.removeEventListener('resize', updatePosition); };
+  }, [page, lang]);
   return <header className="site-header">
     <div className="utility"><span>SUVARNABHUMI VILLE AIRPORT HOTEL</span><div className="utility-actions"><a href="tel:+66982673888"><Phone size={12} /> +66 (0) 98 267 3888</a><label className="utility-language"><span className="sr-only">{w.language}</span><select value={lang} onChange={e=>setLang(e.target.value)}><option value="th">TH</option><option value="en">EN</option><option value="zh">中文</option></select></label></div></div>
     <div className="navigation wrap">
       <a href="#home" className="brand" aria-label="Suvarnabhumi Ville — Home"><img className="hotel-logo" src="./logo-large.png" alt="Suvarnabhumi Ville" /></a>
-      <nav ref={nav} className="desktop-nav tubelight-nav" aria-label={w.menu}>{links.map(([id,label])=><a key={id} href={'#'+id} aria-current={page===id || (id==='airportToHotel' && page==='hotelToAirport') ? 'page':undefined}><span>{label}</span></a>)}</nav>
+      <nav ref={nav} className="desktop-nav tubelight-nav" aria-label={w.menu}><i className={'nav-active-pill'+(activePill.ready?' ready':'')} style={{ left: activePill.left, width: activePill.width }} aria-hidden="true" />{links.map(([id,label])=><a key={id} href={'#'+id} aria-current={page===id || (id==='airportToHotel' && page==='hotelToAirport') ? 'page':undefined}><span>{label}</span></a>)}</nav>
       <div className="header-actions"><External href={BOOK} className="button gold header-book">{t.navBook}</External></div>
     </div>
   </header>;
@@ -383,6 +393,6 @@ export default function App() {
   useEffect(()=>{try {localStorage.setItem('ville-language',lang);} catch { /* Language remains available without storage. */ }document.documentElement.lang=lang==='zh'?'zh-Hans':lang;},[lang]);
   useEffect(()=>{const titles={home:t.navHome,stay:w.stay,airportToHotel:t.navAirToHotel,hotelToAirport:t.navHotelToAir,facilities:t.navFacilities,dining:t.navDining,promotions:w.promotions,virtualTour:w.tour,contact:t.navContact};document.title=titles[page]+' | Suvarnabhumi Ville Airport Hotel';},[page,t,w]);
   const content={home:<Home t={t} w={w} lang={lang}/>,stay:<Stay t={t} w={w} lang={lang} onImage={setImage}/>,airportToHotel:<Transfer t={t} w={w} onImage={setImage}/>,hotelToAirport:<Transfer departure t={t} w={w} onImage={setImage}/>,facilities:<Facilities t={t} w={w} onImage={setImage}/>,dining:<Dining t={t} w={w} onImage={setImage}/>,promotions:<Promotions lang={lang} lineUrl={LINE}/>,virtualTour:<VirtualTour lang={lang}/>,contact:<Contact t={t} w={w}/>};
-  return <><a className="skip-link" href="#main-content" onClick={e=>{e.preventDefault();main.current?.focus();}}>{w.skip}</a><Header key={page} page={page} lang={lang} setLang={setLang} t={t} w={w}/><main id="main-content" ref={main} tabIndex={-1}><div className="page-transition" key={page}>{content[page]}</div><Concierge w={w} t={t}/></main><Footer t={t} w={w}/><Lightbox image={image} onClose={()=>setImage(null)} w={w}/></>;
+  return <><a className="skip-link" href="#main-content" onClick={e=>{e.preventDefault();main.current?.focus();}}>{w.skip}</a><Header page={page} lang={lang} setLang={setLang} t={t} w={w}/><main id="main-content" ref={main} tabIndex={-1}><div className="page-transition" key={page}>{content[page]}</div><Concierge w={w} t={t}/></main><Footer t={t} w={w}/><Lightbox image={image} onClose={()=>setImage(null)} w={w}/></>;
 }
 
