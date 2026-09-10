@@ -2200,6 +2200,113 @@ button .lucide-arrow-right,
   max-width: 940px;
   margin: 8px auto 0;
 }
+
+/* Tubelight navigation stays visible on every screen and scrolls horizontally when needed. */
+.site-header .navigation { overflow: visible; }
+.site-header .tubelight-nav {
+  display: flex;
+  flex: 1 1 auto;
+  justify-content: center;
+  gap: 3px;
+  min-width: 0;
+  padding: 6px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  border: 1px solid rgb(21 39 70 / 9%);
+  border-radius: 999px;
+  background: rgb(255 255 255 / 48%);
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 82%), 0 9px 26px rgb(16 31 60 / 7%);
+  scrollbar-width: none;
+  overscroll-behavior-inline: contain;
+  scroll-snap-type: x proximity;
+  -webkit-overflow-scrolling: touch;
+}
+.site-header .tubelight-nav::-webkit-scrollbar { display: none; }
+.site-header .tubelight-nav a {
+  position: relative;
+  z-index: 0;
+  flex: 0 0 auto;
+  min-height: 40px;
+  padding: 11px 13px;
+  border-radius: 999px;
+  color: #3f4a60;
+  font-size: 11px;
+  line-height: 1.5;
+  scroll-snap-align: center;
+  transition: color 220ms ease, background-color 220ms ease, box-shadow 220ms ease;
+}
+.site-header .tubelight-nav a::after { display: none; }
+.site-header .tubelight-nav a:hover { color: var(--navy); background: rgb(16 31 60 / 5%); }
+.site-header .tubelight-nav a[aria-current="page"] {
+  color: var(--navy);
+  background: rgb(255 255 255 / 86%);
+  box-shadow: 0 5px 18px rgb(15 32 63 / 10%);
+}
+.site-header .tubelight-nav a[aria-current="page"]::before {
+  content: '';
+  position: absolute;
+  top: -7px;
+  left: 50%;
+  width: 30px;
+  height: 3px;
+  border-radius: 99px;
+  background: var(--gold);
+  box-shadow: 0 0 6px rgb(190 149 79 / 85%), 0 0 16px rgb(190 149 79 / 58%), 0 8px 22px rgb(190 149 79 / 45%);
+  transform: translateX(-50%);
+}
+.site-header .tubelight-nav a[aria-current="page"] span::before,
+.site-header .tubelight-nav a[aria-current="page"] span::after {
+  content: '';
+  position: absolute;
+  top: -4px;
+  width: 16px;
+  height: 10px;
+  background: radial-gradient(circle at center top, rgb(217 181 117 / 30%), transparent 70%);
+}
+.site-header .tubelight-nav a[aria-current="page"] span::before { left: calc(50% - 25px); transform: rotate(28deg); }
+.site-header .tubelight-nav a[aria-current="page"] span::after { right: calc(50% - 25px); transform: rotate(-28deg); }
+@media (max-width: 1320px) {
+  .site-header .navigation {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    padding-block: 10px 12px;
+  }
+  .site-header .tubelight-nav {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    justify-content: flex-start;
+    width: 100%;
+  }
+  .site-header .brand { grid-column: 1; grid-row: 1; }
+  .site-header .header-actions { grid-column: 3; grid-row: 1; }
+}
+@media (max-width: 767px) {
+  html { scroll-padding-top: 175px; }
+  .site-header .navigation {
+    grid-template-columns: 1fr auto;
+    width: 100%;
+    min-height: 0;
+    padding: 8px 14px 10px;
+    gap: 8px 12px;
+  }
+  .site-header .brand .hotel-logo { width: 88px; height: 72px; }
+  .site-header .tubelight-nav {
+    width: calc(100% + 28px);
+    margin-inline: -14px;
+    padding: 8px 14px 7px;
+    border-inline: 0;
+    border-radius: 0;
+    background: rgb(249 248 244 / 58%);
+    box-shadow: inset 0 1px 0 rgb(255 255 255 / 75%);
+  }
+  .site-header .tubelight-nav a {
+    min-height: 42px;
+    padding: 12px 15px;
+    font-size: 12px;
+  }
+  .site-header .header-actions { gap: 5px; }
+  .site-header .language select { min-width: 52px; font-size: 13px; }
+}
 .airport-stack-layout .guide-video {
   margin-top: 0;
 }
