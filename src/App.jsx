@@ -309,6 +309,7 @@ function GalleryStrip({ prefix, title, onImage, w }) {
   );
 }
 function Header({ page, lang, setLang, t, w }) {
+  const header = useRef(null);
   const nav = useRef(null);
   const [activePill, setActivePill] = useState({ left: 0, width: 0, ready: false });
   const links = [['home',t.navHome],['stay',w.stay],['promotions',w.promotions],['facilities',t.navFacilities],['dining',t.navDining],['airportToHotel',w.journey],['virtualTour',w.tour],['contact',t.navContact]];
@@ -326,7 +327,17 @@ function Header({ page, lang, setLang, t, w }) {
     window.addEventListener('resize', updatePosition);
     return () => { cancelAnimationFrame(frame); window.removeEventListener('resize', updatePosition); };
   }, [page, lang]);
-  return <header className="site-header">
+  useEffect(() => {
+    const updateHeaderHeight = () => {
+      if (header.current) document.documentElement.style.setProperty('--site-header-height', `${header.current.offsetHeight}px`);
+    };
+    updateHeaderHeight();
+    const observer = new ResizeObserver(updateHeaderHeight);
+    if (header.current) observer.observe(header.current);
+    window.addEventListener('resize', updateHeaderHeight);
+    return () => { observer.disconnect(); window.removeEventListener('resize', updateHeaderHeight); };
+  }, []);
+  return <header ref={header} className="site-header">
     <div className="utility"><span>SUVARNABHUMI VILLE AIRPORT HOTEL</span><div className="utility-actions"><a href="tel:+66982673888"><Phone size={12} /> +66 (0) 98 267 3888</a><label className="utility-language"><span className="sr-only">{w.language}</span><select value={lang} onChange={e=>setLang(e.target.value)}><option value="th">TH</option><option value="en">EN</option><option value="zh">中文</option></select></label></div></div>
     <div className="navigation wrap">
       <a href="#home" className="brand" aria-label="Suvarnabhumi Ville — Home"><img className="hotel-logo" src="./logo-large.png" alt="Suvarnabhumi Ville" /></a>
