@@ -2444,3 +2444,49 @@ body,
     scroll-margin-top: calc(var(--site-header-height, 176px) + 108px);
   }
 }
+
+
+/* WhatsApp and WeChat contact presentation. */
+.contact-messaging {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+}
+.wechat-contact-card {
+  display: grid;
+  grid-template-columns: 118px 1fr auto;
+  align-items: center;
+  gap: 26px;
+  margin: 22px 0;
+  padding: 18px 24px 18px 18px;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: white;
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+.wechat-contact-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 36px rgb(16 31 60 / 9%);
+}
+.wechat-contact-card img {
+  width: 118px;
+  height: 118px;
+  border-radius: 12px;
+  object-fit: cover;
+}
+.wechat-contact-card span { display: grid; }
+.wechat-contact-card small { color: var(--gold); font-size: 10px; font-weight: 600; letter-spacing: .16em; }
+.wechat-contact-card strong { margin-top: 5px; color: var(--navy); font-size: 22px; font-weight: 500; }
+.wechat-contact-card em { margin-top: 7px; color: var(--muted); font-size: 13px; font-style: normal; }
+.wechat-contact-card > svg { color: var(--gold); }
+@media (max-width: 767px) {
+  .wechat-contact-card {
+    grid-template-columns: 92px 1fr;
+    gap: 16px;
+    padding: 14px;
+  }
+  .wechat-contact-card img { width: 92px; height: 92px; }
+  .wechat-contact-card strong { font-size: 18px; }
+  .wechat-contact-card em { font-size: 11px; line-height: 1.6; }
+  .wechat-contact-card > svg { display: none; }
+}
