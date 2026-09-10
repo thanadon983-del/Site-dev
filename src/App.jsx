@@ -309,13 +309,19 @@ function GalleryStrip({ prefix, title, onImage, w }) {
   );
 }
 function Header({ page, lang, setLang, t, w }) {
+  const nav = useRef(null);
   const links = [['home',t.navHome],['stay',w.stay],['promotions',w.promotions],['facilities',t.navFacilities],['dining',t.navDining],['airportToHotel',w.journey],['virtualTour',w.tour],['contact',t.navContact]];
+  useEffect(() => {
+    const active = nav.current?.querySelector('[aria-current="page"]');
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    requestAnimationFrame(() => active?.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'nearest', inline: 'center' }));
+  }, [page]);
   return <header className="site-header">
-    <div className="utility"><span>SUVARNABHUMI VILLE AIRPORT HOTEL</span><a href="tel:+66982673888"><Phone size={12} /> +66 (0) 98 267 3888</a></div>
+    <div className="utility"><span>SUVARNABHUMI VILLE AIRPORT HOTEL</span><div className="utility-actions"><a href="tel:+66982673888"><Phone size={12} /> +66 (0) 98 267 3888</a><label className="utility-language"><span className="sr-only">{w.language}</span><select value={lang} onChange={e=>setLang(e.target.value)}><option value="th">TH</option><option value="en">EN</option><option value="zh">中文</option></select></label></div></div>
     <div className="navigation wrap">
       <a href="#home" className="brand" aria-label="Suvarnabhumi Ville — Home"><img className="hotel-logo" src="./logo-large.png" alt="Suvarnabhumi Ville" /></a>
-      <nav className="desktop-nav tubelight-nav" aria-label={w.menu}>{links.map(([id,label])=><a key={id} href={'#'+id} aria-current={page===id || (id==='airportToHotel' && page==='hotelToAirport') ? 'page':undefined}><span>{label}</span></a>)}</nav>
-      <div className="header-actions"><label className="language"><span className="sr-only">{w.language}</span><select value={lang} onChange={e=>setLang(e.target.value)}><option value="th">TH</option><option value="en">EN</option><option value="zh">中文</option></select></label><External href={BOOK} className="button gold header-book">{t.navBook}</External></div>
+      <nav ref={nav} className="desktop-nav tubelight-nav" aria-label={w.menu}>{links.map(([id,label])=><a key={id} href={'#'+id} aria-current={page===id || (id==='airportToHotel' && page==='hotelToAirport') ? 'page':undefined}><span>{label}</span></a>)}</nav>
+      <div className="header-actions"><External href={BOOK} className="button gold header-book">{t.navBook}</External></div>
     </div>
   </header>;
 }
@@ -371,12 +377,12 @@ export default function App() {
   const main=useRef(null);
   const t=translations[lang],w=words[lang];
   useEffect(()=>{
-    const update=()=>{setPage(readPage());setImage(null);window.scrollTo({top:0,behavior:'instant'});requestAnimationFrame(()=>main.current?.focus({preventScroll:true}));};
+    const update=()=>{setPage(readPage());setImage(null);const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;window.scrollTo({top:0,behavior:reduced?'auto':'smooth'});requestAnimationFrame(()=>main.current?.focus({preventScroll:true}));};
     window.addEventListener('hashchange',update);return()=>window.removeEventListener('hashchange',update);
   },[]);
   useEffect(()=>{try {localStorage.setItem('ville-language',lang);} catch { /* Language remains available without storage. */ }document.documentElement.lang=lang==='zh'?'zh-Hans':lang;},[lang]);
   useEffect(()=>{const titles={home:t.navHome,stay:w.stay,airportToHotel:t.navAirToHotel,hotelToAirport:t.navHotelToAir,facilities:t.navFacilities,dining:t.navDining,promotions:w.promotions,virtualTour:w.tour,contact:t.navContact};document.title=titles[page]+' | Suvarnabhumi Ville Airport Hotel';},[page,t,w]);
   const content={home:<Home t={t} w={w} lang={lang}/>,stay:<Stay t={t} w={w} lang={lang} onImage={setImage}/>,airportToHotel:<Transfer t={t} w={w} onImage={setImage}/>,hotelToAirport:<Transfer departure t={t} w={w} onImage={setImage}/>,facilities:<Facilities t={t} w={w} onImage={setImage}/>,dining:<Dining t={t} w={w} onImage={setImage}/>,promotions:<Promotions lang={lang} lineUrl={LINE}/>,virtualTour:<VirtualTour lang={lang}/>,contact:<Contact t={t} w={w}/>};
-  return <><a className="skip-link" href="#main-content" onClick={e=>{e.preventDefault();main.current?.focus();}}>{w.skip}</a><Header key={page} page={page} lang={lang} setLang={setLang} t={t} w={w}/><main id="main-content" ref={main} tabIndex={-1}>{content[page]}<Concierge w={w} t={t}/></main><Footer t={t} w={w}/><Lightbox image={image} onClose={()=>setImage(null)} w={w}/></>;
+  return <><a className="skip-link" href="#main-content" onClick={e=>{e.preventDefault();main.current?.focus();}}>{w.skip}</a><Header key={page} page={page} lang={lang} setLang={setLang} t={t} w={w}/><main id="main-content" ref={main} tabIndex={-1}><div className="page-transition" key={page}>{content[page]}</div><Concierge w={w} t={t}/></main><Footer t={t} w={w}/><Lightbox image={image} onClose={()=>setImage(null)} w={w}/></>;
 }
 
