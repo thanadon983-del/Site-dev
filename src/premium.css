@@ -1606,7 +1606,7 @@ button .lucide-arrow-right,
   display: block;
   border-top: 1px solid var(--line);
 }
-.faq-item {
+.faq-grid .faq-item {
   margin: 0;
   padding: 0;
   background: transparent;
@@ -1614,7 +1614,7 @@ button .lucide-arrow-right,
   border-bottom: 1px solid var(--line);
   border-radius: 0;
 }
-.faq-item summary {
+.faq-grid .faq-item summary {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -1628,18 +1628,24 @@ button .lucide-arrow-right,
   font-weight: 500;
   line-height: 1.65;
 }
-.faq-item summary::-webkit-details-marker {
+.faq-grid .faq-item summary::-webkit-details-marker {
   display: none;
 }
-.faq-item summary svg {
+.faq-grid .faq-item summary > span {
+  transform: none;
+}
+.faq-grid .faq-item summary svg {
   flex: 0 0 auto;
   color: var(--gold);
   transition: transform 220ms ease;
 }
-.faq-item[open] summary svg {
+.faq-grid .faq-item[open] summary > span {
+  transform: none;
+}
+.faq-grid .faq-item[open] summary svg {
   transform: rotate(180deg);
 }
-.faq-answer {
+.faq-grid .faq-answer {
   padding: 0 44px 24px 2px;
   color: var(--muted);
   font-size: 15px;
@@ -1666,23 +1672,23 @@ button .lucide-arrow-right,
   }
 }
 @media (hover: hover) and (pointer: fine) {
-  .faq-item summary:hover {
+  .faq-grid .faq-item summary:hover {
     color: #765828;
   }
 }
 @media (max-width: 767px) {
-  .faq-item summary {
+  .faq-grid .faq-item summary {
     min-height: 62px;
     padding-block: 17px;
     font-size: 15px;
   }
-  .faq-answer {
+  .faq-grid .faq-answer {
     padding: 0 28px 21px 0;
     font-size: 14px;
   }
 }
 @media (prefers-reduced-motion: reduce) {
-  .faq-item summary svg {
+  .faq-grid .faq-item summary svg {
     transition: none;
   }
   .faq-item[open] .faq-letter {
