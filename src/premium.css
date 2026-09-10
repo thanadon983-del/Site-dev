@@ -1384,6 +1384,12 @@ button .lucide-arrow-right,
   transform: translateY(-50%);
 }
 .coverflow-arrow:hover { background: rgb(176 132 66 / 88%); }
+.coverflow-arrow .lucide-arrow-right {
+  display: block !important;
+  width: 21px;
+  height: 21px;
+  stroke-width: 1.8;
+}
 .coverflow-arrow.previous { left: 3%; }
 .coverflow-arrow.previous svg { transform: rotate(180deg); }
 .coverflow-arrow.next { right: 3%; }
